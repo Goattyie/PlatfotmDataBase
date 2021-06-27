@@ -1,0 +1,30 @@
+﻿<Window x:Class="Database.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Database"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="768" Width="1366">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="13*"/>
+            <RowDefinition Height="204*"/>
+        </Grid.RowDefinitions>
+        <Menu Height="30" FontSize="24" Background="Transparent" Margin="0,8,0,7">
+            <MenuItem Header="Таблицы">
+                <MenuItem Header="Товары" Command="{Binding TableClick}" CommandParameter="Товар"/>
+                <MenuItem Header="Клиенты" Command="{Binding TableClick}" CommandParameter="Клиент"/>
+                <MenuItem Header="Профиль" Command="{Binding TableClick}" CommandParameter="Профиль"/>
+                <MenuItem Header="Продажи" Command="{Binding TableClick}" CommandParameter="Продажа"/>
+                <MenuItem Header="Наличие" Command="{Binding TableClick}" CommandParameter="Наличие"/>
+                <MenuItem Header="Заказы" Command="{Binding TableClick}" CommandParameter="Заказ"/>
+                <MenuItem Header="Поставщики" Command="{Binding TableClick}" CommandParameter="Поставщик"/>
+                <MenuItem Header="Товары поставщиков" Command="{Binding TableClick}" CommandParameter="Поставщик-Товар"/>
+                <MenuItem Header="Карта" Command="{Binding TableClick}" CommandParameter="Карта"/>
+            </MenuItem>
+            <MenuItem Header="Запросы" Command="{Binding QueryClick}"/>
+        </Menu>
+        <Frame Grid.Row="1" Content="{Binding CurrentPage}" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>
