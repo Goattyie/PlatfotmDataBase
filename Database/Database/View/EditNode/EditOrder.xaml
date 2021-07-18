@@ -1,0 +1,36 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Database.View.EditNode"
+        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" x:Class="Database.View.EditNode.EditOrder"
+        mc:Ignorable="d"
+        Title="EditOrder" Height="800" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="79*"/>
+            <RowDefinition Height="88*"/>
+            <RowDefinition Height="83*"/>
+            <RowDefinition Height="65*"/>
+            <RowDefinition Height="78*"/>
+            <RowDefinition Height="78*"/>
+            <RowDefinition Height="78*"/>
+            <RowDefinition Height="78*"/>
+            <RowDefinition Height="78*"/>
+            <RowDefinition Height="78*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Заказы" FontSize="28" Margin="10,0,-10,0"/>
+        <TextBlock Text="Товар" FontSize="28" Margin="10" Grid.Row="2"/>
+        
+        <TextBlock Text="Поставщик" FontSize="28" Margin="10" Grid.Row="1"/>
+        
+        <TextBox Grid.Row="3" FontSize="20" Margin="10"/>
+        <TextBox Grid.Row="4" FontSize="20" Margin="10"/>
+        <TextBox Grid.Row="5" FontSize="20" Margin="10"/>
+        <TextBox Grid.Row="6" FontSize="20" Margin="10"/>
+        <TextBox Grid.Row="7" FontSize="20" Margin="10"/>
+        <TextBox Grid.Row="8" FontSize="20" Margin="10"/>
+        <Button Grid.Row="9" FontSize="20" Margin="10" Background="Transparent" Content="Добавить"></Button>
+    </Grid>
+</Window>
