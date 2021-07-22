@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace Database.Model.Database.Tables
 {
-    class Sell
+    public class Sell
     {
         public int Id { get; set; }
         public string SellDate { get; set; }
-        public int AvailabilityId { get; set; }
+        public int ProductId { get; set; }
         public int Count { get; set; }
         public double Profit { get; set; }
         public int ClientId { get; set; }
         public int CardId { get; set; }
         public Client Client { get; set; }
         public Card Card { get; set; }
-        public Availability Availability { get; set; }
+        public Product Product { get; set; }
     }
 }

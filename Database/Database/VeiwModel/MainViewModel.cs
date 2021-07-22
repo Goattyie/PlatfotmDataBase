@@ -5,15 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using Database.VeiwModel.Commands;
 using Database.View.Pages;
 using Database.View.Pages.Tables;
 
 namespace Database.VeiwModel
 {
-    class MainViewModel : INotifyPropertyChanged
+    class MainViewModel : BasePropertyChanged
     {
         private Page _currentPage;
-
         private Page _availabilityPage;
         private Page _clientPage;
         private Page _productPage;
@@ -23,10 +23,8 @@ namespace Database.VeiwModel
         private Page _sellPage;
         private Page _profilePage;
         private Page _cardPage;
-        private Page _queryPage;
 
         private BaseCommand _tableClick;
-        private BaseCommand _queryClick;
 
         public BaseCommand TableClick
         {
@@ -36,20 +34,10 @@ namespace Database.VeiwModel
                   (_tableClick = new BaseCommand((obj) => { NewTablePage(obj); }));
             }
         }
-        public BaseCommand QueryClick
-        {
-            get { return _queryClick ?? (_queryClick = new BaseCommand((obj) => { CurrentPage = _queryPage; })); }
-        }
         public Page CurrentPage
         {
             get { return _currentPage; }
             set { _currentPage = value; OnPropertyChanged(nameof(CurrentPage)); }
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
         public MainViewModel()
         {
@@ -63,38 +51,37 @@ namespace Database.VeiwModel
             _profilePage = new Profile();
             _cardPage = new Card();
 
-            _queryPage = new Query();
-            _currentPage = _sellPage;
+            _currentPage = null;
         }
-        public void NewTablePage(object tableName)
+        private void NewTablePage(object tableName)
         {
             switch (tableName.ToString())
             {
-                case "Товар":
+                case "ProductTable":
                     CurrentPage = _productPage;
                     break;
-                case "Клиент":
+                case "ClientTable":
                     CurrentPage = _clientPage;
                     break;
-                case "Продажа":
+                case "SellTable":
                     CurrentPage = _sellPage;
                     break;
-                case "Наличие":
+                case "AvailableTable":
                     CurrentPage = _availabilityPage;
                     break;
-                case "Поставщик":
+                case "DeliverTable":
                     CurrentPage = _deliverPage;
                     break;
-                case "Карта":
+                case "CardTable":
                     CurrentPage = _cardPage;
                     break;
-                case "Поставщик-Товар":
+                case "DeliverProductTable":
                     CurrentPage = _deliverProductPage;
                     break;
-                case "Заказ":
+                case "OrderTable":
                     CurrentPage = _orderPage;
                     break;
-                case "Профиль":
+                case "ProfileTable":
                     CurrentPage = _profilePage;
                     break;
             }

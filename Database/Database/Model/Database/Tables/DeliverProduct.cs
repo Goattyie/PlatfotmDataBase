@@ -9,7 +9,7 @@ namespace Database.Model.Database.Tables
     /// <summary>
     /// Класс Поставщики-Товары
     /// </summary>
-    class DeliverProduct
+    public class DeliverProduct
     {
         public int Id { get; set; }
         public int ProductId { get; set; }

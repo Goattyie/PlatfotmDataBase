@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Database.Model.Database.Tables
 {
-    class Profile
+    public class Profile
     {
         public int Id { get; set; }
         public string Name { get; set; }

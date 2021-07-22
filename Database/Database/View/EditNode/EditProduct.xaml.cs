@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Database.Model.Database.Tables;
+using Database.VeiwModel.EditNode;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,11 @@ namespace Database.View.EditNode
         public EditProduct()
         {
             InitializeComponent();
+        }
+        public EditProduct(Product product)
+        {
+            InitializeComponent();
+            DataContext = new ProductViewModel(product);
         }
     }
 }

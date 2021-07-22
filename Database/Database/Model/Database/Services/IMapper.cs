@@ -14,6 +14,7 @@ namespace Database.Model.Database.Services
         T GetElementById(int id);
         void Update(T obj);
         void Delete(T obj);
+        void Delete(T[] obj);
         IEnumerable<T> GetAll();
         
     }

@@ -53,7 +53,7 @@ namespace Database.View.Pages {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Database;V1.0.0.0;component/view/pages/query.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Database;component/view/pages/query.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\View\Pages\Query.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

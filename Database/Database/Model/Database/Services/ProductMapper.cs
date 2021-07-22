@@ -10,6 +10,7 @@ namespace Database.Model.Database.Services
 {
     class ProductMapper : IMapper<Product>
     {
+
         public void Create(Product obj)
         {
             using(var connection = new SqlModel())
@@ -47,12 +48,30 @@ namespace Database.Model.Database.Services
 
         public void Delete(Product obj)
         {
-            throw new NotImplementedException();
+            using (var connection = new SqlModel())
+            {
+                connection.Products.Remove(obj);
+                connection.SaveChanges();
+            }
+        }
+
+        public void Delete(Product[] obj)
+        {
+            using (var connection = new SqlModel())
+            {
+                connection.Products.RemoveRange(obj);
+                connection.SaveChanges();
+            }
         }
 
         public IEnumerable<Product> GetAll()
         {
-            throw new NotImplementedException();
+            var product = new List<Product>();
+            using (var connection = new SqlModel())
+            {
+                product = connection.Products.ToList();
+            }
+            return product;
         }
 
         public Product GetElementById(int id)
@@ -60,9 +79,23 @@ namespace Database.Model.Database.Services
             throw new NotImplementedException();
         }
 
+        public Product GetElementByName(string name)
+        {
+            var product = new Product();
+            using (var connection = new SqlModel())
+            {
+                product = connection.Products.Where(p => p.Name == name).FirstOrDefault();
+            }
+            return product;
+        }
+
         public void Update(Product obj)
         {
-            throw new NotImplementedException();
+            using(var connection = new SqlModel())
+            {
+                connection.Products.Update(obj);
+                connection.SaveChanges();
+            }
         }
     }
 }

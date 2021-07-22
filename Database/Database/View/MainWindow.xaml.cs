@@ -15,14 +15,8 @@ namespace Database
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            new ProductExcelWorker().Read("D:\\PlaygroundDataBase\\Database\\Database\\bin\\Debug\\net5.0-windows\\import\\Товар.xls");
-            var p = new Product();
-            p.Name = "A";
-            p.DeliverCost = 1;
-            p.OrderCost = 2;
-            p.SellCost = 4;
-            new ProductMapper().Create(p);
         }
     }
 }

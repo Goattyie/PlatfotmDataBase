@@ -24,6 +24,11 @@ namespace Database.Model.Database.Services
             throw new NotImplementedException();
         }
 
+        public void Delete(Availability[] obj)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Availability> GetAll()
         {
             throw new NotImplementedException();

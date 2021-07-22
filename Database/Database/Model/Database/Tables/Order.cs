@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Database.Model.Database.Tables
 {
-    class Order
+    public class Order
     {
         public int Id { get; set; }
         public int ProductId { get; set; }

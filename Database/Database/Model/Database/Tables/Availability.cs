@@ -9,21 +9,16 @@ using System.Threading.Tasks;
 namespace Database.Model.Database.Tables
 {
     /// <summary>
-    /// Класс Наличие
+    /// <param name="Availability">Товары в наличии</param>
     /// </summary>
-    class Availability
+    public class Availability
     {
         public int Id { get; set; }
         public int ProductId { get; set; }
         public int ProfileId { get; set; }
-        /// <summary>
-        /// Количество товара
-        /// </summary>
-        /// <remarks>
-        /// Не должно быть меньше нуля
-        /// </remarks>
         public int Count { get; set; }
         public double BuyCost { get; set; }
+        public double DeliverCost { get; set; }
         public double SellCost { get; set; }
         public virtual Profile Profile { get; set; }
         public virtual Product Product { get; set; }
