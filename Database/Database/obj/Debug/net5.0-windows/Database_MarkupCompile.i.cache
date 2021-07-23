@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 D:\PlaygroundDataBase\Database\Database\App.xaml
-13-23787511
+14-1242628688
 
-48-703169669
+52-466356236
 2232024114181
-View\EditNode\EditOrder.xaml;View\EditNode\EditProduct.xaml;View\EditNode\EditSup.xaml;View\MainWindow.xaml;View\Pages\Tables\Availability.xaml;View\Pages\Tables\Card.xaml;View\Pages\Tables\Client.xaml;View\Pages\Tables\Deliver.xaml;View\Pages\Tables\DeliverProduct.xaml;View\Pages\Tables\Order.xaml;View\Pages\Tables\Product.xaml;View\Pages\Tables\Profile.xaml;View\Pages\Tables\Sell.xaml;
+View\EditNode\EditDeliverProduct.xaml;View\EditNode\EditOrder.xaml;View\EditNode\EditProduct.xaml;View\EditNode\EditSup.xaml;View\MainWindow.xaml;View\Pages\Tables\Availability.xaml;View\Pages\Tables\Card.xaml;View\Pages\Tables\Client.xaml;View\Pages\Tables\Deliver.xaml;View\Pages\Tables\DeliverProduct.xaml;View\Pages\Tables\Order.xaml;View\Pages\Tables\Product.xaml;View\Pages\Tables\Profile.xaml;View\Pages\Tables\Sell.xaml;
 
 False
 

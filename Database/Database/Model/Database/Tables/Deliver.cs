@@ -12,6 +12,11 @@ namespace Database.Model.Database.Tables
         public string Name { get; set; }
         public virtual ICollection<DeliverProduct> DeliverProducts { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
+        public Deliver() { }
+        public Deliver(string name)
+        {
+            Name = name;
+        }
 
     }
 }

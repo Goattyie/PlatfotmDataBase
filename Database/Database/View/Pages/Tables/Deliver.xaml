@@ -18,10 +18,6 @@
         </Style>
     </Page.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="37*"/>
             <RowDefinition Height="362*"/>
@@ -41,7 +37,14 @@
                 <DataGridTextColumn Header="Название" Width="*" Binding="{Binding Path=Name}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Row="2" Grid.Column="0" Style="{Binding Source={StaticResource Btn}}" Content="Добавить поставщика" Margin="10,0,10,10" Command="{Binding AddCommand}"/>
-        <Button Grid.Row="2" Grid.Column="2" Style="{Binding Source={StaticResource Btn}}" Content="Удалить запись" Margin="10,0,10,10" Command="{Binding RemoveCommand}"/>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="2" Grid.Column="0" Style="{Binding Source={StaticResource Btn}}" Content="Добавить поставщика" Margin="10,0,10,10" Command="{Binding AddCommand}"/>
+            <Button Grid.Row="2" Grid.Column="2" Style="{Binding Source={StaticResource Btn}}" Content="Удалить запись" Margin="10,0,10,10" Command="{Binding RemoveCommand}"/>
+        </Grid>
     </Grid>
 </Page>

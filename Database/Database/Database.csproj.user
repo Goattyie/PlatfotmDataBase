@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="View\EditNode\EditDeliverProduct.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\EditNode\EditOrder.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -45,6 +48,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="View\EditNode\EditDeliverProduct.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\EditNode\EditOrder.xaml">
       <SubType>Designer</SubType>
     </Page>

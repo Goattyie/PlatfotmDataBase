@@ -16,5 +16,6 @@ namespace Database.Model.Database.Tables
         public int DeliverId { get; set; }
         public virtual Product Product { get; set; }
         public virtual Deliver Deliver { get; set; }
+
     }
 }

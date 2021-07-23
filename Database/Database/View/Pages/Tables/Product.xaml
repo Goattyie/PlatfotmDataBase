@@ -18,11 +18,6 @@
         </Style>
     </Page.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="37*"/>
             <RowDefinition Height="362*"/>
@@ -45,8 +40,17 @@
                 <DataGridTextColumn Header="Цена продажи" Binding="{Binding Path=SellCost}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Row="2" Grid.Column="0" Style="{Binding Source={StaticResource Btn}}" Content="Добавить товар" Margin="10,0,10,10" Command="{Binding AddCommand}"/>
-        <Button Grid.Row="2" Grid.Column="1" Style="{Binding Source={StaticResource Btn}}" Content="Редактировать товар" Margin="10,0,10,10" Command="{Binding EditCommand}"/>
-        <Button Grid.Row="2" Grid.Column="2" Style="{Binding Source={StaticResource Btn}}" Content="Удалить товар" Margin="10,0,10,10" Command="{Binding RemoveCommand}"/>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="2" Grid.Column="0" Style="{Binding Source={StaticResource Btn}}" Content="Добавить товар" Margin="10,0,10,10" Command="{Binding AddCommand}"/>
+            <Button Grid.Row="2" Grid.Column="1" Style="{Binding Source={StaticResource Btn}}" Content="Редактировать товар" Margin="10,0,10,10" Command="{Binding EditCommand}"/>
+            <Button Grid.Row="2" Grid.Column="2" Style="{Binding Source={StaticResource Btn}}" Content="Удалить товар" Margin="10,0,10,10" Command="{Binding RemoveCommand}"/>
+        </Grid>
+
     </Grid>
 </Page>

@@ -17,5 +17,10 @@ namespace Database.Model.Database.Tables
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<DeliverProduct> DeliverProducts { get; set; }
         public virtual ICollection<Availability> Availabilities { get; set; }
+        public Product() { }
+        public Product(string name)
+        {
+            Name = name;
+        }
     }
 }
