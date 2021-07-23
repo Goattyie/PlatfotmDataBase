@@ -1,4 +1,5 @@
 ﻿using Database.Model.Database.Tables;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,74 +9,67 @@ using System.Windows;
 
 namespace Database.Model.Database.Services
 {
-    public class ProfileMapper : IMapper<Profile>
+    public class CardMapper : IMapper<Card>
     {
         public event Action<object> CreateEntityEvent;
-        public void Create(Profile obj)
+        public void Create(Card obj)
         {
             using (var connection = new SqlModel())
             {
                 try
                 {
-                    connection.Profiles.Add(obj);
+                    connection.Cards.Add(obj);
                     connection.SaveChanges();
                     CreateEntityEvent?.Invoke(obj);
                     MessageBox.Show("Запись добавлена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                catch (Exception ex)
+                catch (DbUpdateException ex)
                 {
                     MessageBox.Show("Запись уже существует", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
 
-        public void Create(Profile[] obj)
+        public void Create(Card[] obj)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Profile obj)
+        public void Delete(Card obj)
         {
             using (var connection = new SqlModel())
             {
-                connection.Profiles.Remove(obj);
+                connection.Cards.Remove(obj);
                 connection.SaveChanges();
             }
         }
 
-        public void Delete(Profile[] obj)
+        public void Delete(Card[] obj)
         {
             using (var connection = new SqlModel())
             {
-                connection.Profiles.RemoveRange(obj);
+                connection.Cards.RemoveRange(obj);
                 connection.SaveChanges();
             }
         }
 
-        public IEnumerable<Profile> GetAll()
+        public IEnumerable<Card> GetAll()
         {
-            var profile = new List<Profile>();
+            var cards = new List<Card>();
             using (var connection = new SqlModel())
             {
-                profile = connection.Profiles.ToList();
+                cards = connection.Cards.ToList();
+                connection.SaveChanges();
             }
-            return profile;
+            return cards;
         }
 
-        public Profile GetElementById(int id)
+        public Card GetElementById(int id)
         {
             throw new NotImplementedException();
         }
-        public Profile GetElementByName(string name)
-        {
-            var profile = new Profile();
-            using (var connection = new SqlModel())
-            {
-                profile = connection.Profiles.Where(p => p.Name == name).FirstOrDefault();
-            }
-            return profile;
-        }
-        public void Update(Profile obj)
+
+        public void Update(Card obj)
         {
             throw new NotImplementedException();
         }

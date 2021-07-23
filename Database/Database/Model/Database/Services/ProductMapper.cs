@@ -21,10 +21,11 @@ namespace Database.Model.Database.Services
                     connection.Products.Add(obj);
                     connection.SaveChanges();
                     CreateEntityEvent?.Invoke(obj);
+                    MessageBox.Show("Запись добавлена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Ошибка");
+                    MessageBox.Show("Ошибка добавления записи. Возможно, запись уже существует.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

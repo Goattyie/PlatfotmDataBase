@@ -3,11 +3,14 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Database.View.Pages.Tables"
+      xmlns:local="clr-namespace:Database.View.Pages.Tables" xmlns:pages="clr-namespace:Database.VeiwModel.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Profile" Background="White">
 
+    <Page.DataContext>
+        <pages:PageProfileViewModel/>
+    </Page.DataContext>
     <Page.Resources>
         <Style x:Key="Btn" TargetType="Button">
             <Setter Property="Margin" Value="10,0,10,10"></Setter>
@@ -26,8 +29,20 @@
             <RowDefinition Height="51*"/>
         </Grid.RowDefinitions>
         <TextBlock Margin="10,10,0,0" FontSize="18">Таблица: Профиль</TextBlock>
-        <DataGrid Grid.Row="1" Grid.ColumnSpan="3" Margin="10,10,10,10" Background="Transparent"></DataGrid>
-        <Button Grid.Row="2" Grid.Column="0" Style="{Binding Source={StaticResource Btn}}" Content="Добавить профиль" Margin="10,0,10,10"/>
-        <Button Grid.Row="2" Grid.Column="2" Style="{Binding Source={StaticResource Btn}}" Content="Удалить профиль" Margin="10,0,10,10"/>
+        <DataGrid AutoGenerateColumns="False" 
+                  CanUserAddRows="False"
+                  Grid.Row="1" 
+                  Grid.ColumnSpan="3" 
+                  Margin="10,10,10,10" 
+                  Background="Transparent"
+                  ItemsSource="{Binding ProfileList}"
+                  SelectedItem="{Binding SelectedProfile}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Width="50" Binding="{Binding Path=Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Название" Width="*" Binding="{Binding Path=Name}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Row="2" Grid.Column="0" Style="{Binding Source={StaticResource Btn}}" Content="Добавить профиль" Margin="10,0,10,10" Command="{Binding AddCommand}"/>
+        <Button Grid.Row="2" Grid.Column="2" Style="{Binding Source={StaticResource Btn}}" Content="Удалить профиль" Margin="10,0,10,10" Command="{Binding RemoveCommand}"/>
     </Grid>
 </Page>

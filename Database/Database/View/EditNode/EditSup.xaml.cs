@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Database.Model.Database.Services;
+using Database.VeiwModel.EditNode;
+using Database.VeiwModel.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +22,20 @@ namespace Database.View.EditNode
     /// </summary>
     public partial class EditSup : Window
     {
-        public EditSup()
+        public EditSup(ProfileMapper service)
         {
             InitializeComponent();
+            DataContext = new ProfileViewModel(service);
+        }
+        public EditSup(CardMapper service)
+        {
+            InitializeComponent();
+            DataContext = new CardViewModel(service);
+        }
+        public EditSup(DeliverMapper service)
+        {
+            InitializeComponent();
+            DataContext = new DeliverViewModel(service);
         }
     }
 }

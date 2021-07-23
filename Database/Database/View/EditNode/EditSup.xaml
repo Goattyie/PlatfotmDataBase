@@ -13,7 +13,7 @@
             <RowDefinition Height="67*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Добавление записи" FontSize="18" Margin="10,10,10,10"></TextBlock>
-        <TextBox Grid.Row="1" Margin="10,10,10,10" FontSize="18"></TextBox>
-        <Button Grid.Row="2" Margin="13" FontSize="18" Content="Добавить" Background="Transparent"></Button>
+        <TextBox Grid.Row="1" Margin="10,10,10,10" FontSize="18" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <Button Grid.Row="2" Margin="13" FontSize="18" Content="Добавить" Background="Transparent" Command="{Binding AddCommand}"></Button>
     </Grid>
 </Window>

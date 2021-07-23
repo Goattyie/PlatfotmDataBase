@@ -122,7 +122,6 @@ namespace Database.VeiwModel.EditNode
         {
             _service.Update(_product);
         }
-
         private void UpdateIsValid()
         {
             IsValid = !_errors.Values.Any(x => x != null);

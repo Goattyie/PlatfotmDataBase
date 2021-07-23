@@ -1,4 +1,5 @@
 ﻿using Database.Model.Database.Tables;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,74 +9,66 @@ using System.Windows;
 
 namespace Database.Model.Database.Services
 {
-    public class ProfileMapper : IMapper<Profile>
+    public class DeliverMapper : IMapper<Deliver>
     {
         public event Action<object> CreateEntityEvent;
-        public void Create(Profile obj)
+        public void Create(Deliver obj)
         {
             using (var connection = new SqlModel())
             {
                 try
                 {
-                    connection.Profiles.Add(obj);
+                    connection.Delivers.Add(obj);
                     connection.SaveChanges();
                     CreateEntityEvent?.Invoke(obj);
                     MessageBox.Show("Запись добавлена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                catch (Exception ex)
+                catch (DbUpdateException ex)
                 {
                     MessageBox.Show("Запись уже существует", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
 
-        public void Create(Profile[] obj)
+        public void Create(Deliver[] obj)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Profile obj)
+        public void Delete(Deliver obj)
         {
             using (var connection = new SqlModel())
             {
-                connection.Profiles.Remove(obj);
+                connection.Delivers.Remove(obj);
                 connection.SaveChanges();
             }
         }
 
-        public void Delete(Profile[] obj)
+        public void Delete(Deliver[] obj)
         {
             using (var connection = new SqlModel())
             {
-                connection.Profiles.RemoveRange(obj);
+                connection.Delivers.RemoveRange(obj);
                 connection.SaveChanges();
             }
         }
 
-        public IEnumerable<Profile> GetAll()
+        public IEnumerable<Deliver> GetAll()
         {
-            var profile = new List<Profile>();
+            var delivers = new List<Deliver>();
             using (var connection = new SqlModel())
             {
-                profile = connection.Profiles.ToList();
+                delivers = connection.Delivers.ToList();
             }
-            return profile;
+            return delivers;
         }
 
-        public Profile GetElementById(int id)
+        public Deliver GetElementById(int id)
         {
             throw new NotImplementedException();
         }
-        public Profile GetElementByName(string name)
-        {
-            var profile = new Profile();
-            using (var connection = new SqlModel())
-            {
-                profile = connection.Profiles.Where(p => p.Name == name).FirstOrDefault();
-            }
-            return profile;
-        }
-        public void Update(Profile obj)
+
+        public void Update(Deliver obj)
         {
             throw new NotImplementedException();
         }
