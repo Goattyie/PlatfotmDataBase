@@ -30,7 +30,7 @@ namespace Database.VeiwModel.Pages
         {
             get
             {
-                return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditProduct().Show(); }));
+                return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditProduct(_service).Show(); DownloadData(); }));
             }
         }
         public BaseCommand EditCommand
@@ -39,7 +39,7 @@ namespace Database.VeiwModel.Pages
             {
                 return _editCommand ?? (_editCommand = new BaseCommand(obj => 
                 { 
-                    new EditProduct(_selectedProduct).Show(); 
+                    new EditProduct(_service, _selectedProduct).Show(); 
                 }));
             }
         }
@@ -64,8 +64,21 @@ namespace Database.VeiwModel.Pages
         {
             ProductList = new BindingList<Product>();
             _service = new ProductMapper();
+            _service.CreateEntityEvent += OnUpdate;
+            _service.UpdateEntityEvent += OnUpdate;
+            DownloadData();
+        }
+
+        private void OnUpdate(object obj)
+        {
+            DownloadData();
+        }
+
+        public void DownloadData()
+        {
+            ProductList.Clear();
             var products = new ProductMapper().GetAll();
-            foreach(var item in products)
+            foreach (var item in products)
             {
                 ProductList.Add(item);
             }

@@ -7,21 +7,36 @@
         mc:Ignorable="d"
         Title="EditProduct" Height="416" Width="622">
 
-    <Window.DataContext>
-        <editnode:ProductViewModel/>
-    </Window.DataContext>
-    
     <Grid>
         <StackPanel Margin="10">
             <TextBlock Text="Название товара" FontSize="28"></TextBlock>
-            <TextBox x:Name="Name" FontSize="28" VerticalAlignment="Center" Text="{Binding Name , UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox x:Name="Name" FontSize="28" VerticalAlignment="Center" Text="{Binding Name , UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True,
+                ValidatesOnDataErrors=True, 
+                NotifyOnValidationError=True}"></TextBox>
             <TextBlock Text="Цена продажи" FontSize="28"></TextBlock>
-            <TextBox x:Name="SellCost" FontSize="28" VerticalAlignment="Center" Text="{Binding SellCost , UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox x:Name="SellCost" FontSize="28" VerticalAlignment="Center" 
+                     Text="{Binding SellCost, 
+                UpdateSourceTrigger=PropertyChanged, 
+                ValidatesOnExceptions=True,
+                ValidatesOnDataErrors=True, 
+                NotifyOnValidationError=True}">
+            </TextBox>
             <TextBlock Text="Цена покупки" FontSize="28"></TextBlock>
-            <TextBox x:Name="OrderCost" FontSize="28" VerticalAlignment="Center" Text="{Binding OrderCost , UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox x:Name="OrderCost" FontSize="28" VerticalAlignment="Center" Text="{Binding OrderCost , UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True,
+                ValidatesOnDataErrors=True, 
+                NotifyOnValidationError=True}"></TextBox>
             <TextBlock Text="Цена доставки" FontSize="28"></TextBlock>
-            <TextBox x:Name="DeliverCost" FontSize="28" VerticalAlignment="Center"  Text="{Binding DeliverCost , UpdateSourceTrigger=PropertyChanged}"></TextBox>
-            <Button  Margin="10,10,10,0" Content="Добавить" FontSize="28" Background="Transparent" Command="{Binding AddButtonClick}"></Button>
+            <TextBox x:Name="DeliverCost" FontSize="28" VerticalAlignment="Center"  Text="{Binding DeliverCost , UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True,
+                ValidatesOnDataErrors=True, 
+                NotifyOnValidationError=True}"></TextBox>
+            <Button  
+                Margin="10,10,10,0" 
+                Content="Добавить" 
+                FontSize="28" 
+                Background="Transparent" 
+                Command="{Binding AddButtonClick}"
+                IsEnabled="{Binding IsValid}"
+                ></Button>
         </StackPanel>
     </Grid>
 </Window>

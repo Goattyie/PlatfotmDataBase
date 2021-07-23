@@ -1,4 +1,5 @@
-﻿using Database.Model.Database.Tables;
+﻿using Database.Model.Database.Services;
+using Database.Model.Database.Tables;
 using Database.VeiwModel.EditNode;
 using System;
 using System.Collections.Generic;
@@ -21,14 +22,15 @@ namespace Database.View.EditNode
     /// </summary>
     public partial class EditProduct : Window
     {
-        public EditProduct()
+        public EditProduct(ProductMapper service)
         {
             InitializeComponent();
+            DataContext = new ProductViewModel(service);
         }
-        public EditProduct(Product product)
+        public EditProduct(ProductMapper service, Product product)
         {
             InitializeComponent();
-            DataContext = new ProductViewModel(product);
+            DataContext = new ProductViewModel(service, product);
         }
     }
 }

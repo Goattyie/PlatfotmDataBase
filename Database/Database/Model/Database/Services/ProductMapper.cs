@@ -8,9 +8,10 @@ using System.Windows;
 
 namespace Database.Model.Database.Services
 {
-    class ProductMapper : IMapper<Product>
+    public class ProductMapper : IMapper<Product>
     {
-
+        public event Action<object> CreateEntityEvent;
+        public event Action<object> UpdateEntityEvent;
         public void Create(Product obj)
         {
             using(var connection = new SqlModel())
@@ -19,6 +20,7 @@ namespace Database.Model.Database.Services
                 {
                     connection.Products.Add(obj);
                     connection.SaveChanges();
+                    CreateEntityEvent?.Invoke(obj);
                 }
                 catch (Exception ex)
                 {
@@ -95,6 +97,7 @@ namespace Database.Model.Database.Services
             {
                 connection.Products.Update(obj);
                 connection.SaveChanges();
+                UpdateEntityEvent?.Invoke(obj);
             }
         }
     }
