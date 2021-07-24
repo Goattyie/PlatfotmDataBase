@@ -8,7 +8,8 @@ namespace Database.Model.Database
     {
         public SqlModel()
         {
-            //Database.EnsureCreated();
+            //Database.EnsureDeleted();
+            Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

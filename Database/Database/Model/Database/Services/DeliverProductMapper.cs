@@ -23,7 +23,7 @@ namespace Database.Model.Database.Services
                     CreateEntityEvent?.Invoke(obj);
                     MessageBox.Show("Запись добавлена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                catch (DbUpdateException ex)
+                catch
                 {
                     MessageBox.Show("Запись уже существует", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }

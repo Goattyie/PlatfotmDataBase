@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="View\EditNode\EditAvailability.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\EditNode\EditClient.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -17,6 +20,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\EditNode\EditProduct.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\EditNode\EditSell.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\EditNode\EditSup.xaml.cs">
@@ -51,6 +57,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="View\EditNode\EditAvailability.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\EditNode\EditClient.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -61,6 +70,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\EditNode\EditProduct.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\EditNode\EditSell.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\EditNode\EditSup.xaml">

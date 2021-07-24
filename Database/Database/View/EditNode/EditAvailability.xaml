@@ -1,0 +1,88 @@
+﻿<Window x:Class="Database.View.EditNode.EditAvailability"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Database.View.EditNode"
+        mc:Ignorable="d"
+        Title="EditAvailability" Height="450" Width="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="196*"/>
+            <RowDefinition Height="177*"/>
+            <RowDefinition Height="41*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="11*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="58*"/>
+                <RowDefinition Height="11*"/>
+            </Grid.RowDefinitions>
+
+            <DataGrid CanUserAddRows="False"
+                  AutoGenerateColumns="False"
+                  Background="Transparent"
+                  ItemsSource="{Binding ProductList}"
+                  SelectedItem="{Binding SelectedProduct}" Margin="0,0,0,31" Grid.RowSpan="2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Width="50" Binding="{Binding Path=Id}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Название" Width="*" Binding="{Binding Path=Name}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Цена закупки" Binding="{Binding Path=OrderCost}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Цена с доставкой" Binding="{Binding Path=DeliverCost}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Цена продажи" Binding="{Binding Path=SellCost}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <TextBlock VerticalAlignment="Center" Text="Выбранный товар: " FontSize="16" Height="21"/>
+                <TextBlock Text="{Binding SelectedProduct.Name}" VerticalAlignment="Center" FontSize="16"/>
+            </StackPanel>
+            <DataGrid Grid.Column="1" AutoGenerateColumns="False" 
+                  CanUserAddRows="False"
+                  Grid.Row="0" 
+                  Background="Transparent"
+                  ItemsSource="{Binding ProfileList}"
+                  SelectedItem="{Binding SelectedProfile}" Margin="0,0,0,31" Grid.RowSpan="2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Width="50" Binding="{Binding Path=Id}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Название" Width="*" Binding="{Binding Path=Name}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
+                <TextBlock VerticalAlignment="Center" Text="Выбранный профиль (необяз.): " FontSize="16" Height="21"/>
+                <TextBlock Text="{Binding SelectedProfile.Name}" VerticalAlignment="Center" FontSize="16"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80*"/>
+                <RowDefinition Height="97*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="209*"/>
+                <ColumnDefinition Width="181*"/>
+                <ColumnDefinition Width="195*"/>
+                <ColumnDefinition Width="195*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Цена закупки:" VerticalAlignment="Center" Margin="30,0,0,0" FontSize="20"/>
+            <TextBox Grid.Column="1" Text="{Binding BuyCost}" VerticalAlignment="Center" Margin="20,0,20,0" FontSize="20"/>
+
+            <TextBlock Grid.Row="1" Text="Цена с доставкой:" VerticalAlignment="Center" Margin="30,0,0,0" FontSize="20"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding DeliverCost}" VerticalAlignment="Center" Margin="20,0,20,0" FontSize="20"/>
+
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="Цена Продажи:" VerticalAlignment="Center" Margin="30,0,0,0" FontSize="20"/>
+            <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding SellCost}" VerticalAlignment="Center" Margin="20,0,20,0" FontSize="20"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="Количество:" VerticalAlignment="Center" Margin="30,0,0,0" FontSize="20"/>
+            <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding Count}" VerticalAlignment="Center" Margin="20,0,20,0" FontSize="20"/>
+
+        </Grid>
+        <Button Grid.Row="2" Content="Сохранить" Command="{Binding ExecuteCommand}"/>
+    </Grid>
+</Window>
