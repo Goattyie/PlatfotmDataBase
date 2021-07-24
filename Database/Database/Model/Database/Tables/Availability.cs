@@ -15,14 +15,13 @@ namespace Database.Model.Database.Tables
     {
         public int Id { get; set; }
         public int ProductId { get; set; }
-        public int ProfileId { get; set; }
+        public int? ProfileId { get; set; }
         public int Count { get; set; }
         public double BuyCost { get; set; }
         public double DeliverCost { get; set; }
         public double SellCost { get; set; }
         public virtual Profile Profile { get; set; }
         public virtual Product Product { get; set; }
-        public virtual ICollection<Sell> Sells { get; set; }
 
     }
 }

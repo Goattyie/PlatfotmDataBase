@@ -14,7 +14,7 @@ namespace Database.Model.Database.Tables
         public int Count { get; set; }
         public double Profit { get; set; }
         public int ClientId { get; set; }
-        public int CardId { get; set; }
+        public int? CardId { get; set; }
         public Client Client { get; set; }
         public Card Card { get; set; }
         public Product Product { get; set; }

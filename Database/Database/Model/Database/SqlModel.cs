@@ -8,7 +8,7 @@ namespace Database.Model.Database
     {
         public SqlModel()
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -28,6 +28,7 @@ namespace Database.Model.Database
                .HasIndex(a => new { a.Name }).IsUnique(true);
             modelBuilder.Entity<Deliver>()
                .HasIndex(a => new { a.Name }).IsUnique(true);
+            modelBuilder.Entity<Availability>().HasIndex(a => new { a.ProductId, a.ProfileId }).IsUnique(true);
 
             //Ограничения на NOT NULL
             modelBuilder.Entity<Product>()

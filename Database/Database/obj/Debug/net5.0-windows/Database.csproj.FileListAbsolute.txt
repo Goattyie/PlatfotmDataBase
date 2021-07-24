@@ -159,3 +159,5 @@ D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\View\EditNode\E
 D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\Database.csproj.AssemblyReference.cache
 D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\View\EditNode\EditClient.g.cs
 D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\View\EditNode\EditClient.baml
+D:\PlaygroundDataBase\Database\Database\bin\Debug\net5.0-windows\Humanizer.dll
+D:\PlaygroundDataBase\Database\Database\bin\Debug\net5.0-windows\Microsoft.EntityFrameworkCore.Design.dll
