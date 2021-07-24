@@ -41,8 +41,6 @@ namespace Database.VeiwModel.Pages
                     var list = new List<DeliverProduct>();
                     while (SelectedDeliverProduct != null)
                     {
-                        _selectedDeliverProduct.Product = null;
-                        _selectedDeliverProduct.Deliver = null;
                         list.Add(_selectedDeliverProduct);
                         DeliverProductList.Remove(_selectedDeliverProduct);
                     }

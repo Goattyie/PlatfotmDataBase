@@ -1,5 +1,4 @@
 ﻿using Database.Model.Database.Tables;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,66 +8,66 @@ using System.Windows;
 
 namespace Database.Model.Database.Services
 {
-    public class DeliverProductMapper : IMapper<DeliverProduct>
+    public class ClientMapper : IMapper<Client>
     {
         public event Action<object> CreateEntityEvent;
-        public void Create(DeliverProduct obj)
+        public void Create(Client obj)
         {
             using (var connection = new SqlModel())
             {
                 try
                 {
-                    connection.DeliversProducts.Add(obj);
+                    connection.Clients.Add(obj);
                     connection.SaveChanges();
                     CreateEntityEvent?.Invoke(obj);
                     MessageBox.Show("Запись добавлена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                catch (DbUpdateException ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show("Запись уже существует", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
 
-        public void Create(DeliverProduct[] obj)
+        public void Create(Client[] obj)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(DeliverProduct obj)
+        public void Delete(Client obj)
         {
-            using (var connection = new SqlModel())
+            using(var connection = new SqlModel())
             {
-                connection.DeliversProducts.Remove(obj);
+                connection.Clients.Remove(obj);
                 connection.SaveChanges();
             }
         }
 
-        public void Delete(DeliverProduct[] obj)
+        public void Delete(Client[] obj)
         {
             using (var connection = new SqlModel())
             {
-                connection.DeliversProducts.RemoveRange(obj);
+                connection.Clients.RemoveRange(obj);
                 connection.SaveChanges();
             }
         }
 
-        public IEnumerable<DeliverProduct> GetAll()
+        public IEnumerable<Client> GetAll()
         {
-            var dpList = new List<DeliverProduct>();
+            var clients = new List<Client>();
             using (var connection = new SqlModel())
             {
-                dpList = connection.DeliversProducts.Include(dp => dp.Product).Include(dp => dp.Deliver).ToList();
+                clients = connection.Clients.ToList();
             }
-            return dpList;
+            return clients;
         }
 
-        public DeliverProduct GetElementById(int id)
+        public Client GetElementById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(DeliverProduct obj)
+        public void Update(Client obj)
         {
             throw new NotImplementedException();
         }

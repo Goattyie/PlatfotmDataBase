@@ -36,8 +36,8 @@
                   SelectedItem="{Binding SelectedDeliverProduct}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Width="50" Binding="{Binding Path=Id}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Товар" Width="*" Binding="{Binding Path=Product.Name}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Поставщик" Binding="{Binding Path=Deliver.Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Товар" Width="300*" Binding="{Binding Path=Product.Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Поставщик" Width="300*" Binding="{Binding Path=Deliver.Name}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 

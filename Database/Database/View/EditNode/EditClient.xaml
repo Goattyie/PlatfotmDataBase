@@ -1,0 +1,18 @@
+﻿<Window x:Class="Database.View.EditNode.EditClient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Database.View.EditNode"
+        mc:Ignorable="d"
+        Title="EditClient" Height="454" Width="429">
+    <StackPanel Margin="10">
+        <TextBlock Text="Телефон" Margin="0,0,0,10" FontSize="24"/>
+        <TextBox Margin="0,0,0,10" FontSize="24" Text="{Binding Phone}"/>
+        <TextBlock Text="Описание" Margin="0,0,0,10" FontSize="24"/>
+        <TextBox TextWrapping="Wrap"  Margin="0,0,0,10" FontSize="24" Height="144" Text="{Binding Description}"/>
+        <TextBlock Text="Машина (не обязательно)" Margin="0,0,0,10" FontSize="24"/>
+        <TextBox Margin="0,0,0,10" FontSize="24" Text="{Binding Car}"/>
+        <Button Content="Принять" FontSize="24" Command="{Binding AddCommand}"/>
+    </StackPanel>
+</Window>
