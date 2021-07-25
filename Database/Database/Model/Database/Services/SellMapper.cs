@@ -93,7 +93,20 @@ namespace Database.Model.Database.Services
 
         public void Update(Sell obj)
         {
-            throw new NotImplementedException();
+            using(var connection = new SqlModel())
+            {
+                try
+                {
+                    connection.Sells.Update(obj);
+                    connection.SaveChanges();
+                    UpdateEntityEvent?.Invoke(obj);
+                    MessageBox.Show("Запись успешно обновлена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка обновления записи", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

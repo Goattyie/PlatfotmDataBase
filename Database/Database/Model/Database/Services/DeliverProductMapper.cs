@@ -68,6 +68,16 @@ namespace Database.Model.Database.Services
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Product> GetProductByDeliverId(int id)
+        {
+            var products = new List<Product>();
+            using(var connection = new SqlModel())
+            {
+                products = connection.DeliversProducts.Where(a => a.DeliverId == id).Select(p => p.Product).ToList();
+            }
+            return products;
+        }
+
         public void Update(DeliverProduct obj)
         {
             throw new NotImplementedException();

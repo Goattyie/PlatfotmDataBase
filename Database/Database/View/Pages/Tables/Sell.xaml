@@ -37,6 +37,8 @@
                 <DataGridTextColumn Header="Id" Width="50" Binding="{Binding Path=Id}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Товар" Width="400*" Binding="{Binding Path=Product.Name}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Прибыль" Width="140" Binding="{Binding Path=Profit}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Цена закупки" Width="100" Binding="{Binding Path=BuyCost}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Цена продажи" Width="110" Binding="{Binding Path=SellCost}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Количество" Width="140" Binding="{Binding Path=Count}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Дата продажи" Width="170" Binding="{Binding Path=SellDate}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Клиент" Width="130" Binding="{Binding Path=Client.Phone}"></DataGridTextColumn>
@@ -48,9 +50,10 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button Grid.Row="2" Grid.Column="0" Style="{Binding Source={StaticResource Btn}}" Content="Добавить запись" Margin="10,0,10,10" Command="{Binding AddCommand}"/>
-            
+            <Button Grid.Row="2" Grid.Column="1" Style="{Binding Source={StaticResource Btn}}" Content="Редактировать запись" Margin="10,0,10,10" Command="{Binding EditCommand}"/>
             <Button Grid.Row="2" Grid.Column="2" Style="{Binding Source={StaticResource Btn}}" Content="Удалить запись" Margin="10,0,10,10" Command="{Binding RemoveCommand}"/>
         </Grid>
 

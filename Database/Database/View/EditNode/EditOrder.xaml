@@ -4,33 +4,83 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Database.View.EditNode"
-        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" x:Class="Database.View.EditNode.EditOrder"
+        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:editnode="clr-namespace:Database.VeiwModel.EditNode" x:Class="Database.View.EditNode.EditOrder"
         mc:Ignorable="d"
-        Title="EditOrder" Height="800" Width="500">
-    <Grid>
+        Title="Заказы" Height="626" Width="625">
+
+    <Window.DataContext>
+        <editnode:OrderViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <Style x:Key="MainStyle" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="24"/>
+        </Style>
+        <Style x:Key="TBoxStyle" TargetType="TextBox">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="24"/>
+        </Style>
+
+    </Window.Resources>
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="38*"/>
+            <ColumnDefinition Width="73*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="79*"/>
-            <RowDefinition Height="88*"/>
-            <RowDefinition Height="83*"/>
-            <RowDefinition Height="65*"/>
-            <RowDefinition Height="78*"/>
-            <RowDefinition Height="78*"/>
-            <RowDefinition Height="78*"/>
-            <RowDefinition Height="78*"/>
-            <RowDefinition Height="78*"/>
-            <RowDefinition Height="78*"/>
+            <RowDefinition Height="99*"/>
+            <RowDefinition Height="438*"/>
+            <RowDefinition Height="53*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Заказы" FontSize="28" Margin="10,0,-10,0"/>
-        <TextBlock Text="Товар" FontSize="28" Margin="10" Grid.Row="2"/>
-        
-        <TextBlock Text="Поставщик" FontSize="28" Margin="10" Grid.Row="1"/>
-        
-        <TextBox Grid.Row="3" FontSize="20" Margin="10"/>
-        <TextBox Grid.Row="4" FontSize="20" Margin="10"/>
-        <TextBox Grid.Row="5" FontSize="20" Margin="10"/>
-        <TextBox Grid.Row="6" FontSize="20" Margin="10"/>
-        <TextBox Grid.Row="7" FontSize="20" Margin="10"/>
-        <TextBox Grid.Row="8" FontSize="20" Margin="10"/>
-        <Button Grid.Row="9" FontSize="20" Margin="10" Background="Transparent" Content="Добавить"></Button>
+        <Grid Grid.ColumnSpan="3">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="238*"/>
+                <ColumnDefinition Width="367*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Поставщик: " Style="{StaticResource MainStyle}" Height="32" Width="134"/>
+            <ComboBox FontSize="24" VerticalAlignment="Center" Grid.Column="1"  ItemsSource="{Binding DeliverList}" SelectedItem="{Binding SelectedDeliver}" DisplayMemberPath="Name" Height="38"/>
+            <TextBlock Grid.Row="1" Text="Товар: " Style="{StaticResource MainStyle}" Height="32" Width="78"/>
+            <ComboBox FontSize="24" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}" DisplayMemberPath="Name" Height="38"/>
+        </Grid>
+
+        <Grid Grid.ColumnSpan="3" Margin="0,99,0,0" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="238*"/>
+                <ColumnDefinition Width="367*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Количество:" Style="{StaticResource MainStyle}"/>
+            <TextBox Grid.Column="1" Style="{StaticResource TBoxStyle}" Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBlock Grid.Row="1" Text="Получено:" Style="{StaticResource MainStyle}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource TBoxStyle}" Text="{Binding CurrentCount, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBlock Grid.Row="2" Text="Цена закупки:" Style="{StaticResource MainStyle}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TBoxStyle}" Text="{Binding OrderCost, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBlock Grid.Row="3" Text="Цена доставки:" Style="{StaticResource MainStyle}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource TBoxStyle}" Text="{Binding DeliverCost, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBlock Grid.Row="4" Text="Цена оплаты:" Style="{StaticResource MainStyle}"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource TBoxStyle}" Text="{Binding SummCost, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBlock Grid.Row="5" Text="Оплачено уже:" Style="{StaticResource MainStyle}"/>
+            <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource TBoxStyle}" Text="{Binding CurrentCost, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
+        <Button Grid.Row="1" Content="Сохранить" FontSize="24" Background="Transparent" Grid.ColumnSpan="3" Margin="0,438,0,0" Grid.RowSpan="2" Command="{Binding ExecuteCommand}"/>
     </Grid>
 </Window>

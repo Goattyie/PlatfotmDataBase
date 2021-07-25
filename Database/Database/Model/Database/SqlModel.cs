@@ -9,7 +9,7 @@ namespace Database.Model.Database
         public SqlModel()
         {
             //Database.EnsureDeleted();
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -70,11 +70,6 @@ namespace Database.Model.Database
                 .Property(d => d.Count).IsRequired();
             modelBuilder.Entity<Sell>()
                 .Property(d => d.Profit).IsRequired();
-            modelBuilder.Entity<Sell>()
-                .Property(d => d.ClientId).IsRequired();
-            modelBuilder.Entity<Sell>()
-                .Property(d => d.CardId).IsRequired();
-
         }
 
         public DbSet<Availability> Availability { get; set; }

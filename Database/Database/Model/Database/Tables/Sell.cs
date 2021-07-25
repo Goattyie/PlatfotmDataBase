@@ -12,8 +12,10 @@ namespace Database.Model.Database.Tables
         public string SellDate { get; set; }
         public int ProductId { get; set; }
         public int Count { get; set; }
+        public double BuyCost { get; set; }
+        public double SellCost { get; set; }
         public double Profit { get; set; }
-        public int ClientId { get; set; }
+        public int? ClientId { get; set; }
         public int? CardId { get; set; }
         public Client Client { get; set; }
         public Card Card { get; set; }

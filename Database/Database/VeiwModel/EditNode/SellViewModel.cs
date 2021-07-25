@@ -19,9 +19,8 @@ namespace Database.VeiwModel.EditNode
         private Availability _selectedAvailable;
         private Card _selectedCard;
         private Client _selectedClient;
-        private double _buyCost;
-        private double _sellCost;
         private bool _isValid;
+        private bool _isCreate;
 
         #region Errors
         Dictionary<string, string> _errors = new Dictionary<string, string>()
@@ -83,14 +82,14 @@ namespace Database.VeiwModel.EditNode
         }
         public double SellCost
         {
-            get { return _sellCost; }
-            set { _sellCost = value; Profit = (_sellCost - _buyCost) * Count; OnPropertyChanged(nameof(SellCost)); }
+            get { return _sell.SellCost; }
+            set { _sell.SellCost = value; Profit = (_sell.SellCost - _sell.BuyCost) * _sell.Count; OnPropertyChanged(nameof(SellCost)); }
 
         }
         public double BuyCost
         {
-            get { return _buyCost; }
-            set { _buyCost = value; Profit = (_sellCost - _buyCost)*Count; OnPropertyChanged(nameof(BuyCost)); }
+            get { return _sell.BuyCost; }
+            set { _sell.BuyCost = value; Profit = (_sell.SellCost - _sell.BuyCost) * _sell.Count; OnPropertyChanged(nameof(BuyCost)); }
         }
         
         public int Count
@@ -98,10 +97,10 @@ namespace Database.VeiwModel.EditNode
             get { return _sell.Count; }
             set 
             { 
-                _sell.Count = value; 
-                Profit = (_sellCost - _buyCost) * Count; 
+                _sell.Count = value;
+                Profit = (_sell.SellCost - _sell.BuyCost) * _sell.Count;
                 OnPropertyChanged(nameof(Count));
-                if (value < 1 || value > _selectedAvailable?.Count)
+                if ((value < 1 || value > _selectedAvailable?.Count) && _isCreate)
                     _errors["Count"] = "Количество указано неверно";
                 else _errors["Count"] = null;
                 UpdateIsValid();
@@ -149,22 +148,47 @@ namespace Database.VeiwModel.EditNode
                 ClientList.Add(item);
 
             _executeDelegate = new Action(Create);
-            if (AvailabilityList.Count != 0)
-            {
-                SelectedAvailable = AvailabilityList[0];
-                Count = 1;
-            }
+            Count = 1;
+            _isCreate = true;
         }
 
         public SellViewModel(SellMapper service, Sell sell)
         {
+            _service = service;
+            _sell = sell;
+            _selectedAvailable = new Availability();
+            _selectedCard = _sell.Card;
+            _selectedClient = _sell.Client;
+            _selectedAvailable.Product = new ProductMapper().GetElementById(_sell.ProductId);
+            AvailabilityList = new BindingList<Availability>();
+            CardList = new BindingList<Card>();
+            ClientList = new BindingList<Client>();
 
+            var available = new AvailabilityMapper().GetAll();
+            var cards = new CardMapper().GetAll();
+            var clients = new ClientMapper().GetAll();
+
+            foreach (var item in available)
+                AvailabilityList.Add(item);
+            foreach (var item in cards)
+                CardList.Add(item);
+            foreach (var item in clients)
+                ClientList.Add(item);
+
+            _executeDelegate = new Action(Update);
+            _isCreate = false;
+            _isValid = true;
         }
 
         private void Create()
         {
             _service.Create(_sell);
             _sell.Id = 0;
+        }
+
+        private void Update()
+        {
+            _service.Update(_sell);
         }
 
         private void UpdateIsValid()

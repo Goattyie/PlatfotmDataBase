@@ -79,7 +79,12 @@ namespace Database.Model.Database.Services
 
         public Product GetElementById(int id)
         {
-            throw new NotImplementedException();
+            var product = new Product();
+            using(var connection = new SqlModel())
+            {
+                product = connection.Products.Where(p => p.Id == id).FirstOrDefault();
+            }
+            return product;
         }
 
         public Product GetElementByName(string name)
