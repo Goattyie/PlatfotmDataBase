@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace Database.Model.Database.Services
 {
-    class OrderMapper : IMapper<Order>
+    public class OrderMapper : IMapper<Order>
     {
         public event Action<object> CreateEntityEvent;
         public event Action<object> UpdateEntityEvent;
@@ -30,22 +30,14 @@ namespace Database.Model.Database.Services
                 }
             }
         }
-
-        public void Create(Order[] obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(Order obj)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Delete(Order[] obj)
         {
-            throw new NotImplementedException();
+            using (var connection = new SqlModel())
+            {
+                connection.Orders.RemoveRange(obj);
+                connection.SaveChanges();
+            }
         }
-
         public IEnumerable<Order> GetAll()
         {
             var items = new List<Order>();
@@ -55,15 +47,22 @@ namespace Database.Model.Database.Services
             }
             return items;
         }
-
-        public Order GetElementById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Update(Order obj)
         {
-            throw new NotImplementedException();
+            using(var connection = new SqlModel())
+            {
+                try
+                {
+                    connection.Orders.Update(obj);
+                    connection.SaveChanges();
+                    UpdateEntityEvent?.Invoke(obj);
+                    MessageBox.Show("Запись обновлена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка обновления записи", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

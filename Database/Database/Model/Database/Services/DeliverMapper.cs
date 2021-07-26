@@ -29,21 +29,6 @@ namespace Database.Model.Database.Services
                 }
             }
         }
-
-        public void Create(Deliver[] obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(Deliver obj)
-        {
-            using (var connection = new SqlModel())
-            {
-                connection.Delivers.Remove(obj);
-                connection.SaveChanges();
-            }
-        }
-
         public void Delete(Deliver[] obj)
         {
             using (var connection = new SqlModel())
@@ -52,7 +37,6 @@ namespace Database.Model.Database.Services
                 connection.SaveChanges();
             }
         }
-
         public IEnumerable<Deliver> GetAll()
         {
             var delivers = new List<Deliver>();
@@ -62,12 +46,6 @@ namespace Database.Model.Database.Services
             }
             return delivers;
         }
-
-        public Deliver GetElementById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Update(Deliver obj)
         {
             throw new NotImplementedException();

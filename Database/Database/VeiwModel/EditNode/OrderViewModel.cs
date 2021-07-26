@@ -10,17 +10,24 @@ using System.Threading.Tasks;
 
 namespace Database.VeiwModel.EditNode
 {
-    class OrderViewModel:BasePropertyChanged
+    class OrderViewModel:ValidatePropertyChanged
     {
         private Product _selectedProduct;
         private Deliver _selectedDeliver;
         private OrderMapper _service;
         private Order _order;
         private BaseCommand _executeCommand;
-
+        private Action _executeDelegate;
+        protected override Dictionary<string, string> _errors { get; set; } = new Dictionary<string, string>()
+        {
+            ["SelectedProduct"] = null,
+            ["SelectedDeliver"] = null,
+            ["Count"] = null,
+            ["CurrentCount"] = null,
+        };
         public BaseCommand ExecuteCommand
         {
-            get { return _executeCommand ?? (_executeCommand = new BaseCommand(obj => { _service.Create(_order); })); }
+            get { return _executeCommand ?? (_executeCommand = new BaseCommand(obj => { _executeDelegate?.Invoke(); })); }
         }
         public Product SelectedProduct
         {
@@ -31,6 +38,10 @@ namespace Database.VeiwModel.EditNode
                 _order.ProductId = _selectedProduct?.Id ?? 0;
                 OnPropertyChanged(nameof(SelectedProduct));
                 UpdateCost();
+                if (_selectedProduct is null)
+                    _errors["SelectedProduct"] = "Неверный товар";
+                else _errors["SelectedProduct"] = null;
+                UpdateIsValid();
             }
         }
         public Deliver SelectedDeliver
@@ -39,15 +50,17 @@ namespace Database.VeiwModel.EditNode
             set 
             {
                 _selectedDeliver = value;
-                _order.DeliverId = _selectedDeliver.Id;
+                _order.DeliverId = _selectedDeliver?.Id ?? 0;
                 SelectedProduct = null;
-                var products = new DeliverProductMapper().GetProductByDeliverId(_selectedDeliver.Id);
-                ProductList.Clear();
-                foreach (var item in products)
-                    ProductList.Add(item);
+                LoadProducts();
                 OnPropertyChanged(nameof(SelectedDeliver));
+                if (_selectedDeliver is null)
+                    _errors["SelectedDeliver"] = "Неверный поставщик";
+                else _errors["SelectedDeliver"] = null;
+                UpdateIsValid();
             }
         }
+    
         public BindingList<Product> ProductList { get; set; }
         public BindingList<Deliver> DeliverList { get; set; }
 
@@ -60,17 +73,33 @@ namespace Database.VeiwModel.EditNode
                 _order.Count = value; 
                 OnPropertyChanged(nameof(Count));
                 UpdateCost();
+                if(value < 1)
+                    _errors["Count"] = "Неверное количество";
+                else _errors["Count"] = null;
+                UpdateIsValid();
             }
         }
         public int CurrentCount
         {
             get { return _order.CurrentCount; }
-            set { _order.CurrentCount = value; OnPropertyChanged(nameof(CurrentCount)); }
+            set 
+            { 
+                _order.CurrentCount = value; 
+                OnPropertyChanged(nameof(CurrentCount));
+                if (value < 1 || value > Count)
+                    _errors["CurrentCount"] = "Неверное полученное количество";
+                else _errors["CurrentCount"] = null;
+                UpdateIsValid();
+            }
         }
         public double OrderCost
         {
             get { return _order.OrderCost; }
-            set { _order.OrderCost = value; OnPropertyChanged(nameof(OrderCost)); }
+            set 
+            { 
+                _order.OrderCost = value; 
+                OnPropertyChanged(nameof(OrderCost));
+            }
         }
         public double DeliverCost
         {
@@ -88,16 +117,35 @@ namespace Database.VeiwModel.EditNode
             set { _order.CurrentCost = value; OnPropertyChanged(nameof(CurrentCost)); }
         }
         #endregion
-        public OrderViewModel()
+        public OrderViewModel(OrderMapper service)
         {
             _order = new Order();
-            _service = new OrderMapper();
+            _service = service;
             Count = 1;
             DeliverList = new BindingList<Deliver>();
             ProductList = new BindingList<Product>();
             var delivers = new DeliverMapper().GetAll();
             foreach (var item in delivers)
                 DeliverList.Add(item);
+
+            _executeDelegate = new Action(Create);
+            IsValid = false;
+        }
+        public OrderViewModel(OrderMapper service, Order order)
+        {
+            _order = order;
+            _service = service;
+            DeliverList = new BindingList<Deliver>();
+            ProductList = new BindingList<Product>();
+            var delivers = new DeliverMapper().GetAll();
+            foreach (var item in delivers)
+                DeliverList.Add(item);
+
+            _selectedDeliver = DeliverList.Where(p=>p.Id == _order.DeliverId).FirstOrDefault();
+            LoadProducts();
+            _selectedProduct = ProductList.Where(p => p.Id == _order.ProductId).FirstOrDefault();
+            _executeDelegate = new Action(Update);
+            IsValid = false;
         }
         private void UpdateCost()
         {
@@ -113,6 +161,24 @@ namespace Database.VeiwModel.EditNode
                 SummCost = 0;
                 DeliverCost = 0;
             }
+        }
+        private void Create()
+        {
+            _order.Deliver = null;
+            _order.Product = null;
+            _service.Create(_order);
+            _order.Id = 0;
+        }
+        private void Update()
+        {
+            _service.Update(_order);
+        }
+        private void LoadProducts()
+        {
+            var products = new DeliverProductMapper().GetProductByDeliverId(_selectedDeliver.Id);
+            ProductList.Clear();
+            foreach (var item in products)
+                ProductList.Add(item);
         }
     }
 }

@@ -8,33 +8,14 @@
         mc:Ignorable="d"
         Title="Заказы" Height="626" Width="625">
 
-    <Window.DataContext>
-        <editnode:OrderViewModel/>
-    </Window.DataContext>
-    <Window.Resources>
-        <Style x:Key="MainStyle" TargetType="TextBlock">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="24"/>
-        </Style>
-        <Style x:Key="TBoxStyle" TargetType="TextBox">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="24"/>
-        </Style>
 
-    </Window.Resources>
     <Grid Margin="10">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="38*"/>
-            <ColumnDefinition Width="73*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="99*"/>
             <RowDefinition Height="438*"/>
             <RowDefinition Height="53*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.ColumnSpan="3">
+        <Grid Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -43,13 +24,17 @@
                 <ColumnDefinition Width="238*"/>
                 <ColumnDefinition Width="367*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Поставщик: " Style="{StaticResource MainStyle}" Height="32" Width="134"/>
-            <ComboBox FontSize="24" VerticalAlignment="Center" Grid.Column="1"  ItemsSource="{Binding DeliverList}" SelectedItem="{Binding SelectedDeliver}" DisplayMemberPath="Name" Height="38"/>
-            <TextBlock Grid.Row="1" Text="Товар: " Style="{StaticResource MainStyle}" Height="32" Width="78"/>
-            <ComboBox FontSize="24" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}" DisplayMemberPath="Name" Height="38"/>
+            <TextBlock Text="Поставщик: " Height="32" Width="134" Style="{StaticResource EditTextBlock}"/>
+            <ComboBox Grid.Column="1"  ItemsSource="{Binding DeliverList}" SelectedItem="{Binding SelectedDeliver, ValidatesOnExceptions=True,
+                ValidatesOnDataErrors=True, 
+                NotifyOnValidationError=True}" DisplayMemberPath="Name" Style="{StaticResource EditComboBox}" />
+            <TextBlock Grid.Row="1" Text="Товар: " Height="32" Width="78" Style="{StaticResource EditTextBlock}"/>
+            <ComboBox  Grid.Row="1" Grid.Column="1" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct, ValidatesOnExceptions=True,
+                ValidatesOnDataErrors=True, 
+                NotifyOnValidationError=True}" DisplayMemberPath="Name" Style="{StaticResource EditComboBox}"/>
         </Grid>
 
-        <Grid Grid.ColumnSpan="3" Margin="0,99,0,0" Grid.RowSpan="2">
+        <Grid Grid.ColumnSpan="2" Margin="0,99,0,0" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="238*"/>
                 <ColumnDefinition Width="367*"/>
@@ -63,24 +48,28 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Количество:" Style="{StaticResource MainStyle}"/>
-            <TextBox Grid.Column="1" Style="{StaticResource TBoxStyle}" Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Количество:" Style="{StaticResource EditTextBlock}"/>
+            <TextBox Grid.Column="1" Text="{Binding Count, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True,
+                ValidatesOnDataErrors=True, 
+                NotifyOnValidationError=True}"/>
 
-            <TextBlock Grid.Row="1" Text="Получено:" Style="{StaticResource MainStyle}"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource TBoxStyle}" Text="{Binding CurrentCount, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Grid.Row="1" Text="Получено:" Style="{StaticResource EditTextBlock}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CurrentCount, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True,
+                ValidatesOnDataErrors=True, 
+                NotifyOnValidationError=True}"/>
 
-            <TextBlock Grid.Row="2" Text="Цена закупки:" Style="{StaticResource MainStyle}"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TBoxStyle}" Text="{Binding OrderCost, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Grid.Row="2" Text="Цена закупки:" Style="{StaticResource EditTextBlock}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding OrderCost, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <TextBlock Grid.Row="3" Text="Цена доставки:" Style="{StaticResource MainStyle}"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource TBoxStyle}" Text="{Binding DeliverCost, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Grid.Row="3" Text="Цена доставки:" Style="{StaticResource EditTextBlock}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding DeliverCost, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <TextBlock Grid.Row="4" Text="Цена оплаты:" Style="{StaticResource MainStyle}"/>
-            <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource TBoxStyle}" Text="{Binding SummCost, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Grid.Row="4" Text="Цена оплаты:" Style="{StaticResource EditTextBlock}"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding SummCost, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <TextBlock Grid.Row="5" Text="Оплачено уже:" Style="{StaticResource MainStyle}"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource TBoxStyle}" Text="{Binding CurrentCost, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Grid.Row="5" Text="Оплачено уже:" Style="{StaticResource EditTextBlock}"/>
+            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding CurrentCost, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
-        <Button Grid.Row="1" Content="Сохранить" FontSize="24" Background="Transparent" Grid.ColumnSpan="3" Margin="0,438,0,0" Grid.RowSpan="2" Command="{Binding ExecuteCommand}"/>
+        <Button Grid.Row="1" Content="Сохранить" FontSize="24" Background="Transparent" Grid.ColumnSpan="2" Margin="0,438,0,0" Grid.RowSpan="2" Command="{Binding ExecuteCommand}" IsEnabled="{Binding IsValid}"/>
     </Grid>
 </Window>

@@ -4,6 +4,24 @@
              xmlns:local="clr-namespace:Database"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
-
+        <ResourceDictionary>
+            <Style TargetType="TextBlock" x:Key="EditTextBlock">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="20"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="Transparent"/>
+            </Style>
+            <Style TargetType="ComboBox" x:Key="EditComboBox">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Height" Value="34" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

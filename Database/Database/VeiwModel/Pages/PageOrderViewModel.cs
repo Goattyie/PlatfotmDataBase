@@ -31,7 +31,7 @@ namespace Database.VeiwModel.Pages
         {
             get
             {
-                return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditOrder().Show(); DownloadData(); }));
+                return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditOrder(_service).Show(); }));
             }
         }
         public BaseCommand EditCommand
@@ -40,7 +40,8 @@ namespace Database.VeiwModel.Pages
             {
                 return _editCommand ?? (_editCommand = new BaseCommand(obj =>
                 {
-                    
+                    if(_selectedOrder != null)
+                        new EditOrder(_service, _selectedOrder).Show();
                 }));
             }
         }
@@ -75,7 +76,12 @@ namespace Database.VeiwModel.Pages
 
         private void OnUpdate(object obj)
         {
-            DownloadData();
+            OrderList.Clear();
+            var products = new OrderMapper().GetAll();
+            foreach (var item in products)
+            {
+                OrderList.Add(item);
+            }
         }
 
         public void DownloadData()

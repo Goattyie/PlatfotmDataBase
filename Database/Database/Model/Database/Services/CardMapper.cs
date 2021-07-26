@@ -30,20 +30,6 @@ namespace Database.Model.Database.Services
             }
         }
 
-        public void Create(Card[] obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(Card obj)
-        {
-            using (var connection = new SqlModel())
-            {
-                connection.Cards.Remove(obj);
-                connection.SaveChanges();
-            }
-        }
-
         public void Delete(Card[] obj)
         {
             using (var connection = new SqlModel())
@@ -63,12 +49,6 @@ namespace Database.Model.Database.Services
             }
             return cards;
         }
-
-        public Card GetElementById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Update(Card obj)
         {
             throw new NotImplementedException();

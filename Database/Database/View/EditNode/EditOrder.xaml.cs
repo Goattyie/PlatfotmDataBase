@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Database.Model.Database.Services;
+using Database.Model.Database.Tables;
+using Database.VeiwModel.EditNode;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +22,15 @@ namespace Database.View.EditNode
     /// </summary>
     public partial class EditOrder : Window
     {
-        public EditOrder()
+        public EditOrder(OrderMapper service)
         {
             InitializeComponent();
+            DataContext = new OrderViewModel(service);
+        }
+        public EditOrder(OrderMapper service, Order order)
+        {
+            InitializeComponent();
+            DataContext = new OrderViewModel(service, order);
         }
     }
 }

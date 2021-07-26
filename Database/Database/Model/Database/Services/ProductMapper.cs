@@ -29,35 +29,6 @@ namespace Database.Model.Database.Services
                 }
             }
         }
-
-        public void Create(Product[] obj)
-        {
-            using (var connection = new SqlModel())
-            {
-                foreach(var item in obj)
-                {
-                    try
-                    {
-                        connection.Products.Add(item);
-                        connection.SaveChanges();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Ошибка");
-                    }
-                }
-            }
-        }
-
-        public void Delete(Product obj)
-        {
-            using (var connection = new SqlModel())
-            {
-                connection.Products.Remove(obj);
-                connection.SaveChanges();
-            }
-        }
-
         public void Delete(Product[] obj)
         {
             using (var connection = new SqlModel())
@@ -66,7 +37,6 @@ namespace Database.Model.Database.Services
                 connection.SaveChanges();
             }
         }
-
         public IEnumerable<Product> GetAll()
         {
             var product = new List<Product>();
@@ -76,7 +46,6 @@ namespace Database.Model.Database.Services
             }
             return product;
         }
-
         public Product GetElementById(int id)
         {
             var product = new Product();
@@ -86,7 +55,6 @@ namespace Database.Model.Database.Services
             }
             return product;
         }
-
         public Product GetElementByName(string name)
         {
             var product = new Product();
@@ -96,7 +64,6 @@ namespace Database.Model.Database.Services
             }
             return product;
         }
-
         public void Update(Product obj)
         {
             using(var connection = new SqlModel())

@@ -28,21 +28,6 @@ namespace Database.Model.Database.Services
                 }
             }
         }
-
-        public void Create(Profile[] obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(Profile obj)
-        {
-            using (var connection = new SqlModel())
-            {
-                connection.Profiles.Remove(obj);
-                connection.SaveChanges();
-            }
-        }
-
         public void Delete(Profile[] obj)
         {
             using (var connection = new SqlModel())
@@ -51,7 +36,6 @@ namespace Database.Model.Database.Services
                 connection.SaveChanges();
             }
         }
-
         public IEnumerable<Profile> GetAll()
         {
             var profile = new List<Profile>();
@@ -60,12 +44,7 @@ namespace Database.Model.Database.Services
                 profile = connection.Profiles.ToList();
             }
             return profile;
-        }
-
-        public Profile GetElementById(int id)
-        {
-            throw new NotImplementedException();
-        }
+        }  
         public Profile GetElementByName(string name)
         {
             var profile = new Profile();

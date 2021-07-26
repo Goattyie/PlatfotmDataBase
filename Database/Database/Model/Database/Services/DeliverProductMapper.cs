@@ -29,21 +29,6 @@ namespace Database.Model.Database.Services
                 }
             }
         }
-
-        public void Create(DeliverProduct[] obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(DeliverProduct obj)
-        {
-            using (var connection = new SqlModel())
-            {
-                connection.DeliversProducts.Remove(obj);
-                connection.SaveChanges();
-            }
-        }
-
         public void Delete(DeliverProduct[] obj)
         {
             using (var connection = new SqlModel())
@@ -52,7 +37,6 @@ namespace Database.Model.Database.Services
                 connection.SaveChanges();
             }
         }
-
         public IEnumerable<DeliverProduct> GetAll()
         {
             var dpList = new List<DeliverProduct>();
@@ -62,12 +46,6 @@ namespace Database.Model.Database.Services
             }
             return dpList;
         }
-
-        public DeliverProduct GetElementById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<Product> GetProductByDeliverId(int id)
         {
             var products = new List<Product>();
@@ -77,7 +55,6 @@ namespace Database.Model.Database.Services
             }
             return products;
         }
-
         public void Update(DeliverProduct obj)
         {
             throw new NotImplementedException();

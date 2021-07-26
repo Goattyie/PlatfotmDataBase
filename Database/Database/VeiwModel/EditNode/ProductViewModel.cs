@@ -10,29 +10,19 @@ using System.Threading.Tasks;
 
 namespace Database.VeiwModel.EditNode
 {
-    class ProductViewModel:BasePropertyChanged, IDataErrorInfo
+    class ProductViewModel:ValidatePropertyChanged 
     {
         private BaseCommand _buttonClick;
         private Product _product;
         private readonly ProductMapper _service;
         private Action _command;
-        private bool _isValid;
-        private Dictionary<string, string> _errors = new Dictionary<string, string>() { 
+        protected override Dictionary<string, string> _errors { get; set; } = new Dictionary<string, string>()
+        {
             ["Name"] = null,
             ["SellCost"] = null,
             ["OrderCost"] = null,
             ["DeliverCost"] = null,
         };
-
-        public bool IsValid 
-        {
-            get { return _isValid; }
-            set 
-            { 
-                _isValid = value;
-                OnPropertyChanged(nameof(IsValid)); 
-            }
-        }
         #region Поля
         public string Name
         {
@@ -92,9 +82,6 @@ namespace Database.VeiwModel.EditNode
             get { return _buttonClick ?? (_buttonClick = new BaseCommand(obj => { _command?.Invoke(); })); } 
         }
 
-        public string Error => throw new NotImplementedException();
-
-        public string this[string columnName]=> _errors.ContainsKey(columnName) ? _errors[columnName] : null;
 
         public ProductViewModel(ProductMapper service)
         {
@@ -121,10 +108,6 @@ namespace Database.VeiwModel.EditNode
         private void EditNode()
         {
             _service.Update(_product);
-        }
-        private void UpdateIsValid()
-        {
-            IsValid = !_errors.Values.Any(x => x != null);
         }
     }
 }

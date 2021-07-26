@@ -39,7 +39,8 @@ namespace Database.VeiwModel.Pages
             {
                 return _editCommand ?? (_editCommand = new BaseCommand(obj =>
                 {
-                    new EditSell(_service, _selectedSell).Show();
+                    if(_selectedSell is not null)
+                        new EditSell(_service, _selectedSell).Show();
                 }));
             }
         }

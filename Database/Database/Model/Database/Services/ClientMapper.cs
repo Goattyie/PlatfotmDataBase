@@ -28,21 +28,6 @@ namespace Database.Model.Database.Services
                 }
             }
         }
-
-        public void Create(Client[] obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(Client obj)
-        {
-            using(var connection = new SqlModel())
-            {
-                connection.Clients.Remove(obj);
-                connection.SaveChanges();
-            }
-        }
-
         public void Delete(Client[] obj)
         {
             using (var connection = new SqlModel())
@@ -51,7 +36,6 @@ namespace Database.Model.Database.Services
                 connection.SaveChanges();
             }
         }
-
         public IEnumerable<Client> GetAll()
         {
             var clients = new List<Client>();
@@ -61,12 +45,6 @@ namespace Database.Model.Database.Services
             }
             return clients;
         }
-
-        public Client GetElementById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Update(Client obj)
         {
             throw new NotImplementedException();

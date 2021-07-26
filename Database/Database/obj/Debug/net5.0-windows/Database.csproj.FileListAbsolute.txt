@@ -165,3 +165,4 @@ D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\View\EditNode\E
 D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\View\EditNode\EditSell.baml
 D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\View\EditNode\EditAvailability.g.cs
 D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\View\EditNode\EditAvailability.baml
+D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\App.baml

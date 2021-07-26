@@ -156,10 +156,6 @@ namespace Database.VeiwModel.EditNode
         {
             _service = service;
             _sell = sell;
-            _selectedAvailable = new Availability();
-            _selectedCard = _sell.Card;
-            _selectedClient = _sell.Client;
-            _selectedAvailable.Product = new ProductMapper().GetElementById(_sell.ProductId);
             AvailabilityList = new BindingList<Availability>();
             CardList = new BindingList<Card>();
             ClientList = new BindingList<Client>();
@@ -178,6 +174,10 @@ namespace Database.VeiwModel.EditNode
             _executeDelegate = new Action(Update);
             _isCreate = false;
             _isValid = true;
+
+            _selectedAvailable = AvailabilityList.Where(a => a.ProductId == _sell.ProductId).FirstOrDefault();
+            _selectedCard = CardList.Where(c => c.Id == _sell.CardId).FirstOrDefault();
+            _selectedClient = ClientList.Where(c => c.Id == _sell.ClientId).FirstOrDefault();
         }
 
         private void Create()

@@ -51,7 +51,15 @@ namespace Database.VeiwModel.Pages
         }
         public BaseCommand EditCommand
         {
-            get { return _editCommand ?? (_editCommand = new BaseCommand(obj => { new EditAvailability(_service, _selectedAvailability).Show(); DownloadData(); })); }
+            get
+            {
+                return _editCommand ??
+                      (_editCommand = new BaseCommand(obj =>
+                  {
+                      if (_selectedAvailability is not null)
+                          new EditAvailability(_service, _selectedAvailability).Show();
+                  }));
+            }
         }
 
         public PageAvailabilityViewModel()

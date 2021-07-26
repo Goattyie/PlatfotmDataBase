@@ -96,8 +96,6 @@ namespace Database.VeiwModel.EditNode
         {
             _service = service;
             _availability = availability;
-            _selectedProduct = _availability.Product;
-            _selectedProfile = _availability.Profile;
             ProductList = new BindingList<Product>();
             ProfileList = new BindingList<Profile>();
             var products = new ProductMapper().GetAll();
@@ -107,6 +105,9 @@ namespace Database.VeiwModel.EditNode
             foreach (var item in profiles)
                 ProfileList.Add(item);
             _executeDelegate = new Action(Update);
+
+            _selectedProduct = ProductList.Where(p => p.Id == availability.ProductId).FirstOrDefault();
+            _selectedProfile = ProfileList.Where(p => p.Id == availability.ProfileId).FirstOrDefault();
         }
         private void Create()
         {

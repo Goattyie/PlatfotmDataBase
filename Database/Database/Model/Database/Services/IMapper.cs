@@ -10,10 +10,7 @@ namespace Database.Model.Database.Services
     interface IMapper<T> where T:class
     {
         void Create(T obj);
-        void Create(T[] obj);
-        T GetElementById(int id);
         void Update(T obj);
-        void Delete(T obj);
         void Delete(T[] obj);
         IEnumerable<T> GetAll();
         

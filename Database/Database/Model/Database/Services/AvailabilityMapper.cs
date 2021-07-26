@@ -31,20 +31,6 @@ namespace Database.Model.Database.Services
             }
         }
 
-        public void Create(Availability[] obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(Availability obj)
-        {
-            using (var connection = new SqlModel())
-            {
-                connection.Availability.Remove(obj);
-                connection.SaveChanges();
-            }
-        }
-
         public void Delete(Availability[] obj)
         {
             using(var connection = new SqlModel())
@@ -64,10 +50,6 @@ namespace Database.Model.Database.Services
             return items;
         }
 
-        public Availability GetElementById(int id)
-        {
-            throw new NotImplementedException();
-        }
         public Availability GetElementByProductId(int id)
         {
             var available = new Availability();
