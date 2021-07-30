@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Database.VeiwModel.EditNode
 {
-    class SellViewModel:BasePropertyChanged, IDataErrorInfo
+    class SellViewModel:ValidatePropertyChanged, IDataErrorInfo
     {
         private Sell _sell;
         private SellMapper _service;
@@ -23,9 +23,10 @@ namespace Database.VeiwModel.EditNode
         private bool _isCreate;
 
         #region Errors
-        Dictionary<string, string> _errors = new Dictionary<string, string>()
+        protected override Dictionary<string, string> _errors { get; set; } = new Dictionary<string, string>()
         {
             ["Count"] = null,
+            ["Phone"] = null,
         };
         #endregion
 
@@ -70,6 +71,19 @@ namespace Database.VeiwModel.EditNode
         }
         #endregion
         #region Поля
+        public string Phone
+        {
+            get { return _selectedClient?.Phone; }
+            set
+            {
+                _selectedClient.Phone = value;
+                _selectedClient = ClientList.Where(c => c.Phone == _selectedClient.Phone).FirstOrDefault();
+                if (_selectedClient is null)
+                    _errors["Phone"] = "Ошибка";
+                else _errors["Phone"] = null;
+                
+            }
+        }
         public string SellDate
         {
             get { return _sell.SellDate; }
@@ -108,24 +122,18 @@ namespace Database.VeiwModel.EditNode
             }
         }
 
-        public bool IsValid
+        public string Comment
         {
-            get { return _isValid; }
-            set
-            {
-                _isValid = value;
-                OnPropertyChanged(nameof(IsValid));
-            }
+            get { return _sell.Comment; }
+            set { _sell.Comment = value; OnPropertyChanged(nameof(Comment)); }
         }
+    
         #endregion
         public BaseCommand ExecuteCommand
         {
             get { return _executeCommand ?? (_executeCommand = new BaseCommand(obj => { _executeDelegate?.Invoke(); })); }
         }
 
-        public string Error => throw new NotImplementedException();
-
-        public string this[string columnName] => _errors.ContainsKey(columnName) ? _errors[columnName] : null;
 
         public SellViewModel(SellMapper service)
         {

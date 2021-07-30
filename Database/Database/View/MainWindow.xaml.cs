@@ -18,6 +18,7 @@ namespace Database
             InitializeComponent();
             DataContext = new MainViewModel();
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            //new ProductExcelWorker().Read(@"D:\PlaygroundDataBase\Database\Database\bin\Debug\net5.0-windows\import\Наличие.xlsx");
         }
     }
 }

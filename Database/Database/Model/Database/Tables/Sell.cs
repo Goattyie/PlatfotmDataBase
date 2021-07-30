@@ -15,6 +15,7 @@ namespace Database.Model.Database.Tables
         public double BuyCost { get; set; }
         public double SellCost { get; set; }
         public double Profit { get; set; }
+        public string Comment { get; set; }
         public int? ClientId { get; set; }
         public int? CardId { get; set; }
         public Client Client { get; set; }

@@ -35,14 +35,15 @@
                   SelectedItem="{Binding SelectedSell}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Width="50" Binding="{Binding Path=Id}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Товар" Width="400*" Binding="{Binding Path=Product.Name}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Прибыль" Width="140" Binding="{Binding Path=Profit}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Товар" Width="200" Binding="{Binding Path=Product.Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Прибыль" Width="100" Binding="{Binding Path=Profit}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Цена закупки" Width="100" Binding="{Binding Path=BuyCost}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Цена продажи" Width="110" Binding="{Binding Path=SellCost}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Количество" Width="140" Binding="{Binding Path=Count}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Дата продажи" Width="170" Binding="{Binding Path=SellDate}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Клиент" Width="130" Binding="{Binding Path=Client.Phone}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Карта" Width="70" Binding="{Binding Path=Card.Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Примечание" Width="100*" Binding="{Binding Path=Comment}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 

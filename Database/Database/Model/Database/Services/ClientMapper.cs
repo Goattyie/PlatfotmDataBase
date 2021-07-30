@@ -1,4 +1,5 @@
 ﻿using Database.Model.Database.Tables;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +46,17 @@ namespace Database.Model.Database.Services
             }
             return clients;
         }
+
+        public async Task<IEnumerable<Client>> GetAllAsync()
+        {
+            var clients = new List<Client>();
+            using (var connection = new SqlModel())
+            {
+                clients = await connection.Clients.ToListAsync();
+            }
+            return clients;
+        }
+
         public void Update(Client obj)
         {
             throw new NotImplementedException();

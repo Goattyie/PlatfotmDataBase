@@ -20,6 +20,7 @@ namespace Database.Model.Database.Tables
         public double BuyCost { get; set; }
         public double DeliverCost { get; set; }
         public double SellCost { get; set; }
+        public string Comment { get; set; }
         public virtual Profile Profile { get; set; }
         public virtual Product Product { get; set; }
 

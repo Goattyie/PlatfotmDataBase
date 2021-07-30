@@ -1,4 +1,5 @@
 ﻿using Database.Model.Database.Tables;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,18 @@ namespace Database.Model.Database.Services
                 profile = connection.Profiles.ToList();
             }
             return profile;
-        }  
+        }
+
+        public async Task<IEnumerable<Profile>> GetAllAsync()
+        {
+            var profile = new List<Profile>();
+            using (var connection = new SqlModel())
+            {
+                profile =await connection.Profiles.ToListAsync();
+            }
+            return profile;
+        }
+
         public Profile GetElementByName(string name)
         {
             var profile = new Profile();

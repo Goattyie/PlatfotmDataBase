@@ -16,6 +16,7 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -41,6 +42,8 @@
         <TextBlock Grid.Row="5" Text="Количество:" Style="{StaticResource EditTextBlock}"/>
         <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Count}" VerticalAlignment="Center" Margin="20,0,20,0" FontSize="20"/>
 
-        <Button FontSize="20" Grid.Row="6" Grid.ColumnSpan="2" Background="Transparent" Content="Сохранить" Command="{Binding ExecuteCommand}" VerticalAlignment="Center" Height="40"/>
+        <TextBlock Grid.Row="6" Text="Примечание:" Style="{StaticResource EditTextBlock}"/>
+        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Comment}" VerticalAlignment="Center" Margin="20,0,20,0" FontSize="20"/>
+            <Button FontSize="20" Grid.Row="7" Grid.ColumnSpan="2" Background="Transparent" Content="Сохранить" Command="{Binding ExecuteCommand}" VerticalAlignment="Center" Height="40"/>
     </Grid>
 </Window>

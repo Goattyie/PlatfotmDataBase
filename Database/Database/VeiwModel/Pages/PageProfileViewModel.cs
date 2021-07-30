@@ -62,10 +62,10 @@ namespace Database.VeiwModel.Pages
             DownloadData();
         }
 
-        public void DownloadData()
+        public async void DownloadData()
         {
             ProfileList.Clear();
-            var profiles = new ProfileMapper().GetAll();
+            var profiles = await new ProfileMapper().GetAllAsync();
             foreach (var item in profiles)
             {
                 ProfileList.Add(item);

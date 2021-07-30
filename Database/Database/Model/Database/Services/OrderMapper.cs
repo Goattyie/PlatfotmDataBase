@@ -47,6 +47,17 @@ namespace Database.Model.Database.Services
             }
             return items;
         }
+
+        public  async  Task<IEnumerable<Order>> GetAllAsync()
+        {
+            var items = new List<Order>();
+            using (var connection = new SqlModel())
+            {
+                items = await connection.Orders.Include(a => a.Product).Include(a => a.Deliver).ToListAsync();
+            }
+            return items;
+        }
+
         public void Update(Order obj)
         {
             using(var connection = new SqlModel())

@@ -62,10 +62,10 @@ namespace Database.VeiwModel.Pages
             DownloadData();
         }
 
-        public void DownloadData()
+        public async void DownloadData()
         {
             ClientList.Clear();
-            var clients = new ClientMapper().GetAll();
+            var clients =await new ClientMapper().GetAllAsync();
             foreach (var item in clients)
             {
                 ClientList.Add(item);

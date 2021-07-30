@@ -86,6 +86,16 @@ namespace Database.Model.Database.Services
             return sells;
         }
 
+        public async Task<IEnumerable<Sell>> GetAllAsync()
+        {
+            var sells = new List<Sell>();
+            using (var connection = new SqlModel())
+            {
+                sells = await connection.Sells.Include(s => s.Product).Include(s => s.Card).Include(s => s.Client).ToListAsync();
+            }
+            return sells;
+        }
+
         public Sell GetElementById(int id)
         {
             throw new NotImplementedException();

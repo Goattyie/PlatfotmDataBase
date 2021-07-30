@@ -3,6 +3,7 @@ using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Database.Model.Database.ExcelWorkers
@@ -11,29 +12,39 @@ namespace Database.Model.Database.ExcelWorkers
     {
         public IEnumerable<Product> Read(string filename)
         {
+            string[] replaceList = new string[] { "Автор", "автор", ":", "Закупка", "закупка" };
             var list = new List<Product>();
             FileInfo existingFile = new FileInfo(filename);
             using (var excelPack = new ExcelPackage(existingFile))
             {
-                var ws = excelPack.Workbook.Worksheets[0];
-                int colCount = ws.Dimension.End.Column;  //get Column Count
-                int rowCount = ws.Dimension.End.Row;     //get row count
-                for (int row = 1; row < rowCount; row++)
+                var workBook = excelPack.Workbook;
+                if (workBook == null)
+                    throw new Exception();
+                try
                 {
-                    try
-                    {
-                        var product = new Product();
-                        product.Name = ws.Cells[row, 1].Text;
-                        product.OrderCost = double.Parse(ws.Cells[row, 2].Text);
-                        product.DeliverCost = double.Parse(ws.Cells[row, 3].Text);
-                        product.SellCost = double.Parse(ws.Cells[row, 4].Text);
-                        list.Add(product);
-                    }
-                    catch
-                    {
+                    var currentWorksheet = workBook.Worksheets.First();
+                    var rows = currentWorksheet.Dimension.End.Row;
 
+                    for (int row = 2; row < rows; row++)
+                    {
+                        //var productItem = new Product();
+                        //productItem.Name = currentWorksheet.Cells[row, 1].Text;
+                        //productItem.DeliverCost = double.Parse(currentWorksheet.Cells[row, 2].Text);
+                        string comment = currentWorksheet.Cells[row, 2]?.Comment?.Text ?? null;
+
+                        foreach(var item in replaceList)
+                            comment = comment?.Replace(item, " ").Trim();
+
+                        currentWorksheet.Cells[row, 7].Value = comment;
+                        
                     }
+                    excelPack.Save();
                 }
+                catch
+                {
+
+                }
+
             }
             return list;
         }

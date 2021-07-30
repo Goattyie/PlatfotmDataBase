@@ -77,10 +77,10 @@ namespace Database.VeiwModel.Pages
             DownloadData();
         }
 
-        public void DownloadData()
+        public async void DownloadData()
         {
             AvailabilityList.Clear();
-            var profiles = new AvailabilityMapper().GetAll();
+            var profiles = await new AvailabilityMapper().GetAllAsync();
             foreach (var item in profiles)
             {
                 AvailabilityList.Add(item);

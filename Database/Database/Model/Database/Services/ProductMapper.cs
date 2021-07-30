@@ -1,4 +1,5 @@
 ﻿using Database.Model.Database.Tables;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +47,17 @@ namespace Database.Model.Database.Services
             }
             return product;
         }
+
+        public async Task<IEnumerable<Product>> GetAllAsync()
+        {
+            var product = new List<Product>();
+            using (var connection = new SqlModel())
+            {
+                product = await connection.Products.ToListAsync();
+            }
+            return product;
+        }
+
         public Product GetElementById(int id)
         {
             var product = new Product();

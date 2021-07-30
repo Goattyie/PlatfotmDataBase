@@ -46,6 +46,17 @@ namespace Database.Model.Database.Services
             }
             return dpList;
         }
+
+        public async Task<IEnumerable<DeliverProduct>> GetAllAsync()
+        {
+            var dpList = new List<DeliverProduct>();
+            using (var connection = new SqlModel())
+            {
+                dpList = await connection.DeliversProducts.Include(dp => dp.Product).Include(dp => dp.Deliver).ToListAsync();
+            }
+            return dpList;
+        }
+
         public IEnumerable<Product> GetProductByDeliverId(int id)
         {
             var products = new List<Product>();

@@ -46,6 +46,17 @@ namespace Database.Model.Database.Services
             }
             return delivers;
         }
+
+        public async Task<IEnumerable<Deliver>> GetAllAsync()
+        {
+            var delivers = new List<Deliver>();
+            using (var connection = new SqlModel())
+            {
+                delivers = await connection.Delivers.ToListAsync();
+            }
+            return delivers;
+        }
+
         public void Update(Deliver obj)
         {
             throw new NotImplementedException();

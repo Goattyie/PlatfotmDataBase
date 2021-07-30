@@ -50,6 +50,16 @@ namespace Database.Model.Database.Services
             return items;
         }
 
+        public async Task<IEnumerable<Availability>> GetAllAsync()
+        {
+            var items = new List<Availability>();
+            using (var connection = new SqlModel())
+            {
+                items = await connection.Availability.Include(a => a.Profile).Include(a => a.Product).ToListAsync();
+            }
+            return items;
+        }
+
         public Availability GetElementByProductId(int id)
         {
             var available = new Availability();

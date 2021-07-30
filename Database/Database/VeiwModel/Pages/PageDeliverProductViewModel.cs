@@ -62,10 +62,10 @@ namespace Database.VeiwModel.Pages
             DownloadData();
         }
 
-        public void DownloadData()
+        public async void DownloadData()
         {
             DeliverProductList.Clear();
-            var dp = new DeliverProductMapper().GetAll();
+            var dp =await new DeliverProductMapper().GetAllAsync();
             foreach (var item in dp)
             {
                 DeliverProductList.Add(item);

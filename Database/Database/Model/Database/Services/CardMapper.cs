@@ -49,6 +49,18 @@ namespace Database.Model.Database.Services
             }
             return cards;
         }
+
+        public async Task<IEnumerable<Card>> GetAllAsync()
+        {
+            var cards = new List<Card>();
+            using (var connection = new SqlModel())
+            {
+                cards = await connection.Cards.ToListAsync();
+                connection.SaveChanges();
+            }
+            return cards;
+        }
+
         public void Update(Card obj)
         {
             throw new NotImplementedException();

@@ -73,6 +73,12 @@ namespace Database.VeiwModel.EditNode
             get { return _availability.Count; }
             set { _availability.Count = value; OnPropertyChanged(nameof(Count)); }
         }
+
+        public string Comment
+        {
+            get { return _availability.Comment; }
+            set { _availability.Comment = value; OnPropertyChanged(nameof(Comment)); }
+        }
         #endregion
         public BaseCommand ExecuteCommand
         {

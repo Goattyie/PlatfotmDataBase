@@ -84,10 +84,10 @@ namespace Database.VeiwModel.Pages
             }
         }
 
-        public void DownloadData()
+        public async void DownloadData()
         {
             OrderList.Clear();
-            var products = new OrderMapper().GetAll();
+            var products = await new OrderMapper().GetAllAsync();
             foreach (var item in products)
             {
                 OrderList.Add(item);

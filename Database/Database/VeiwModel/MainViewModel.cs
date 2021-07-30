@@ -25,6 +25,7 @@ namespace Database.VeiwModel
         private Page _cardPage;
 
         private BaseCommand _tableClick;
+        private BaseCommand _exportTable;
 
         public BaseCommand TableClick
         {
@@ -33,6 +34,10 @@ namespace Database.VeiwModel
                 return _tableClick ??
                   (_tableClick = new BaseCommand((obj) => { NewTablePage(obj); }));
             }
+        }
+        public BaseCommand ExportTable 
+        {
+            get { return _exportTable ?? (_exportTable = new BaseCommand(obj => { })); }
         }
         public Page CurrentPage
         {

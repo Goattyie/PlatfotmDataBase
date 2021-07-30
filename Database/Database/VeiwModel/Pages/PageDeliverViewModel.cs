@@ -62,10 +62,10 @@ namespace Database.VeiwModel.Pages
             DownloadData();
         }
 
-        public void DownloadData()
+        public async void DownloadData()
         {
             DeliverList.Clear();
-            var delivers = new DeliverMapper().GetAll();
+            var delivers = await new DeliverMapper().GetAllAsync();
             foreach (var item in delivers)
             {
                 DeliverList.Add(item);

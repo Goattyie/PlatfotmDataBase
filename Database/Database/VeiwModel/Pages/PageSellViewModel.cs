@@ -75,10 +75,10 @@ namespace Database.VeiwModel.Pages
             DownloadData();
         }
 
-        public void DownloadData()
+        public async void DownloadData()
         {
             SellList.Clear();
-            var products = new SellMapper().GetAll();
+            var products = await new SellMapper().GetAllAsync();
             foreach (var item in products)
             {
                 SellList.Add(item);

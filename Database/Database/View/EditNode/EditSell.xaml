@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Database.View.EditNode"
         mc:Ignorable="d"
-        Title="EditSell" Height="439" Width="665">
+        Title="EditSell" Height="500" Width="817">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="253*"/>
             <ColumnDefinition Width="392*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -45,17 +46,23 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
+
         <TextBlock 
             Style="{StaticResource EditTextBlock}"
             Grid.Row="1"
-            Text="Клиент:" Height="26" Width="68"/>
+            Text="Клиент (укажите номер):" Height="26" Width="236"/>
 
-        <ComboBox
-            Style="{StaticResource EditComboBox}"
-            Grid.Row="1" Grid.Column="1"
-            ItemsSource="{Binding ClientList}"
-            SelectedItem="{Binding SelectedClient}" Height="34"
-            DisplayMemberPath="Phone"/>
+        <TextBox
+            Grid.Row="1"
+            Grid.Column="1"
+            Height="29"
+            FontSize="20"
+            Text="{Binding Phone, 
+            UpdateSourceTrigger=PropertyChanged, 
+            ValidatesOnExceptions=True,
+            ValidatesOnDataErrors=True, 
+            NotifyOnValidationError=True}"
+            />
 
         <TextBlock 
             Style="{StaticResource EditTextBlock}"
@@ -124,9 +131,21 @@
             Grid.Row="7" Grid.Column="1"
             Text="{Binding SellDate}" Height="34"></DatePicker>
 
+        <TextBlock 
+            Style="{StaticResource EditTextBlock}"
+            Grid.Row="8"
+            Text="Примечание:" Height="26" Width="121" />
+
+        <TextBox 
+            FontSize="20"
+            Grid.Row="8" Grid.Column="1"
+            Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged, 
+            ValidatesOnExceptions=True,
+            ValidatesOnDataErrors=True, 
+            NotifyOnValidationError=True}" Height="28"/>
         <Button 
             FontSize="20"
-            Grid.Row="7" 
+            Grid.Row="8" 
             Grid.ColumnSpan="2"
             VerticalAlignment="Center"
             Content="Сохранить" 

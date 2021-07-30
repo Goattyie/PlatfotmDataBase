@@ -41,6 +41,7 @@
                 <DataGridTextColumn Header="Цена с доставкой" Width="*" Binding="{Binding Path=DeliverCost}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Ценап продажи" Width="*" Binding="{Binding Path=SellCost}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Профиль" Width="*" Binding="{Binding Path=Profile.Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Примечание" Width="*" Binding="{Binding Path=Comment}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         
