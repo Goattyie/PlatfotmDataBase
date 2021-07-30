@@ -5,38 +5,87 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Database.View.EditNode" xmlns:local1="clr-namespace:Database.View.Pages.Tables" xmlns:editnode="clr-namespace:Database.VeiwModel.EditNode"
         mc:Ignorable="d"
-        Title="EditProduct" Height="416" Width="622">
+        Title="Товары" Height="352" Width="445">
 
-    <Grid>
-        <StackPanel Margin="10">
-            <TextBlock Text="Название товара" FontSize="28"></TextBlock>
-            <TextBox x:Name="Name" FontSize="28" VerticalAlignment="Center" Text="{Binding Name , UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True,
-                ValidatesOnDataErrors=True, 
-                NotifyOnValidationError=True}"></TextBox>
-            <TextBlock Text="Цена продажи" FontSize="28"></TextBlock>
-            <TextBox x:Name="SellCost" FontSize="28" VerticalAlignment="Center" 
-                     Text="{Binding SellCost, 
-                UpdateSourceTrigger=PropertyChanged, 
-                ValidatesOnExceptions=True,
-                ValidatesOnDataErrors=True, 
-                NotifyOnValidationError=True}">
-            </TextBox>
-            <TextBlock Text="Цена покупки" FontSize="28"></TextBlock>
-            <TextBox x:Name="OrderCost" FontSize="28" VerticalAlignment="Center" Text="{Binding OrderCost , UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True,
-                ValidatesOnDataErrors=True, 
-                NotifyOnValidationError=True}"></TextBox>
-            <TextBlock Text="Цена доставки" FontSize="28"></TextBlock>
-            <TextBox x:Name="DeliverCost" FontSize="28" VerticalAlignment="Center"  Text="{Binding DeliverCost , UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True,
-                ValidatesOnDataErrors=True, 
-                NotifyOnValidationError=True}"></TextBox>
-            <Button  
-                Margin="10,10,10,0" 
-                Content="Добавить" 
-                FontSize="28" 
-                Background="Transparent" 
-                Command="{Binding AddButtonClick}"
-                IsEnabled="{Binding IsValid}"
-                ></Button>
-        </StackPanel>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBox
+            Style="{StaticResource TextBoxWithWatermark}"
+            Tag="Название товара"
+            Margin="0,12,0,12"
+            Text="{Binding Name}"/>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Style="{StaticResource HeadTextBlock}"
+                Text="Цена закупки"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"/>
+
+            <TextBox
+                Grid.Row="1"
+                Style="{StaticResource TextBoxWithWatermark}"
+                Tag="Цена закупки"
+                Text="{Binding OrderCost}"/>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Style="{StaticResource HeadTextBlock}"
+                Text="Цена с доставкой"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"/>
+
+            <TextBox
+                Grid.Row="1"
+                Style="{StaticResource TextBoxWithWatermark}"
+                Tag="Цена с доставкой"
+                Text="{Binding DeliverCost}"/>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Style="{StaticResource HeadTextBlock}"
+                Text="Цена продажи"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"/>
+
+            <TextBox
+                Grid.Row="1"
+                Style="{StaticResource TextBoxWithWatermark}"
+                Tag="Цена продажи"
+                Text="{Binding SellCost}"/>
+        </Grid>
+
+        <Button 
+            Grid.Row="4"
+            Style="{StaticResource BaseButton}"
+            Content="Сохранить"
+            Command="{Binding AddButtonClick}"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"/>
+
     </Grid>
 </Window>

@@ -122,6 +122,7 @@ namespace Database.VeiwModel.EditNode
         }
         private void Update()
         {
+            _availability.Profile = null;
             _service.Update(_availability);
         }
     }

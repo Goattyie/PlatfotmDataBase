@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net5.0-windows7.0": {
-      "EPPlus/5.7.1": {
+      "EPPlus/5.7.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "5.0.0",
@@ -1564,15 +1564,15 @@
     }
   },
   "libraries": {
-    "EPPlus/5.7.1": {
-      "sha512": "iaH6mKk/w62NTAqH0objK+JPHINuXpIwC6nFNnFnJGS1XR9lhvMkcCplB+eFxb1lfjEx3Dzc+slBDmVBZawGmQ==",
+    "EPPlus/5.7.2": {
+      "sha512": "iKN/pYXY9FZ6x1+u9pHJdG/cWTaphvKOIawyQrq6W9XbDXj9eo5dmmTVMD/MhNc7skVzYEmBUbdQHuPkU8pytQ==",
       "type": "package",
-      "path": "epplus/5.7.1",
+      "path": "epplus/5.7.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "EPPlusLogo.png",
-        "epplus.5.7.1.nupkg.sha512",
+        "epplus.5.7.2.nupkg.sha512",
         "epplus.nuspec",
         "lib/net35/EPPlus.dll",
         "lib/net35/EPPlus.xml",
@@ -5415,7 +5415,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0-windows7.0": [
-      "EPPlus >= 5.7.1",
+      "EPPlus >= 5.7.2",
       "Microsoft.EntityFrameworkCore >= 5.0.8",
       "Microsoft.EntityFrameworkCore.Sqlite >= 5.0.8",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.8"
@@ -5462,7 +5462,7 @@
         "dependencies": {
           "EPPlus": {
             "target": "Package",
-            "version": "[5.7.1, )"
+            "version": "[5.7.2, )"
           },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",

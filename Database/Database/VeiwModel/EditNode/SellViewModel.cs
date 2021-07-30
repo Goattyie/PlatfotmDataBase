@@ -1,6 +1,7 @@
 ﻿using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
 using Database.VeiwModel.Commands;
+using Database.View.EditNode;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,11 +16,11 @@ namespace Database.VeiwModel.EditNode
         private Sell _sell;
         private SellMapper _service;
         private BaseCommand _executeCommand;
+        private BaseCommand _addClient;
         private Action _executeDelegate;
         private Availability _selectedAvailable;
         private Card _selectedCard;
         private Client _selectedClient;
-        private bool _isValid;
         private bool _isCreate;
 
         #region Errors
@@ -66,7 +67,7 @@ namespace Database.VeiwModel.EditNode
             {
                 _selectedClient = value;
                 OnPropertyChanged(nameof(SelectedClient));
-                _sell.ClientId = _selectedClient.Id;
+                _sell.ClientId = _selectedClient?.Id ?? null;
             }
         }
         #endregion
@@ -76,8 +77,7 @@ namespace Database.VeiwModel.EditNode
             get { return _selectedClient?.Phone; }
             set
             {
-                _selectedClient.Phone = value;
-                _selectedClient = ClientList.Where(c => c.Phone == _selectedClient.Phone).FirstOrDefault();
+                SelectedClient = ClientList.Where(c => c.Phone == value).FirstOrDefault();
                 if (_selectedClient is null)
                     _errors["Phone"] = "Ошибка";
                 else _errors["Phone"] = null;
@@ -129,6 +129,18 @@ namespace Database.VeiwModel.EditNode
         }
     
         #endregion
+        public BaseCommand AddClient
+        {
+            get { return _addClient ?? (_addClient = new BaseCommand(obj => 
+            { 
+                new EditClient(new ClientMapper()).ShowDialog();  
+                var clients = new ClientMapper().GetAll(); 
+                ClientList.Clear();
+                foreach (var item in clients)
+                    ClientList.Add(item);
+                })); 
+            }
+        }
         public BaseCommand ExecuteCommand
         {
             get { return _executeCommand ?? (_executeCommand = new BaseCommand(obj => { _executeDelegate?.Invoke(); })); }
@@ -181,7 +193,7 @@ namespace Database.VeiwModel.EditNode
 
             _executeDelegate = new Action(Update);
             _isCreate = false;
-            _isValid = true;
+            IsValid = true;
 
             _selectedAvailable = AvailabilityList.Where(a => a.ProductId == _sell.ProductId).FirstOrDefault();
             _selectedCard = CardList.Where(c => c.Id == _sell.CardId).FirstOrDefault();
@@ -196,12 +208,10 @@ namespace Database.VeiwModel.EditNode
 
         private void Update()
         {
+            _sell.Card = null;
+            _sell.Client = null;
+            _sell.Product = null;
             _service.Update(_sell);
-        }
-
-        private void UpdateIsValid()
-        {
-            IsValid = !_errors.Values.Any(x => x != null);
         }
     }
 }

@@ -37,7 +37,6 @@
                 <DataGridTextColumn Header="Id" Width="50" Binding="{Binding Path=Id}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Телефон" Width="100" Binding="{Binding Path=Phone}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Описание" Width="300*" Binding="{Binding Path=Description}"/>
-                <DataGridTextColumn Header="Машина" Width="100*" Binding="{Binding Path=Car}"/>
             </DataGrid.Columns>
         </DataGrid>
 

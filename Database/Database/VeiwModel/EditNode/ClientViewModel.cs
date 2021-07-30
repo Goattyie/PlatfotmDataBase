@@ -36,11 +36,6 @@ namespace Database.VeiwModel.EditNode
             }
         }
 
-        public string Car
-        {
-            get { return _client.Car; }
-            set { _client.Car = value; OnPropertyChanged(nameof(_client.Car)); }
-        }
         #endregion
         public BaseCommand AddCommand
         {

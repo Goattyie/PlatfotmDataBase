@@ -5,48 +5,63 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Database.View.EditNode"
         mc:Ignorable="d"
-        Title="EditDeliverProduct" Height="199" Width="533">
+        Title="EditDeliverProduct" Height="263" Width="345">
     <Grid Margin="10,10,10,10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="46*"/>
-            <RowDefinition Height="54*"/>
-            <RowDefinition Height="41*"/>
+            <RowDefinition Height="91*"/>
+            <RowDefinition Height="85*"/>
+            <RowDefinition Height="51*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="78*"/>
-            <ColumnDefinition Width="173*"/>
-        </Grid.ColumnDefinitions>
 
-        <TextBlock
-            Style="{StaticResource EditTextBlock}"
-            Text="Товар:" Height="27" Width="60"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock
+                Style="{StaticResource HeadTextBlock}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Text="Товар"/>
 
-        <ComboBox
-            Style="{StaticResource EditComboBox}"
-            Grid.Column="1"
-            ItemsSource="{Binding ProductList}" 
-            SelectedItem="{Binding SelectedProduct}"
-            DisplayMemberPath="Name" Height="34"/>
+            <ComboBox 
+                Grid.Row="1"
+                Margin="0,5,0,5"
+                Style="{StaticResource BaseComboBox}"
+                ItemsSource="{Binding ProductList}"
+                SelectedItem="{Binding SelectedProduct}"
+                DisplayMemberPath="Name"/>
+        </Grid>
 
-        <TextBlock
-            Style="{StaticResource EditTextBlock}"
-            Grid.Row="1"
-            Text="Поставщик:" Height="26" Width="106"/>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-        <ComboBox
-            Style="{StaticResource EditComboBox}"
-            Grid.Row="1" Grid.Column="1"
-            ItemsSource="{Binding DeliverList}" 
-            SelectedItem="{Binding SelectedDeliver}"
-            DisplayMemberPath="Name" Height="34"/>
+            <TextBlock
+                Style="{StaticResource HeadTextBlock}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Text="Поставщик"/>
 
+            <ComboBox 
+                Grid.Row="1"
+                Margin="0,5,0,5"
+                Style="{StaticResource BaseComboBox}"
+                ItemsSource="{Binding DeliverList}"
+                SelectedItem="{Binding SelectedDeliver}"
+                 DisplayMemberPath="Name"/>
+        </Grid>
+        
         <Button 
-            Grid.Row="2" 
-            Grid.ColumnSpan="2"
-            Content="Добавить" 
-            Command="{Binding AddCommand}"
+            Style="{StaticResource BaseButton}"
             VerticalAlignment="Center"
-            FontSize="20" Height="31"/>
+            HorizontalAlignment="Center"
+            Grid.Row="2" 
+            Content="Добавить" 
+            Command="{Binding AddCommand}" Height="32" Width="85"/>
 
     </Grid>
 </Window>

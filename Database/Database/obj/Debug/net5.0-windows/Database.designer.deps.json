@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v5.0": {
-      "EPPlus/5.7.1": {
+      "EPPlus/5.7.2": {
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "5.0.0",
           "Microsoft.IO.RecyclableMemoryStream": "1.4.1",
@@ -24,8 +24,8 @@
         },
         "runtime": {
           "lib/net5.0/EPPlus.dll": {
-            "assemblyVersion": "5.7.1.0",
-            "fileVersion": "5.7.1.0"
+            "assemblyVersion": "5.7.2.0",
+            "fileVersion": "5.7.2.0"
           }
         }
       },
@@ -1375,12 +1375,12 @@
     }
   },
   "libraries": {
-    "EPPlus/5.7.1": {
+    "EPPlus/5.7.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-iaH6mKk/w62NTAqH0objK+JPHINuXpIwC6nFNnFnJGS1XR9lhvMkcCplB+eFxb1lfjEx3Dzc+slBDmVBZawGmQ==",
-      "path": "epplus/5.7.1",
-      "hashPath": "epplus.5.7.1.nupkg.sha512"
+      "sha512": "sha512-iKN/pYXY9FZ6x1+u9pHJdG/cWTaphvKOIawyQrq6W9XbDXj9eo5dmmTVMD/MhNc7skVzYEmBUbdQHuPkU8pytQ==",
+      "path": "epplus/5.7.2",
+      "hashPath": "epplus.5.7.2.nupkg.sha512"
     },
     "Humanizer.Core/2.8.26": {
       "type": "package",

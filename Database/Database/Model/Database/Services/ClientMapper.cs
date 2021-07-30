@@ -11,7 +11,7 @@ namespace Database.Model.Database.Services
 {
     public class ClientMapper : IMapper<Client>
     {
-        public event Action<object> CreateEntityEvent;
+        public static event Action<object> CreateEntityEvent;
         public void Create(Client obj)
         {
             using (var connection = new SqlModel())

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Database.View.EditNode"
         mc:Ignorable="d"
-        Title="EditAvailability" Height="579" Width="648">
+        Title="Наличие" Height="487" Width="433">
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -19,31 +19,141 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-        <TextBlock Text="Товар:" Style="{StaticResource EditTextBlock}"/>
-        <ComboBox Style="{StaticResource EditComboBox}" Margin="20,0,20,0" Grid.Column="1" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}" DisplayMemberPath="Name"></ComboBox>
+            <TextBlock 
+                Style="{StaticResource HeadTextBlock}"
+                Text="Товар"    
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"/>
 
-        <TextBlock Grid.Row="1" Text="Профиль (не обязательно):" Style="{StaticResource EditTextBlock}"/>
-        <ComboBox Style="{StaticResource EditComboBox}" Margin="20,0,20,0" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding ProfileList}" SelectedItem="{Binding SelectedProfile}" DisplayMemberPath="Name"></ComboBox>
+            <ComboBox 
+                Style="{StaticResource BaseComboBox}"
+                Grid.Row="1" 
+                ItemsSource="{Binding ProductList}" 
+                SelectedItem="{Binding SelectedProduct}"
+                DisplayMemberPath="Name"/>
+        </Grid>
 
-        <TextBlock Grid.Row="2" Text="Цена закупки:" Style="{StaticResource EditTextBlock}"/>
-        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding BuyCost}" VerticalAlignment="Center" Margin="20,0,20,0" FontSize="20"/>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="3" Text="Цена с доставкой:" Style="{StaticResource EditTextBlock}"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding DeliverCost}" VerticalAlignment="Center" Margin="20,0,20,0" FontSize="20"/>
+            <TextBlock 
+                Style="{StaticResource HeadTextBlock}"
+                Text="Профиль"    
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"/>
 
-        <TextBlock Grid.Row="4" Text="Цена Продажи:" Style="{StaticResource EditTextBlock}"/>
-        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding SellCost}" VerticalAlignment="Center" Margin="20,0,20,0" FontSize="20"/>
+            <ComboBox 
+                Style="{StaticResource BaseComboBox}"
+                Grid.Row="1" 
+                ItemsSource="{Binding ProfileList}" 
+                SelectedItem="{Binding SelectedProfile}"
+                DisplayMemberPath="Name"/>
+        </Grid>
 
-        <TextBlock Grid.Row="5" Text="Количество:" Style="{StaticResource EditTextBlock}"/>
-        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Count}" VerticalAlignment="Center" Margin="20,0,20,0" FontSize="20"/>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="6" Text="Примечание:" Style="{StaticResource EditTextBlock}"/>
-        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Comment}" VerticalAlignment="Center" Margin="20,0,20,0" FontSize="20"/>
-            <Button FontSize="20" Grid.Row="7" Grid.ColumnSpan="2" Background="Transparent" Content="Сохранить" Command="{Binding ExecuteCommand}" VerticalAlignment="Center" Height="40"/>
+            <TextBlock 
+                Style="{StaticResource HeadTextBlock}"
+                Text="Цена закупки"    
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"/>
+            
+            <TextBox
+            Grid.Row="1"
+            Style="{StaticResource TextBoxWithWatermark}"
+            Text="{Binding BuyCost, UpdateSourceTrigger=PropertyChanged}"
+            Tag="Цена закупки"
+            />
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock 
+                Style="{StaticResource HeadTextBlock}"
+                Text="Цена с доставкой"    
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"/>
+
+            <TextBox
+            Grid.Row="1"
+            Style="{StaticResource TextBoxWithWatermark}"
+            Text="{Binding DeliverCost, UpdateSourceTrigger=PropertyChanged}"
+            Tag="Цена с доставкой"
+            />
+        </Grid>
+
+        <Grid Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock 
+                Style="{StaticResource HeadTextBlock}"
+                Text="Цена продажи"    
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"/>
+
+            <TextBox
+            Grid.Row="1"
+            Style="{StaticResource TextBoxWithWatermark}"
+            Text="{Binding SellCost, UpdateSourceTrigger=PropertyChanged}"
+            Tag="Цена продажи"
+            />
+        </Grid>
+
+        <Grid Grid.Row="5">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock 
+                Style="{StaticResource HeadTextBlock}"
+                Text="Количество"    
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"/>
+
+            <TextBox
+            Grid.Row="1"
+            Style="{StaticResource TextBoxWithWatermark}"
+            Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}"
+            Tag="Количество"
+            />
+        </Grid>
+
+        <TextBox
+            Margin="0,10,0,0"
+            Grid.Row="6"
+            Style="{StaticResource TextBoxWithWatermark}"
+            Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}"
+            Tag="Примечание"
+            TextWrapping="Wrap"/>
+
+        <Button
+            Style="{StaticResource BaseButton}"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Grid.Row="7"
+            Content="Сохранить"
+            Command="{Binding ExecuteCommand}"
+            />
     </Grid>
 </Window>

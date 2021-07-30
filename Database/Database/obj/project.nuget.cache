@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "mKqJe13S7y38MOgb210gsr1i2juHvVVeQsrmvA56bNX+NqIySfqV3YX+BsuCwflW7wZXaa0zoe9og2VnHOUOJA==",
+  "dgSpecHash": "QJgYS/T0SIqIztrd9dTcFlkdX1efHkPKkABAwl+osf8G/8ZNxdMC3vJyu6p1qKjdTqlMCGE3ZZpUL0rJRUFDEA==",
   "success": true,
   "projectFilePath": "D:\\PlaygroundDataBase\\Database\\Database\\Database.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Goattyie\\.nuget\\packages\\epplus\\5.7.1\\epplus.5.7.1.nupkg.sha512",
+    "C:\\Users\\Goattyie\\.nuget\\packages\\epplus\\5.7.2\\epplus.5.7.2.nupkg.sha512",
     "C:\\Users\\Goattyie\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Goattyie\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Goattyie\\.nuget\\packages\\microsoft.data.sqlite.core\\5.0.8\\microsoft.data.sqlite.core.5.0.8.nupkg.sha512",

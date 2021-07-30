@@ -53,7 +53,7 @@ namespace Database.VeiwModel.Pages
         {
             ClientList = new BindingList<Client>();
             _service = new ClientMapper();
-            _service.CreateEntityEvent += OnUpdate;
+            ClientMapper.CreateEntityEvent += OnUpdate;
             DownloadData();
         }
 

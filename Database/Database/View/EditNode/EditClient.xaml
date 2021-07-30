@@ -5,14 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Database.View.EditNode"
         mc:Ignorable="d"
-        Title="EditClient" Height="454" Width="429">
-    <StackPanel Margin="10">
-        <TextBlock Text="Телефон" Margin="0,0,0,10" FontSize="24"/>
-        <TextBox Margin="0,0,0,10" FontSize="24" Text="{Binding Phone}"/>
-        <TextBlock Text="Описание" Margin="0,0,0,10" FontSize="24"/>
-        <TextBox TextWrapping="Wrap"  Margin="0,0,0,10" FontSize="24" Height="144" Text="{Binding Description}"/>
-        <TextBlock Text="Машина (не обязательно)" Margin="0,0,0,10" FontSize="24"/>
-        <TextBox Margin="0,0,0,10" FontSize="24" Text="{Binding Car}"/>
-        <Button Content="Принять" FontSize="24" Command="{Binding AddCommand}"/>
-    </StackPanel>
+        Title="Клиент" Height="206" Width="411">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="41*"/>
+            <RowDefinition Height="91*"/>
+            <RowDefinition Height="38*"/>
+        </Grid.RowDefinitions>
+
+        <TextBox
+            Style="{StaticResource TextBoxWithWatermark}"
+            Tag="Номер телефона"
+            Text="{Binding Phone}"/>
+        <TextBox
+            Grid.Row="1"
+            Margin="0,10,0,10"
+            TextWrapping="Wrap"
+            Style="{StaticResource TextBoxWithWatermark}"
+            Tag="Описание"
+            Text="{Binding Description}"/>
+
+        <Button
+            Grid.Row="2"
+            Style="{StaticResource BaseButton}"
+            Content="Сохранить" 
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Command="{Binding AddCommand}" Height="31" Width="91"/>
+    </Grid>
 </Window>

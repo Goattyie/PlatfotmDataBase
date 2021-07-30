@@ -5,15 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Database.View.EditNode"
         mc:Ignorable="d"
-        Title="EditSup" Height="200" Width="300">
-    <Grid>
+        Title="Справочник" Height="142" Width="339">
+    <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="51*"/>
-            <RowDefinition Height="66*"/>
-            <RowDefinition Height="67*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Добавление записи" FontSize="18" Margin="10,10,10,10"></TextBlock>
-        <TextBox Grid.Row="1" Margin="10,10,10,10" FontSize="18" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-        <Button Grid.Row="2" Margin="13" FontSize="18" Content="Добавить" Background="Transparent" Command="{Binding AddCommand}"></Button>
+        <TextBox 
+            Style="{StaticResource TextBoxWithWatermark}"
+            Tag="Введите значение"
+            Margin="0,5,0,5"
+            Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+        <Button 
+            Style="{StaticResource BaseButton}"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Grid.Row="1"
+            Content="Сохранить"
+            Command="{Binding AddCommand}" Height="31" Width="91"></Button>
     </Grid>
 </Window>

@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:system="clr-namespace:System;assembly=System.Runtime">
+
+    <FontFamily x:Key="Calibri">Calibri</FontFamily>
+    <FontFamily x:Key="Comic Sans MS">Comic Sans MS</FontFamily>
+
+    <system:Double x:Key="Small">11</system:Double>
+    <system:Double x:Key="Medium">14</system:Double>
+    <system:Double x:Key="Big">20</system:Double>
+</ResourceDictionary>

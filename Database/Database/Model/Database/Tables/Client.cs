@@ -11,7 +11,6 @@ namespace Database.Model.Database.Tables
         public int Id { get; set; }
         public string Phone { get; set; }
         public string Description { get; set; }
-        public string Car { get; set; }
         public virtual ICollection<Sell> Sells { get; set; }
     }
 }

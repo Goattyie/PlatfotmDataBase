@@ -145,7 +145,7 @@ namespace Database.VeiwModel.EditNode
             LoadProducts();
             _selectedProduct = ProductList.Where(p => p.Id == _order.ProductId).FirstOrDefault();
             _executeDelegate = new Action(Update);
-            IsValid = false;
+            IsValid = true;
         }
         private void UpdateCost()
         {

@@ -168,3 +168,8 @@ D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\View\EditNode\E
 D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\App.baml
 D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\Database.Properties.Resources.resources
 D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\Database.csproj.GenerateResource.cache
+D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\Colors.baml
+D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\Fonts.baml
+D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\Styles.baml
+D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\View\AcceptOrder.g.cs
+D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\View\AcceptOrder.baml
