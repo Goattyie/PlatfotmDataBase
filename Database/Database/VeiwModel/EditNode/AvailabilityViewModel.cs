@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Database.VeiwModel.EditNode
 {
-    class AvailabilityViewModel:BasePropertyChanged
+    class AvailabilityViewModel:ValidatePropertyChanged
     {
         private Availability _availability;
         private AvailabilityMapper _service;
@@ -18,6 +18,11 @@ namespace Database.VeiwModel.EditNode
         private Profile _selectedProfile;
         private BaseCommand _executeCommand;
         private Action _executeDelegate;
+        protected override Dictionary<string, string> _errors { get; set; } = new Dictionary<string, string>()
+        {
+            ["SelectedProduct"] = null,
+            ["Count"] = null,
+        };
 
         #region BindingList
         public BindingList<Product> ProductList { get; set; }
@@ -35,6 +40,11 @@ namespace Database.VeiwModel.EditNode
                 DeliverCost = _selectedProduct.DeliverCost;
                 SellCost = _selectedProduct.SellCost;
                 _availability.ProductId = _selectedProduct.Id;
+
+                if (_selectedProduct is not null)
+                    _errors["SelectedProduct"] = null;
+                else _errors["SelectedProduct"] = "Нужно выбрать товар";
+                UpdateIsValid();
             }
         }
         
@@ -71,7 +81,16 @@ namespace Database.VeiwModel.EditNode
         public int Count
         {
             get { return _availability.Count; }
-            set { _availability.Count = value; OnPropertyChanged(nameof(Count)); }
+            set 
+            { 
+                _availability.Count = value; 
+                OnPropertyChanged(nameof(Count));
+
+                if (_availability.Count > 0)
+                    _errors["Count"] = null;
+                else _errors["Count"] = "Количество не может быть меньше 0";
+                UpdateIsValid();
+            }
         }
 
         public string Comment
@@ -97,6 +116,10 @@ namespace Database.VeiwModel.EditNode
             foreach (var item in profiles)
                 ProfileList.Add(item);
             _executeDelegate = new Action(Create);
+
+            Count = 1;
+            _errors["SelectedProduct"] = "Нужно выбрать товар";
+            UpdateIsValid();
         }
         public AvailabilityViewModel(AvailabilityMapper service, Availability availability)
         {

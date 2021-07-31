@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Database.VeiwModel.Pages
 {
-    class PageDeliverViewModel:BasePropertyChanged
+    class PageDeliverViewModel: BasePropertyChanged
     {
         private BaseCommand _addCommand;
         private BaseCommand _removeCommand;

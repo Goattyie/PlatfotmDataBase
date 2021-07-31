@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Database.VeiwModel.EditNode
 {
-    class DeliverProductViewModel:BasePropertyChanged
+    class DeliverProductViewModel: BasePropertyChanged
     {
         private Deliver _selectedDeliver;
         private Product _selectedProduct;

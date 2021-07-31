@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Database.VeiwModel.Pages
 {
-    class ProfileViewModel:BasePropertyChanged
+    class ProfileViewModel: BasePropertyChanged
     {
         private Profile _profile;
         private BaseCommand _addCommand;

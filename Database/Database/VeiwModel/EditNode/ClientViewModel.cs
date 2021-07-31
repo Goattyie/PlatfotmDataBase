@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Database.VeiwModel.EditNode
 {
-    class ClientViewModel:BasePropertyChanged
+    class ClientViewModel: BasePropertyChanged
     {
         private Client _client;
         private BaseCommand _addCommand;

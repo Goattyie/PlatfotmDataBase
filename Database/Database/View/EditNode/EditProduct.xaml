@@ -20,7 +20,7 @@
             Style="{StaticResource TextBoxWithWatermark}"
             Tag="Название товара"
             Margin="0,12,0,12"
-            Text="{Binding Name}"/>
+            Text="{Binding Name, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -38,7 +38,7 @@
                 Grid.Row="1"
                 Style="{StaticResource TextBoxWithWatermark}"
                 Tag="Цена закупки"
-                Text="{Binding OrderCost}"/>
+                Text="{Binding OrderCost, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
         <Grid Grid.Row="2">
@@ -57,7 +57,7 @@
                 Grid.Row="1"
                 Style="{StaticResource TextBoxWithWatermark}"
                 Tag="Цена с доставкой"
-                Text="{Binding DeliverCost}"/>
+                Text="{Binding DeliverCost, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
         <Grid Grid.Row="3">
@@ -76,7 +76,7 @@
                 Grid.Row="1"
                 Style="{StaticResource TextBoxWithWatermark}"
                 Tag="Цена продажи"
-                Text="{Binding SellCost}"/>
+                Text="{Binding SellCost, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
         <Button 
@@ -85,7 +85,8 @@
             Content="Сохранить"
             Command="{Binding AddButtonClick}"
             VerticalAlignment="Center"
-            HorizontalAlignment="Center"/>
+            HorizontalAlignment="Center"
+            IsEnabled="{Binding IsValid}"/>
 
     </Grid>
 </Window>

@@ -88,6 +88,8 @@ namespace Database.VeiwModel.EditNode
             _service = service;
             _product = new Product();
             _command = new Action(CreateNode);
+            _errors["Name"] = "Введите название";
+            UpdateIsValid();
         }
 
         public ProductViewModel(ProductMapper service, Product product)

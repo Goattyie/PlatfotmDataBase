@@ -38,9 +38,8 @@ namespace Database.VeiwModel.EditNode
                 _order.ProductId = _selectedProduct?.Id ?? 0;
                 OnPropertyChanged(nameof(SelectedProduct));
                 UpdateCost();
-                if (_selectedProduct is null)
-                    _errors["SelectedProduct"] = "Неверный товар";
-                else _errors["SelectedProduct"] = null;
+
+                _errors["SelectedProduct"] = _selectedProduct  == null ? "Неверный товар" : null;             
                 UpdateIsValid();
             }
         }
@@ -54,9 +53,9 @@ namespace Database.VeiwModel.EditNode
                 SelectedProduct = null;
                 LoadProducts();
                 OnPropertyChanged(nameof(SelectedDeliver));
-                if (_selectedDeliver is null)
-                    _errors["SelectedDeliver"] = "Неверный поставщик";
-                else _errors["SelectedDeliver"] = null;
+
+
+                _errors["SelectedDeliver"] = _selectedDeliver == null ? "Неверный поставщик" : null;
                 UpdateIsValid();
             }
         }
@@ -73,9 +72,8 @@ namespace Database.VeiwModel.EditNode
                 _order.Count = value; 
                 OnPropertyChanged(nameof(Count));
                 UpdateCost();
-                if(value < 1)
-                    _errors["Count"] = "Неверное количество";
-                else _errors["Count"] = null;
+                
+                _errors["Count"] = value < 1 ? "Неверное количество": null;
                 UpdateIsValid();
             }
         }
@@ -86,9 +84,8 @@ namespace Database.VeiwModel.EditNode
             { 
                 _order.CurrentCount = value; 
                 OnPropertyChanged(nameof(CurrentCount));
-                if (value < 1 || value > Count)
-                    _errors["CurrentCount"] = "Неверное полученное количество";
-                else _errors["CurrentCount"] = null;
+                
+                _errors["CurrentCount"] = (value < 1 || value > Count) ? "Неверное полученное количество" : null;
                 UpdateIsValid();
             }
         }
@@ -129,7 +126,9 @@ namespace Database.VeiwModel.EditNode
                 DeliverList.Add(item);
 
             _executeDelegate = new Action(Create);
-            IsValid = false;
+            _errors["SelectedDeliver"] = "Error";
+            _errors["SelectedProduct"] = "Error";
+            UpdateIsValid();
         }
         public OrderViewModel(OrderMapper service, Order order)
         {

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Database.VeiwModel.EditNode
 {
-    class DeliverViewModel:BasePropertyChanged
+    class DeliverViewModel: BasePropertyChanged
     {
         private Deliver _deliver;
         private BaseCommand _addCommand;

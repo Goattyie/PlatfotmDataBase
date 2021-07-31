@@ -26,8 +26,8 @@ namespace Database.VeiwModel.EditNode
         #region Errors
         protected override Dictionary<string, string> _errors { get; set; } = new Dictionary<string, string>()
         {
+            ["SelectedAvailable"] = null,
             ["Count"] = null,
-            ["Phone"] = null,
         };
         #endregion
 
@@ -44,10 +44,15 @@ namespace Database.VeiwModel.EditNode
             {
                 _selectedAvailable = value;
                 OnPropertyChanged(nameof(SelectedAvailable));
-                BuyCost = _selectedAvailable.DeliverCost;
-                SellCost = _selectedAvailable.SellCost;
+                BuyCost = _selectedAvailable?.DeliverCost ?? 0;
+                SellCost = _selectedAvailable?.SellCost ?? 0;
                 Profit = Profit = (SellCost - BuyCost) * Count;
-                _sell.ProductId = _selectedAvailable.ProductId;
+                _sell.ProductId = _selectedAvailable?.ProductId ?? 0;
+
+                if (_selectedAvailable is null)
+                    _errors["SelectedAvailable"] = "Товар из наличия не выбран";
+                else _errors["SelectedAvailable"] = null;
+                UpdateIsValid();
             }
         }
         public Card SelectedCard
@@ -77,11 +82,7 @@ namespace Database.VeiwModel.EditNode
             get { return _selectedClient?.Phone; }
             set
             {
-                SelectedClient = ClientList.Where(c => c.Phone == value).FirstOrDefault();
-                if (_selectedClient is null)
-                    _errors["Phone"] = "Ошибка";
-                else _errors["Phone"] = null;
-                
+                SelectedClient = ClientList.Where(c => c.Phone == value).FirstOrDefault();               
             }
         }
         public string SellDate
@@ -114,6 +115,7 @@ namespace Database.VeiwModel.EditNode
                 _sell.Count = value;
                 Profit = (_sell.SellCost - _sell.BuyCost) * _sell.Count;
                 OnPropertyChanged(nameof(Count));
+                
                 if ((value < 1 || value > _selectedAvailable?.Count) && _isCreate)
                     _errors["Count"] = "Количество указано неверно";
                 else _errors["Count"] = null;
@@ -170,6 +172,9 @@ namespace Database.VeiwModel.EditNode
             _executeDelegate = new Action(Create);
             Count = 1;
             _isCreate = true;
+
+            _errors["SelectedAvailable"] = "Товар из наличия не выбран";
+            UpdateIsValid();
         }
 
         public SellViewModel(SellMapper service, Sell sell)
@@ -193,7 +198,6 @@ namespace Database.VeiwModel.EditNode
 
             _executeDelegate = new Action(Update);
             _isCreate = false;
-            IsValid = true;
 
             _selectedAvailable = AvailabilityList.Where(a => a.ProductId == _sell.ProductId).FirstOrDefault();
             _selectedCard = CardList.Where(c => c.Id == _sell.CardId).FirstOrDefault();
@@ -204,6 +208,9 @@ namespace Database.VeiwModel.EditNode
         {
             _service.Create(_sell);
             _sell.Id = 0;
+
+            UpdateAvailabilityList();//Обновляем список наличия
+            Count = 1;
         }
 
         private void Update()
@@ -212,6 +219,14 @@ namespace Database.VeiwModel.EditNode
             _sell.Client = null;
             _sell.Product = null;
             _service.Update(_sell);
+        }
+        private void UpdateAvailabilityList()
+        {
+            AvailabilityList.Clear();
+            var available = new AvailabilityMapper().GetAll();
+
+            foreach (var item in available)
+                AvailabilityList.Add(item);
         }
     }
 }

@@ -38,7 +38,7 @@
                 Grid.Row="1"
                 Style="{StaticResource BaseComboBox}"
                 ItemsSource="{Binding DeliverList}"
-                SelectedItem="{Binding SelectedDeliver}"
+                SelectedItem="{Binding SelectedDeliver, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
                 DisplayMemberPath="Name"/>
         </Grid>
 
@@ -58,7 +58,7 @@
                 Grid.Row="1"
                 Style="{StaticResource BaseComboBox}"
                 ItemsSource="{Binding ProductList}"
-                SelectedItem="{Binding SelectedProduct}"
+                SelectedItem="{Binding SelectedProduct, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
                 DisplayMemberPath="Name"/>
         </Grid>
 
@@ -78,7 +78,7 @@
                 Grid.Row="1"
                 Style="{StaticResource TextBoxWithWatermark}"
                 Tag="Количество"
-                Text="{Binding Count}"/>
+                Text="{Binding Count, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
         <Grid Grid.Row="3">
@@ -97,7 +97,7 @@
                 Grid.Row="1"
                 Style="{StaticResource TextBoxWithWatermark}"
                 Tag="Получено"
-                Text="{Binding CurrentCount}"/>
+                Text="{Binding CurrentCount, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
         <Grid Grid.Row="4">
@@ -116,7 +116,7 @@
                 Grid.Row="1"
                 Style="{StaticResource TextBoxWithWatermark}"
                 Tag="Цена закупки"
-                Text="{Binding OrderCost}"/>
+                Text="{Binding OrderCost, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
         <Grid Grid.Row="5">
@@ -135,7 +135,7 @@
                 Grid.Row="1"
                 Style="{StaticResource TextBoxWithWatermark}"
                 Tag="Цена доставки"
-                Text="{Binding DeliverCost}"/>
+                Text="{Binding DeliverCost, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
         <Grid Grid.Row="6">
@@ -154,7 +154,7 @@
                 Grid.Row="1"
                 Style="{StaticResource TextBoxWithWatermark}"
                 Tag="Цена оплаты"
-                Text="{Binding SummCost}"/>
+                Text="{Binding SummCost, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
         <Grid Grid.Row="7">

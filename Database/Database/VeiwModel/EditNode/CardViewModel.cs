@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Database.VeiwModel.EditNode
 {
-    class CardViewModel:BasePropertyChanged
+    class CardViewModel: BasePropertyChanged
     {
         private Card _card;
         private BaseCommand _addCommand;

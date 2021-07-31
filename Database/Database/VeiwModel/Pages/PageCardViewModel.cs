@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Database.VeiwModel.Pages
 {
-    class PageCardViewModel:BasePropertyChanged
+    class PageCardViewModel: BasePropertyChanged
     {
         private BaseCommand _addCommand;
         private BaseCommand _removeCommand;

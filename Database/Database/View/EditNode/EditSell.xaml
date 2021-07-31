@@ -35,7 +35,7 @@
                 Grid.Row="1"
                 Style="{StaticResource BaseComboBox}"
                 ItemsSource="{Binding AvailabilityList}"
-                SelectedItem="{Binding SelectedAvailable}"
+                SelectedItem="{Binding SelectedAvailable, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
                 DisplayMemberPath="Product.Name"/>
         </Grid>
 
@@ -149,7 +149,7 @@
                 Grid.Row="1"
                 Style="{StaticResource TextBoxWithWatermark}"
                 Tag="Количество"
-                Text="{Binding Count}"
+                Text="{Binding Count, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
                 />
         </Grid>
 

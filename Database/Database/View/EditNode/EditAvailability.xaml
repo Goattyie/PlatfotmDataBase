@@ -35,7 +35,7 @@
                 Style="{StaticResource BaseComboBox}"
                 Grid.Row="1" 
                 ItemsSource="{Binding ProductList}" 
-                SelectedItem="{Binding SelectedProduct}"
+                SelectedItem="{Binding SelectedProduct, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
                 DisplayMemberPath="Name"/>
         </Grid>
 
@@ -134,7 +134,7 @@
             <TextBox
             Grid.Row="1"
             Style="{StaticResource TextBoxWithWatermark}"
-            Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding Count, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
             Tag="Количество"
             />
         </Grid>
@@ -143,7 +143,7 @@
             Margin="0,10,0,0"
             Grid.Row="6"
             Style="{StaticResource TextBoxWithWatermark}"
-            Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding Comment, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
             Tag="Примечание"
             TextWrapping="Wrap"/>
 
@@ -154,6 +154,7 @@
             Grid.Row="7"
             Content="Сохранить"
             Command="{Binding ExecuteCommand}"
+            IsEnabled="{Binding IsValid}"
             />
     </Grid>
 </Window>
