@@ -8,9 +8,6 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Availability" Background="White">
 
-    <Page.DataContext>
-        <pages:PageAvailabilityViewModel/>
-    </Page.DataContext>
     <Page.Resources>
         <Style x:Key="Btn" TargetType="Button">
             <Setter Property="Margin" Value="10,0,10,10"></Setter>

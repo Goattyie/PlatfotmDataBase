@@ -34,8 +34,15 @@ namespace Database.Model.Database.Services
         {
             using (var connection = new SqlModel())
             {
-                connection.Orders.RemoveRange(obj);
-                connection.SaveChanges();
+                try
+                {
+                    connection.Orders.RemoveRange(obj);
+                    connection.SaveChanges();
+                }
+                catch
+                {
+
+                }
             }
         }
         public IEnumerable<Order> GetAll()
@@ -47,7 +54,6 @@ namespace Database.Model.Database.Services
             }
             return items;
         }
-
         public  async  Task<IEnumerable<Order>> GetAllAsync()
         {
             var items = new List<Order>();
@@ -57,7 +63,6 @@ namespace Database.Model.Database.Services
             }
             return items;
         }
-
         public void Update(Order obj)
         {
             using(var connection = new SqlModel())
@@ -72,6 +77,44 @@ namespace Database.Model.Database.Services
                 catch
                 {
                     MessageBox.Show("Ошибка обновления записи", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+        public void AcceptOrder(Order obj, int count)
+        {
+            using(var connection = new SqlModel())
+            {
+                try
+                {
+                    obj.CurrentCount += count;
+                    connection.Orders.Update(obj);
+
+                    var available = new AvailabilityMapper().GetElementByProductId(obj.ProductId);
+                    
+                    if (available != null)
+                    {
+                        available.Count += count;
+                        connection.Availability.Update(available);
+                    }
+                    else
+                    {
+                        available = new Availability();
+                        available.Count = count;
+                        available.ProductId = obj.ProductId;
+                        available.BuyCost = obj.Product.OrderCost;
+                        available.DeliverCost = obj.Product.DeliverCost;
+                        available.SellCost = obj.Product.SellCost;
+                        connection.Availability.Add(available);
+                    }
+
+                    connection.SaveChanges();
+                    MessageBox.Show("Товар принят", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                    UpdateEntityEvent?.Invoke(obj);
+                    new AvailabilityMapper().UpdateTable();
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка принятия товара", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

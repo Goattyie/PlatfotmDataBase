@@ -31,6 +31,7 @@ namespace Database.Model.Database.Services
                     else connection.Availability.Remove(available);
                     connection.SaveChanges();
                     CreateEntityEvent?.Invoke(obj);
+                    new AvailabilityMapper().UpdateTable();
                     MessageBox.Show("Запись добавлена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch
@@ -62,8 +63,15 @@ namespace Database.Model.Database.Services
         {
             using (var connection = new SqlModel())
             {
+                try 
+                {
                 connection.Sells.Remove(obj);
                 connection.SaveChanges();
+                }
+                catch
+                {
+
+                }
             }
         }
 

@@ -13,7 +13,6 @@ namespace Database.Model.Database.Services
         void Update(T obj);
         void Delete(T[] obj);
         IEnumerable<T> GetAll();
-        Task<IEnumerable<T>> GetAllAsync();
-        
+        Task<IEnumerable<T>> GetAllAsync();  
     }
 }

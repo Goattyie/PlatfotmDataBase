@@ -1,6 +1,7 @@
 ﻿using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
 using Database.VeiwModel.Commands;
+using Database.View;
 using Database.View.EditNode;
 using System;
 using System.Collections.Generic;
@@ -62,7 +63,7 @@ namespace Database.VeiwModel.Pages
         }
         public BaseCommand AcceptCommand
         {
-            get { return _acceptCommand ?? (_acceptCommand = new BaseCommand(obj => { })); }
+            get { return _acceptCommand ?? (_acceptCommand = new BaseCommand(obj => { if(_selectedOrder != null) new AcceptOrder(_service, _selectedOrder).ShowDialog(); })); }
         }
 
         public PageOrderViewModel()

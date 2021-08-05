@@ -5,33 +5,58 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Database.View"
         mc:Ignorable="d"
-        Title="Принять товар" Height="161" Width="375">
-    <Grid>
+        Title="Принять товар" Height="237" Width="337">
+    <Grid Margin="10">
+
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="141*"/>
-            <ColumnDefinition Width="292*"/>
-        </Grid.ColumnDefinitions>
 
-        <TextBlock 
-            Text="Товар:" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-        <TextBox x:Name="PasswordTextBox" />
-        <TextBlock Text="Enter password"
-                    VerticalAlignment="Center"
-                    Margin="5,0"
-                    Foreground="Gray"
-                    IsHitTestVisible="False"
-                    />
+            <TextBlock
+                Style="{StaticResource HeadTextBlock}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Text="Товар"/>
+            <TextBlock
+                Grid.Row="1"
+                Style="{StaticResource HeadTextBlock}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Text="{Binding ProductName}"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Style="{StaticResource HeadTextBlock}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Text="Получено"/>
+            <TextBox
+                Grid.Row="1"
+                Style="{StaticResource TextBoxWithWatermark}"
+                Tag="Количество"
+                Text="{Binding Count, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
         <Button
-            Grid.Row="2" 
-            Grid.ColumnSpan="2"
-            VerticalAlignment="Center"
-            Content="Принять"
-            ></Button>
+          Grid.Row="2"
+          Style="{StaticResource BaseButton}"
+          VerticalAlignment="Center"
+          HorizontalAlignment="Center"
+          Content="Принять товар"
+          Command="{Binding AcceptProductCommand}"
+          IsEnabled="{Binding IsValid}"/>
     </Grid>
 </Window>

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Database.Model.Database.Services;
+using Database.Model.Database.Tables;
+using Database.VeiwModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +22,10 @@ namespace Database.View
     /// </summary>
     public partial class AcceptOrder : Window
     {
-        public AcceptOrder()
+        public AcceptOrder(OrderMapper service, Order order)
         {
             InitializeComponent();
+            DataContext = new AcceptProductViewModel(service, order);
         }
     }
 }

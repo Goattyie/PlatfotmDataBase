@@ -13,6 +13,7 @@ namespace Database.VeiwModel.Pages
 {
     class PageAvailabilityViewModel: BasePropertyChanged
     {
+        private BaseCommand _updateCommand;
         private BaseCommand _addCommand;
         private BaseCommand _removeCommand;
         private BaseCommand _editCommand;
@@ -33,7 +34,13 @@ namespace Database.VeiwModel.Pages
                 return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditAvailability(_service).Show(); DownloadData(); }));
             }
         }
-
+        public BaseCommand UpdateCommand
+        {
+            get
+            {
+                return _updateCommand ?? (_updateCommand = new BaseCommand(obj => { DownloadData(); }));
+            }
+        }
         public BaseCommand RemoveCommand
         {
             get
@@ -67,8 +74,8 @@ namespace Database.VeiwModel.Pages
             AvailabilityList = new BindingList<Availability>();
             _service = new AvailabilityMapper();
             SellMapper.CreateEntityEvent += OnUpdate;
-            _service.CreateEntityEvent += OnUpdate;
-            _service.UpdateEntityEvent += OnUpdate;
+            AvailabilityMapper.CreateEntityEvent += OnUpdate;
+            AvailabilityMapper.UpdateEntityEvent += OnUpdate;
             DownloadData();
         }
 

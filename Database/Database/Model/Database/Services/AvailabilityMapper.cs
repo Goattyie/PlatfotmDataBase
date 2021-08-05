@@ -9,10 +9,10 @@ using System.Windows;
 
 namespace Database.Model.Database.Services
 {
-    public class AvailabilityMapper : IMapper<Availability>
+    public class AvailabilityMapper : IMapper<Availability>, ITableWorker
     {
-        public event Action<object> CreateEntityEvent;
-        public event Action<object> UpdateEntityEvent;
+        public static event Action<object> CreateEntityEvent;
+        public static event Action<object> UpdateEntityEvent;
         public void Create(Availability obj)
         {
             using (var connection = new SqlModel())
@@ -35,8 +35,15 @@ namespace Database.Model.Database.Services
         {
             using(var connection = new SqlModel())
             {
+                try 
+                {
                 connection.Availability.RemoveRange(obj);
                 connection.SaveChanges();
+                }
+                catch
+                {
+
+                }
             }
         }
 
@@ -86,6 +93,12 @@ namespace Database.Model.Database.Services
                     MessageBox.Show("Запись не может быть обновлена", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+
+        public void UpdateTable()
+        {
+            CreateEntityEvent?.Invoke(null);
+            UpdateEntityEvent?.Invoke(null);
         }
     }
 }

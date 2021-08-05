@@ -85,7 +85,7 @@ namespace Database.VeiwModel.EditNode
                 _order.CurrentCount = value; 
                 OnPropertyChanged(nameof(CurrentCount));
                 
-                _errors["CurrentCount"] = (value < 1 || value > Count) ? "Неверное полученное количество" : null;
+                _errors["CurrentCount"] = (value < 0 || value > Count) ? "Неверное полученное количество" : null;
                 UpdateIsValid();
             }
         }
