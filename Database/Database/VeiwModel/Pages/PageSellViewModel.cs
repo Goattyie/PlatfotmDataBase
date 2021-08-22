@@ -1,5 +1,6 @@
 ﻿using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
+using Database.Services.Interfaces;
 using Database.VeiwModel.Commands;
 using Database.View.EditNode;
 using System;
@@ -8,16 +9,16 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Database.Services;
 
 namespace Database.VeiwModel.Pages
 {
-    class PageSellViewModel:BasePropertyChanged
+    class PageSellViewModel:BasePropertyChanged, IObserver
     {
         private BaseCommand _addCommand;
         private BaseCommand _editCommand;
         private BaseCommand _removeCommand;
         private Sell _selectedSell;
-        private SellMapper _service;
 
         public Sell SelectedSell
         {
@@ -30,7 +31,7 @@ namespace Database.VeiwModel.Pages
         {
             get
             {
-                return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditSell(_service).Show(); DownloadData(); }));
+                return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditSell().Show(); }));
             }
         }
         public BaseCommand EditCommand
@@ -40,7 +41,7 @@ namespace Database.VeiwModel.Pages
                 return _editCommand ?? (_editCommand = new BaseCommand(obj =>
                 {
                     if(_selectedSell is not null)
-                        new EditSell(_service, _selectedSell).Show();
+                        new EditSell(_selectedSell).Show();
                 }));
             }
         }
@@ -56,7 +57,7 @@ namespace Database.VeiwModel.Pages
                         list.Add(_selectedSell);
                         SellList.Remove(_selectedSell);
                     }
-                    _service.Delete(list.ToArray());
+                    Service.sellMapper.Delete(list.ToArray());
                 }));
             }
         }
@@ -64,18 +65,11 @@ namespace Database.VeiwModel.Pages
         public PageSellViewModel()
         {
             SellList = new BindingList<Sell>();
-            _service = new SellMapper();
-            SellMapper.CreateEntityEvent += OnUpdate;
-            _service.UpdateEntityEvent += OnUpdate;
-            DownloadData();
+            Service.sellMapper.AddObserver(this);
+            Execute();
         }
 
-        private void OnUpdate(object obj)
-        {
-            DownloadData();
-        }
-
-        public async void DownloadData()
+        public async void Execute()
         {
             SellList.Clear();
             var products = await new SellMapper().GetAllAsync();

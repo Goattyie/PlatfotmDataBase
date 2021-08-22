@@ -1,5 +1,6 @@
 ﻿using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
+using Database.Services;
 using Database.VeiwModel.Commands;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,6 @@ namespace Database.VeiwModel.EditNode
     {
         private BaseCommand _buttonClick;
         private Product _product;
-        private readonly ProductMapper _service;
         private Action _command;
         protected override Dictionary<string, string> _errors { get; set; } = new Dictionary<string, string>()
         {
@@ -83,24 +83,22 @@ namespace Database.VeiwModel.EditNode
         }
 
 
-        public ProductViewModel(ProductMapper service)
+        public ProductViewModel()
         {
-            _service = service;
             _product = new Product();
             _command = new Action(CreateNode);
             _errors["Name"] = "Введите название";
             UpdateIsValid();
         }
 
-        public ProductViewModel(ProductMapper service, Product product)
+        public ProductViewModel(Product product)
         {
-            _service = service;
             _product = product;
             _command = new Action(EditNode);
         }
         private void CreateNode()
         {
-            _service.Create(_product);
+            Service.productMapper.Create(_product);
             _product = new Product();
             OnPropertyChanged(nameof(_product.Name));
             OnPropertyChanged(nameof(_product.SellCost));
@@ -109,7 +107,7 @@ namespace Database.VeiwModel.EditNode
         }
         private void EditNode()
         {
-            _service.Update(_product);
+            Service.productMapper.Update(_product);
         }
     }
 }

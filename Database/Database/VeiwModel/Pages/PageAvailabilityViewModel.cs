@@ -1,5 +1,7 @@
 ﻿using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
+using Database.Services;
+using Database.Services.Interfaces;
 using Database.VeiwModel.Commands;
 using Database.View.EditNode;
 using System;
@@ -11,14 +13,13 @@ using System.Threading.Tasks;
 
 namespace Database.VeiwModel.Pages
 {
-    class PageAvailabilityViewModel: BasePropertyChanged
+    class PageAvailabilityViewModel: BasePropertyChanged, IObserver
     {
         private BaseCommand _updateCommand;
         private BaseCommand _addCommand;
         private BaseCommand _removeCommand;
         private BaseCommand _editCommand;
         private Availability _selectedAvailability;
-        private AvailabilityMapper _service;
 
         public Availability SelectedAvailability
         {
@@ -31,14 +32,14 @@ namespace Database.VeiwModel.Pages
         {
             get
             {
-                return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditAvailability(_service).Show(); DownloadData(); }));
+                return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditAvailability().Show(); Execute(); }));
             }
         }
         public BaseCommand UpdateCommand
         {
             get
             {
-                return _updateCommand ?? (_updateCommand = new BaseCommand(obj => { DownloadData(); }));
+                return _updateCommand ?? (_updateCommand = new BaseCommand(obj => { Execute(); }));
             }
         }
         public BaseCommand RemoveCommand
@@ -52,7 +53,7 @@ namespace Database.VeiwModel.Pages
                         list.Add(_selectedAvailability);
                         AvailabilityList.Remove(_selectedAvailability);
                     }
-                    _service.Delete(list.ToArray());
+                    Service.availabilityMapper.Delete(list.ToArray());
                 }));
             }
         }
@@ -64,7 +65,7 @@ namespace Database.VeiwModel.Pages
                       (_editCommand = new BaseCommand(obj =>
                   {
                       if (_selectedAvailability is not null)
-                          new EditAvailability(_service, _selectedAvailability).Show();
+                          new EditAvailability(_selectedAvailability).Show();
                   }));
             }
         }
@@ -72,19 +73,11 @@ namespace Database.VeiwModel.Pages
         public PageAvailabilityViewModel()
         {
             AvailabilityList = new BindingList<Availability>();
-            _service = new AvailabilityMapper();
-            SellMapper.CreateEntityEvent += OnUpdate;
-            AvailabilityMapper.CreateEntityEvent += OnUpdate;
-            AvailabilityMapper.UpdateEntityEvent += OnUpdate;
-            DownloadData();
+            Service.availabilityMapper.AddObserver(this);
+            Execute();
         }
 
-        private void OnUpdate(object obj)
-        {
-            DownloadData();
-        }
-
-        public async void DownloadData()
+        public async void Execute()
         {
             AvailabilityList.Clear();
             var profiles = await new AvailabilityMapper().GetAllAsync();

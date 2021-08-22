@@ -1,5 +1,7 @@
 ﻿using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
+using Database.Services;
+using Database.Services.Interfaces;
 using Database.VeiwModel.Commands;
 using Database.View.EditNode;
 using System;
@@ -11,12 +13,11 @@ using System.Threading.Tasks;
 
 namespace Database.VeiwModel.Pages
 {
-    class PageDeliverProductViewModel: BasePropertyChanged
+    class PageDeliverProductViewModel: BasePropertyChanged, IObserver
     {
         private BaseCommand _addCommand;
         private BaseCommand _removeCommand;
         private DeliverProduct _selectedDeliverProduct;
-        private DeliverProductMapper _service;
 
         public DeliverProduct SelectedDeliverProduct
         {
@@ -29,7 +30,7 @@ namespace Database.VeiwModel.Pages
         {
             get
             {
-                return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditDeliverProduct(_service).Show(); DownloadData(); }));
+                return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditDeliverProduct().Show(); Execute(); }));
             }
         }
 
@@ -44,7 +45,7 @@ namespace Database.VeiwModel.Pages
                         list.Add(_selectedDeliverProduct);
                         DeliverProductList.Remove(_selectedDeliverProduct);
                     }
-                    _service.Delete(list.ToArray());
+                    Service.deliverProductMapper.Delete(list.ToArray());
                 }));
             }
         }
@@ -52,17 +53,11 @@ namespace Database.VeiwModel.Pages
         public PageDeliverProductViewModel()
         {
             DeliverProductList = new BindingList<DeliverProduct>();
-            _service = new DeliverProductMapper();
-            _service.CreateEntityEvent += OnUpdate;
-            DownloadData();
+            Service.deliverProductMapper.AddObserver(this);
+            Execute();
         }
 
-        private void OnUpdate(object obj)
-        {
-            DownloadData();
-        }
-
-        public async void DownloadData()
+        public async void Execute()
         {
             DeliverProductList.Clear();
             var dp =await new DeliverProductMapper().GetAllAsync();

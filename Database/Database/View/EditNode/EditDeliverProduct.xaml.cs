@@ -21,10 +21,10 @@ namespace Database.View.EditNode
     /// </summary>
     public partial class EditDeliverProduct : Window
     {
-        public EditDeliverProduct(DeliverProductMapper service)
+        public EditDeliverProduct()
         {
             InitializeComponent();
-            DataContext = new DeliverProductViewModel(service);
+            DataContext = new DeliverProductViewModel();
         }
     }
 }

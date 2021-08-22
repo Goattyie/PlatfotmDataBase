@@ -1,5 +1,6 @@
 ﻿using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
+using Database.Services;
 using Database.VeiwModel.Commands;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,6 @@ namespace Database.VeiwModel.EditNode
     {
         private Client _client;
         private BaseCommand _addCommand;
-        private ClientMapper _service;
 
         #region Поля
         public string Phone
@@ -39,12 +39,11 @@ namespace Database.VeiwModel.EditNode
         #endregion
         public BaseCommand AddCommand
         {
-            get { return _addCommand ?? (_addCommand = new BaseCommand(obj => { _service.Create(_client); _client.Id = 0; })); }
+            get { return _addCommand ?? (_addCommand = new BaseCommand(obj => { Service.clientMapper.Create(_client); _client.Id = 0; })); }
         }
-        public ClientViewModel(ClientMapper service)
+        public ClientViewModel()
         {
             _client = new Client();
-            _service = service;
         }
     }
 }

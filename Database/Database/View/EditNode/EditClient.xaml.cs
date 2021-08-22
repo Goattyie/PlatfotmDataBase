@@ -21,10 +21,10 @@ namespace Database.View.EditNode
     /// </summary>
     public partial class EditClient : Window
     {
-        public EditClient(ClientMapper service)
+        public EditClient()
         {
             InitializeComponent();
-            DataContext = new ClientViewModel(service);
+            DataContext = new ClientViewModel();
         }
     }
 }

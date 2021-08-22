@@ -1,5 +1,6 @@
 ﻿using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
+using Database.Services;
 using Database.VeiwModel.Commands;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,6 @@ namespace Database.VeiwModel.EditNode
     {
         private Product _selectedProduct;
         private Deliver _selectedDeliver;
-        private OrderMapper _service;
         private Order _order;
         private BaseCommand _executeCommand;
         private Action _executeDelegate;
@@ -114,10 +114,9 @@ namespace Database.VeiwModel.EditNode
             set { _order.CurrentCost = value; OnPropertyChanged(nameof(CurrentCost)); }
         }
         #endregion
-        public OrderViewModel(OrderMapper service)
+        public OrderViewModel()
         {
             _order = new Order();
-            _service = service;
             Count = 1;
             DeliverList = new BindingList<Deliver>();
             ProductList = new BindingList<Product>();
@@ -130,10 +129,9 @@ namespace Database.VeiwModel.EditNode
             _errors["SelectedProduct"] = "Error";
             UpdateIsValid();
         }
-        public OrderViewModel(OrderMapper service, Order order)
+        public OrderViewModel(Order order)
         {
             _order = order;
-            _service = service;
             DeliverList = new BindingList<Deliver>();
             ProductList = new BindingList<Product>();
             var delivers = new DeliverMapper().GetAll();
@@ -165,12 +163,12 @@ namespace Database.VeiwModel.EditNode
         {
             _order.Deliver = null;
             _order.Product = null;
-            _service.Create(_order);
+            Service.orderMapper.Create(_order);
             _order.Id = 0;
         }
         private void Update()
         {
-            _service.Update(_order);
+            Service.orderMapper.Update(_order);
         }
         private void LoadProducts()
         {

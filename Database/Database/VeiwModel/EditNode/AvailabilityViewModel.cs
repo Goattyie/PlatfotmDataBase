@@ -1,5 +1,6 @@
 ﻿using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
+using Database.Services;
 using Database.VeiwModel.Commands;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,6 @@ namespace Database.VeiwModel.EditNode
     class AvailabilityViewModel:ValidatePropertyChanged
     {
         private Availability _availability;
-        private AvailabilityMapper _service;
         private Product _selectedProduct;
         private Profile _selectedProfile;
         private BaseCommand _executeCommand;
@@ -103,9 +103,8 @@ namespace Database.VeiwModel.EditNode
         {
             get { return _executeCommand ?? (_executeCommand = new BaseCommand(obj => { _executeDelegate?.Invoke();})); }
         }
-        public AvailabilityViewModel(AvailabilityMapper service)
+        public AvailabilityViewModel()
         {
-            _service = service;
             _availability = new Availability();
             ProductList = new BindingList<Product>();
             ProfileList = new BindingList<Profile>();
@@ -121,9 +120,8 @@ namespace Database.VeiwModel.EditNode
             _errors["SelectedProduct"] = "Нужно выбрать товар";
             UpdateIsValid();
         }
-        public AvailabilityViewModel(AvailabilityMapper service, Availability availability)
+        public AvailabilityViewModel(Availability availability)
         {
-            _service = service;
             _availability = availability;
             ProductList = new BindingList<Product>();
             ProfileList = new BindingList<Profile>();
@@ -140,13 +138,13 @@ namespace Database.VeiwModel.EditNode
         }
         private void Create()
         {
-            _service.Create(_availability);
+            Service.availabilityMapper.Create(_availability);
             _availability.Id = 0;
         }
         private void Update()
         {
             _availability.Profile = null;
-            _service.Update(_availability);
+            Service.availabilityMapper.Update(_availability);
         }
     }
 }

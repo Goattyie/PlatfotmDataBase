@@ -31,31 +31,31 @@
     <Compile Update="View\EditNode\EditSup.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Pages\Tables\Availability.xaml.cs">
+    <Compile Update="View\Pages\Availability.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Pages\Tables\Card.xaml.cs">
+    <Compile Update="View\Pages\Card.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Pages\Tables\Client.xaml.cs">
+    <Compile Update="View\Pages\Client.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Pages\Tables\Deliver.xaml.cs">
+    <Compile Update="View\Pages\Deliver.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Pages\Tables\DeliverProduct.xaml.cs">
+    <Compile Update="View\Pages\DeliverProduct.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Pages\Tables\Order.xaml.cs">
+    <Compile Update="View\Pages\Order.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Pages\Tables\Product.xaml.cs">
+    <Compile Update="View\Pages\Product.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Pages\Tables\Profile.xaml.cs">
+    <Compile Update="View\Pages\Profile.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Pages\Tables\Sell.xaml.cs">
+    <Compile Update="View\Pages\Sell.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -96,31 +96,31 @@
     <Page Update="View\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Pages\Tables\Availability.xaml">
+    <Page Update="View\Pages\Availability.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Pages\Tables\Card.xaml">
+    <Page Update="View\Pages\Card.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Pages\Tables\Client.xaml">
+    <Page Update="View\Pages\Client.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Pages\Tables\Deliver.xaml">
+    <Page Update="View\Pages\Deliver.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Pages\Tables\DeliverProduct.xaml">
+    <Page Update="View\Pages\DeliverProduct.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Pages\Tables\Order.xaml">
+    <Page Update="View\Pages\Order.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Pages\Tables\Product.xaml">
+    <Page Update="View\Pages\Product.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Pages\Tables\Profile.xaml">
+    <Page Update="View\Pages\Profile.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Pages\Tables\Sell.xaml">
+    <Page Update="View\Pages\Sell.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

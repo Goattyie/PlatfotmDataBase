@@ -1,5 +1,7 @@
 ﻿using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
+using Database.Services;
+using Database.Services.Interfaces;
 using Database.VeiwModel.Commands;
 using Database.View.EditNode;
 using System;
@@ -11,12 +13,11 @@ using System.Threading.Tasks;
 
 namespace Database.VeiwModel.Pages
 {
-    class PageClientViewModel: BasePropertyChanged
+    class PageClientViewModel: BasePropertyChanged, IObserver
     {
         private BaseCommand _addCommand;
         private BaseCommand _removeCommand;
         private Client _selectedClient;
-        private ClientMapper _service;
 
         public Client SelectedClient
         {
@@ -29,7 +30,7 @@ namespace Database.VeiwModel.Pages
         {
             get
             {
-                return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditClient(_service).Show(); DownloadData(); }));
+                return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditClient().Show(); }));
             }
         }
 
@@ -44,7 +45,7 @@ namespace Database.VeiwModel.Pages
                         list.Add(_selectedClient);
                         ClientList.Remove(_selectedClient);
                     }
-                    _service.Delete(list.ToArray());
+                    Service.clientMapper.Delete(list.ToArray());
                 }));
             }
         }
@@ -52,20 +53,14 @@ namespace Database.VeiwModel.Pages
         public PageClientViewModel()
         {
             ClientList = new BindingList<Client>();
-            _service = new ClientMapper();
-            ClientMapper.CreateEntityEvent += OnUpdate;
-            DownloadData();
+            Service.clientMapper.AddObserver(this);
+            Execute();
         }
 
-        private void OnUpdate(object obj)
-        {
-            DownloadData();
-        }
-
-        public async void DownloadData()
+        public async void Execute()
         {
             ClientList.Clear();
-            var clients =await new ClientMapper().GetAllAsync();
+            var clients = await new ClientMapper().GetAllAsync();
             foreach (var item in clients)
             {
                 ClientList.Add(item);

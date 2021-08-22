@@ -1,5 +1,7 @@
 ﻿using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
+using Database.Services;
+using Database.Services.Interfaces;
 using Database.VeiwModel.Commands;
 using Database.View.EditNode;
 using System;
@@ -11,13 +13,12 @@ using System.Threading.Tasks;
 
 namespace Database.VeiwModel.Pages
 {
-    class PageProductViewModel:BasePropertyChanged
+    class PageProductViewModel:BasePropertyChanged, IObserver
     {
         private BaseCommand _addCommand;
         private BaseCommand _editCommand;
         private BaseCommand _removeCommand;
         private Product _selectedProduct;
-        private ProductMapper _service;
 
         public Product SelectedProduct
         {
@@ -30,7 +31,7 @@ namespace Database.VeiwModel.Pages
         {
             get
             {
-                return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditProduct(_service).Show(); DownloadData(); }));
+                return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditProduct().Show(); Execute(); }));
             }
         }
         public BaseCommand EditCommand
@@ -40,7 +41,7 @@ namespace Database.VeiwModel.Pages
                 return _editCommand ?? (_editCommand = new BaseCommand(obj => 
                 { 
                     if(_selectedProduct is not null)
-                        new EditProduct(_service, _selectedProduct).Show(); 
+                        new EditProduct(_selectedProduct).Show(); 
                 }));
             }
         }
@@ -56,7 +57,7 @@ namespace Database.VeiwModel.Pages
                         list.Add(_selectedProduct);
                         ProductList.Remove(_selectedProduct);
                     }
-                    _service.Delete(list.ToArray());
+                    Service.productMapper.Delete(list.ToArray());
                 }));
             }
         }
@@ -64,18 +65,11 @@ namespace Database.VeiwModel.Pages
         public PageProductViewModel()
         {
             ProductList = new BindingList<Product>();
-            _service = new ProductMapper();
-            _service.CreateEntityEvent += OnUpdate;
-            _service.UpdateEntityEvent += OnUpdate;
-            DownloadData();
+            Service.productMapper.AddObserver(this);
+            Execute();
         }
 
-        private void OnUpdate(object obj)
-        {
-            DownloadData();
-        }
-
-        public async void DownloadData()
+        public async void Execute()
         {
             ProductList.Clear();
             var products =await new ProductMapper().GetAllAsync();

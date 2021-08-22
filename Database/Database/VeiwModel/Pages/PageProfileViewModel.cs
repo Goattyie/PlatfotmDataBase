@@ -1,5 +1,7 @@
 ﻿using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
+using Database.Services;
+using Database.Services.Interfaces;
 using Database.VeiwModel.Commands;
 using Database.View.EditNode;
 using System;
@@ -11,28 +13,24 @@ using System.Threading.Tasks;
 
 namespace Database.VeiwModel.Pages
 {
-    class PageProfileViewModel: BasePropertyChanged
+    class PageProfileViewModel: BasePropertyChanged, IObserver
     {
         private BaseCommand _addCommand;
         private BaseCommand _removeCommand;
         private Profile _selectedProfile;
-        private ProfileMapper _service;
-
         public Profile SelectedProfile
         {
             get { return _selectedProfile; }
             set { _selectedProfile = value; OnPropertyChanged(nameof(SelectedProfile)); }
         }
         public BindingList<Profile> ProfileList { get; set; }
-
         public BaseCommand AddCommand
         {
             get
             {
-                return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditSup(_service).Show(); DownloadData(); }));
+                return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditSup("Profile").Show(); }));
             }
         }
-
         public BaseCommand RemoveCommand
         {
             get
@@ -44,28 +42,20 @@ namespace Database.VeiwModel.Pages
                         list.Add(_selectedProfile);
                         ProfileList.Remove(_selectedProfile);
                     }
-                    _service.Delete(list.ToArray());
+                    Service.profileMapper.Delete(list.ToArray());
                 }));
             }
         }
-
         public PageProfileViewModel()
         {
             ProfileList = new BindingList<Profile>();
-            _service = new ProfileMapper();
-            _service.CreateEntityEvent += OnUpdate;
-            DownloadData();
+            Service.profileMapper.AddObserver(this);
+            Execute();
         }
-
-        private void OnUpdate(object obj)
-        {
-            DownloadData();
-        }
-
-        public async void DownloadData()
+        public async void Execute()
         {
             ProfileList.Clear();
-            var profiles = await new ProfileMapper().GetAllAsync();
+            var profiles = await Service.profileMapper.GetAllAsync();
             foreach (var item in profiles)
             {
                 ProfileList.Add(item);

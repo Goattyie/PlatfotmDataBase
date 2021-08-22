@@ -1,5 +1,6 @@
 ﻿using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
+using Database.Services;
 using Database.VeiwModel.Commands;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,6 @@ namespace Database.VeiwModel.EditNode
     {
         private Deliver _deliver;
         private BaseCommand _addCommand;
-        private DeliverMapper _service;
 
         #region Поля
         public string Name
@@ -27,12 +27,11 @@ namespace Database.VeiwModel.EditNode
         #endregion
         public BaseCommand AddCommand
         {
-            get { return _addCommand ?? (_addCommand = new BaseCommand(obj => { _service.Create(_deliver); _deliver.Id = 0; })); }
+            get { return _addCommand ?? (_addCommand = new BaseCommand(obj => { Service.deliverMapper.Create(_deliver); _deliver.Id = 0; })); }
         }
-        public DeliverViewModel(DeliverMapper service)
+        public DeliverViewModel()
         {
             _deliver = new Deliver();
-            _service = service;
         }
     }
 }

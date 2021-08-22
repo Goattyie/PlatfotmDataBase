@@ -22,10 +22,10 @@ namespace Database.View
     /// </summary>
     public partial class AcceptOrder : Window
     {
-        public AcceptOrder(OrderMapper service, Order order)
+        public AcceptOrder(Order order)
         {
             InitializeComponent();
-            DataContext = new AcceptProductViewModel(service, order);
+            DataContext = new AcceptProductViewModel(order);
         }
     }
 }

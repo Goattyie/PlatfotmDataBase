@@ -22,20 +22,21 @@ namespace Database.View.EditNode
     /// </summary>
     public partial class EditSup : Window
     {
-        public EditSup(ProfileMapper service)
+        public EditSup(string name)
         {
             InitializeComponent();
-            DataContext = new ProfileViewModel(service);
-        }
-        public EditSup(CardMapper service)
-        {
-            InitializeComponent();
-            DataContext = new CardViewModel(service);
-        }
-        public EditSup(DeliverMapper service)
-        {
-            InitializeComponent();
-            DataContext = new DeliverViewModel(service);
+            switch (name)
+            {
+                case "Profile":
+                    DataContext = new ProfileViewModel();
+                    break;
+                case "Card":
+                    DataContext = new CardViewModel();
+                    break;
+                case "Deliver":
+                    DataContext = new DeliverViewModel();
+                    break;
+            }
         }
     }
 }

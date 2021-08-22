@@ -22,16 +22,16 @@ namespace Database.View.EditNode
     /// </summary>
     public partial class EditAvailability : Window
     {
-        public EditAvailability(AvailabilityMapper service)
+        public EditAvailability()
         {
             InitializeComponent();
-            DataContext = new AvailabilityViewModel(service);
+            DataContext = new AvailabilityViewModel();
         }
 
-        public EditAvailability(AvailabilityMapper service, Availability availability)
+        public EditAvailability(Availability availability)
         {
             InitializeComponent();
-            DataContext = new AvailabilityViewModel(service, availability);
+            DataContext = new AvailabilityViewModel(availability);
         }
     }
 }

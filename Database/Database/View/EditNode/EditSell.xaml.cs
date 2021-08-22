@@ -22,15 +22,15 @@ namespace Database.View.EditNode
     /// </summary>
     public partial class EditSell : Window
     {
-        public EditSell(SellMapper service)
+        public EditSell()
         {
             InitializeComponent();
-            DataContext = new SellViewModel(service);
+            DataContext = new SellViewModel();
         }
-        public EditSell(SellMapper service, Sell sell)
+        public EditSell(Sell sell)
         {
             InitializeComponent();
-            DataContext = new SellViewModel(service, sell);
+            DataContext = new SellViewModel(sell);
         }
     }
 }

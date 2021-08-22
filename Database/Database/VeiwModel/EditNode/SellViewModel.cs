@@ -1,5 +1,6 @@
 ﻿using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
+using Database.Services;
 using Database.VeiwModel.Commands;
 using Database.View.EditNode;
 using System;
@@ -14,7 +15,6 @@ namespace Database.VeiwModel.EditNode
     class SellViewModel:ValidatePropertyChanged, IDataErrorInfo
     {
         private Sell _sell;
-        private SellMapper _service;
         private BaseCommand _executeCommand;
         private BaseCommand _addClient;
         private Action _executeDelegate;
@@ -135,7 +135,7 @@ namespace Database.VeiwModel.EditNode
         {
             get { return _addClient ?? (_addClient = new BaseCommand(obj => 
             { 
-                new EditClient(new ClientMapper()).ShowDialog();  
+                new EditClient().ShowDialog();  
                 var clients = new ClientMapper().GetAll(); 
                 ClientList.Clear();
                 foreach (var item in clients)
@@ -149,9 +149,8 @@ namespace Database.VeiwModel.EditNode
         }
 
 
-        public SellViewModel(SellMapper service)
+        public SellViewModel()
         {
-            _service = service;
             _sell = new Sell();
             _sell.SellDate = DateTime.Now.ToString().Split(" ")[0];
             AvailabilityList = new BindingList<Availability>();
@@ -177,9 +176,8 @@ namespace Database.VeiwModel.EditNode
             UpdateIsValid();
         }
 
-        public SellViewModel(SellMapper service, Sell sell)
+        public SellViewModel(Sell sell)
         {
-            _service = service;
             _sell = sell;
             AvailabilityList = new BindingList<Availability>();
             CardList = new BindingList<Card>();
@@ -206,7 +204,7 @@ namespace Database.VeiwModel.EditNode
 
         private void Create()
         {
-            _service.Create(_sell);
+            Service.sellMapper.Create(_sell);
             _sell.Id = 0;
 
             UpdateAvailabilityList();//Обновляем список наличия
@@ -218,7 +216,7 @@ namespace Database.VeiwModel.EditNode
             _sell.Card = null;
             _sell.Client = null;
             _sell.Product = null;
-            _service.Update(_sell);
+            Service.sellMapper.Update(_sell);
         }
         private void UpdateAvailabilityList()
         {

@@ -1,5 +1,6 @@
 ﻿using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
+using Database.Services;
 using Database.VeiwModel.Commands;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,6 @@ namespace Database.VeiwModel.EditNode
         private Deliver _selectedDeliver;
         private Product _selectedProduct;
         private BaseCommand _addCommand;
-        private DeliverProductMapper _service;
         private DeliverProduct _deliverProduct;
 
         #region Свойства
@@ -41,14 +41,13 @@ namespace Database.VeiwModel.EditNode
         }
         public BaseCommand AddCommand
         {
-            get { return _addCommand ?? (_addCommand = new BaseCommand(obj => { _service.Create(_deliverProduct); _deliverProduct.Id = 0; })); }
+            get { return _addCommand ?? (_addCommand = new BaseCommand(obj => { Service.deliverProductMapper.Create(_deliverProduct); _deliverProduct.Id = 0; })); }
         }
         public BindingList<Product> ProductList { get; set; }
         public BindingList<Deliver> DeliverList { get; set; }
         #endregion
-        public DeliverProductViewModel(DeliverProductMapper service)
+        public DeliverProductViewModel()
         {
-            _service = service;
             ProductList = new BindingList<Product>();
             DeliverList = new BindingList<Deliver>();
             _deliverProduct = new DeliverProduct();

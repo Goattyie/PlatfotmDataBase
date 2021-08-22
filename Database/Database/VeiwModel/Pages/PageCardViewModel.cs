@@ -1,5 +1,7 @@
 ﻿using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
+using Database.Services;
+using Database.Services.Interfaces;
 using Database.VeiwModel.Commands;
 using Database.View.EditNode;
 using System;
@@ -11,12 +13,11 @@ using System.Threading.Tasks;
 
 namespace Database.VeiwModel.Pages
 {
-    class PageCardViewModel: BasePropertyChanged
+    class PageCardViewModel: BasePropertyChanged, IObserver
     {
         private BaseCommand _addCommand;
         private BaseCommand _removeCommand;
         private Card _selectedCard;
-        private CardMapper _service;
 
         public Card SelectedCard
         {
@@ -29,7 +30,7 @@ namespace Database.VeiwModel.Pages
         {
             get
             {
-                return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditSup(_service).Show(); DownloadData(); }));
+                return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditSup("Card").Show(); Execute(); }));
             }
         }
 
@@ -44,7 +45,7 @@ namespace Database.VeiwModel.Pages
                         list.Add(_selectedCard);
                         CardList.Remove(_selectedCard);
                     }
-                    _service.Delete(list.ToArray());
+                    Service.cardMapper.Delete(list.ToArray());
                 }));
             }
         }
@@ -52,17 +53,12 @@ namespace Database.VeiwModel.Pages
         public PageCardViewModel()
         {
             CardList = new BindingList<Card>();
-            _service = new CardMapper();
-            _service.CreateEntityEvent += OnUpdate;
-            DownloadData();
+            Service.cardMapper.AddObserver(this);
+            Execute();
         }
 
-        private void OnUpdate(object obj)
-        {
-            DownloadData();
-        }
 
-        public async void DownloadData()
+        public async void Execute()
         {
             CardList.Clear();
             var profiles = await new CardMapper().GetAllAsync();

@@ -1,5 +1,6 @@
 ﻿using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
+using Database.Services;
 using Database.VeiwModel.Commands;
 using System;
 using System.Collections.Generic;
@@ -16,10 +17,9 @@ namespace Database.VeiwModel
             ["Count"] = null,
         };
         private BaseCommand _acceptProductCommand;
-        private OrderMapper _service;
         public BaseCommand AcceptProductCommand
         {
-            get { return _acceptProductCommand ?? (_acceptProductCommand = new BaseCommand(obj => { _service.AcceptOrder(_order, _count); })); }
+            get { return _acceptProductCommand ?? (_acceptProductCommand = new BaseCommand(obj => { Service.orderMapper.AcceptOrder(_order, _count); })); }
         }
         //Сколько получено с приезда Евгения
         private int _count;
@@ -40,10 +40,9 @@ namespace Database.VeiwModel
         {
             get { return _order.Product.Name; }
         }
-        public AcceptProductViewModel(OrderMapper service, Order order)
+        public AcceptProductViewModel(Order order)
         {
             _order = order;
-            _service = service;
             Count = 0;
         }
     }

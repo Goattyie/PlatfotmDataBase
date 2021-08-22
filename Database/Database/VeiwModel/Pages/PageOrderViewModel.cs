@@ -1,5 +1,7 @@
 ﻿using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
+using Database.Services;
+using Database.Services.Interfaces;
 using Database.VeiwModel.Commands;
 using Database.View;
 using Database.View.EditNode;
@@ -12,14 +14,13 @@ using System.Threading.Tasks;
 
 namespace Database.VeiwModel.Pages
 {
-    class PageOrderViewModel: BasePropertyChanged
+    class PageOrderViewModel: BasePropertyChanged, IObserver
     {
         private BaseCommand _addCommand;
         private BaseCommand _editCommand;
         private BaseCommand _removeCommand;
         private BaseCommand _acceptCommand;
         private Order _selectedOrder;
-        private OrderMapper _service;
 
         public Order SelectedOrder
         {
@@ -32,7 +33,7 @@ namespace Database.VeiwModel.Pages
         {
             get
             {
-                return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditOrder(_service).Show(); }));
+                return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditOrder().Show(); }));
             }
         }
         public BaseCommand EditCommand
@@ -42,7 +43,7 @@ namespace Database.VeiwModel.Pages
                 return _editCommand ?? (_editCommand = new BaseCommand(obj =>
                 {
                     if(_selectedOrder != null)
-                        new EditOrder(_service, _selectedOrder).Show();
+                        new EditOrder(_selectedOrder).Show();
                 }));
             }
         }
@@ -57,35 +58,23 @@ namespace Database.VeiwModel.Pages
                         list.Add(_selectedOrder);
                         OrderList.Remove(_selectedOrder);
                     }
-                    _service.Delete(list.ToArray());
+                    Service.orderMapper.Delete(list.ToArray());
                 }));
             }
         }
         public BaseCommand AcceptCommand
         {
-            get { return _acceptCommand ?? (_acceptCommand = new BaseCommand(obj => { if(_selectedOrder != null) new AcceptOrder(_service, _selectedOrder).ShowDialog(); })); }
+            get { return _acceptCommand ?? (_acceptCommand = new BaseCommand(obj => { if(_selectedOrder != null) new AcceptOrder(_selectedOrder).ShowDialog(); })); }
         }
 
         public PageOrderViewModel()
         {
             OrderList = new BindingList<Order>();
-            _service = new OrderMapper();
-            _service.CreateEntityEvent += OnUpdate;
-            _service.UpdateEntityEvent += OnUpdate;
-            DownloadData();
+            Service.orderMapper.AddObserver(this);
+            Execute();
         }
 
-        private void OnUpdate(object obj)
-        {
-            OrderList.Clear();
-            var products = new OrderMapper().GetAll();
-            foreach (var item in products)
-            {
-                OrderList.Add(item);
-            }
-        }
-
-        public async void DownloadData()
+        public async void Execute()
         {
             OrderList.Clear();
             var products = await new OrderMapper().GetAllAsync();

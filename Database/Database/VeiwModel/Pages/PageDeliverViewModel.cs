@@ -1,5 +1,7 @@
 ﻿using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
+using Database.Services;
+using Database.Services.Interfaces;
 using Database.VeiwModel.Commands;
 using Database.View.EditNode;
 using System;
@@ -11,12 +13,11 @@ using System.Threading.Tasks;
 
 namespace Database.VeiwModel.Pages
 {
-    class PageDeliverViewModel: BasePropertyChanged
+    class PageDeliverViewModel: BasePropertyChanged, IObserver
     {
         private BaseCommand _addCommand;
         private BaseCommand _removeCommand;
         private Deliver _selectedDeliver;
-        private DeliverMapper _service;
 
         public Deliver SelectedDeliver
         {
@@ -29,7 +30,7 @@ namespace Database.VeiwModel.Pages
         {
             get
             {
-                return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditSup(_service).Show(); DownloadData(); }));
+                return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditSup("Deliver").Show(); }));
             }
         }
 
@@ -44,7 +45,7 @@ namespace Database.VeiwModel.Pages
                         list.Add(_selectedDeliver);
                         DeliverList.Remove(_selectedDeliver);
                     }
-                    _service.Delete(list.ToArray());
+                    Service.deliverMapper.Delete(list.ToArray());
                 }));
             }
         }
@@ -52,17 +53,11 @@ namespace Database.VeiwModel.Pages
         public PageDeliverViewModel()
         {
             DeliverList = new BindingList<Deliver>();
-            _service = new DeliverMapper();
-            _service.CreateEntityEvent += OnUpdate;
-            DownloadData();
+            Service.deliverMapper.AddObserver(this);
+            Execute();
         }
 
-        private void OnUpdate(object obj)
-        {
-            DownloadData();
-        }
-
-        public async void DownloadData()
+        public async void Execute()
         {
             DeliverList.Clear();
             var delivers = await new DeliverMapper().GetAllAsync();

@@ -1,5 +1,6 @@
 ﻿using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
+using Database.Services;
 using Database.VeiwModel.Commands;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,6 @@ namespace Database.VeiwModel.Pages
     {
         private Profile _profile;
         private BaseCommand _addCommand;
-        private ProfileMapper _service;
 
         #region Поля
         public string Name
@@ -27,12 +27,11 @@ namespace Database.VeiwModel.Pages
         #endregion
         public BaseCommand AddCommand
         {
-            get { return _addCommand ?? (_addCommand = new BaseCommand(obj => { _service.Create(_profile); _profile.Id = 0; })); }
+            get { return _addCommand ?? (_addCommand = new BaseCommand(obj => { Service.profileMapper.Create(_profile); _profile.Id = 0; })); }
         }
-        public ProfileViewModel(ProfileMapper service)
+        public ProfileViewModel()
         {
             _profile = new Profile();
-            _service = service;
         }
     }
 }

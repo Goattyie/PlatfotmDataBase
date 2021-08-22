@@ -22,15 +22,15 @@ namespace Database.View.EditNode
     /// </summary>
     public partial class EditOrder : Window
     {
-        public EditOrder(OrderMapper service)
+        public EditOrder()
         {
             InitializeComponent();
-            DataContext = new OrderViewModel(service);
+            DataContext = new OrderViewModel();
         }
-        public EditOrder(OrderMapper service, Order order)
+        public EditOrder(Order order)
         {
             InitializeComponent();
-            DataContext = new OrderViewModel(service, order);
+            DataContext = new OrderViewModel(order);
         }
     }
 }
