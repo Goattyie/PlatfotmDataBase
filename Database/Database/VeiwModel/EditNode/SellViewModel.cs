@@ -22,6 +22,9 @@ namespace Database.VeiwModel.EditNode
         private Card _selectedCard;
         private Client _selectedClient;
         private bool _isCreate;
+        private bool _isChangeClient;
+        private string _phone;
+
 
         #region Errors
         protected override Dictionary<string, string> _errors { get; set; } = new Dictionary<string, string>()
@@ -77,18 +80,25 @@ namespace Database.VeiwModel.EditNode
         }
         #endregion
         #region Поля
+        public bool IsChangeClient
+        {
+            get { return _isChangeClient; }
+            set { _isChangeClient = value; OnPropertyChanged(nameof(IsChangeClient)); }
+        }
         public string Phone
         {
-            get { return _selectedClient?.Phone; }
+            get { return _phone; }
             set
             {
-                SelectedClient = ClientList.Where(c => c.Phone == value).FirstOrDefault();               
+                _phone = value;
+                SelectedClient = ClientList.Where(c => c.Phone == value).FirstOrDefault();
+                IsChangeClient = (SelectedClient == null) ? false : true;
             }
         }
-        public string SellDate
+        public DateTime SellDate
         {
-            get { return _sell.SellDate; }
-            set { _sell.SellDate = value; OnPropertyChanged(nameof(SellDate)); }
+            get { return DateTime.Parse(_sell.SellDate); }
+            set { _sell.SellDate = value.Date.ToString("d"); OnPropertyChanged(nameof(SellDate)); }
         }
         public double Profit
         {
@@ -133,14 +143,18 @@ namespace Database.VeiwModel.EditNode
         #endregion
         public BaseCommand AddClient
         {
-            get { return _addClient ?? (_addClient = new BaseCommand(obj => 
+            get 
             { 
-                new EditClient().ShowDialog();  
+                return _addClient ?? (_addClient = new BaseCommand(obj => 
+                { 
+                new EditClient(Phone).ShowDialog();  
                 var clients = new ClientMapper().GetAll(); 
                 ClientList.Clear();
                 foreach (var item in clients)
                     ClientList.Add(item);
-                })); 
+                SelectedClient = ClientList.Where(c => c.Phone == Phone).FirstOrDefault();
+                IsChangeClient = (SelectedClient == null) ? false : true;
+                }));
             }
         }
         public BaseCommand ExecuteCommand
@@ -152,7 +166,7 @@ namespace Database.VeiwModel.EditNode
         public SellViewModel()
         {
             _sell = new Sell();
-            _sell.SellDate = DateTime.Now.ToString().Split(" ")[0];
+            _sell.SellDate = DateTime.Now.Date.ToString("d");
             AvailabilityList = new BindingList<Availability>();
             CardList = new BindingList<Card>();
             ClientList = new BindingList<Client>();
@@ -162,17 +176,20 @@ namespace Database.VeiwModel.EditNode
             var clients = new ClientMapper().GetAll();
 
             foreach (var item in available)
-                AvailabilityList.Add(item);
+                if(item.Count>0)
+                    AvailabilityList.Add(item);
             foreach (var item in cards)
                 CardList.Add(item);
             foreach (var item in clients)
                 ClientList.Add(item);
+
 
             _executeDelegate = new Action(Create);
             Count = 1;
             _isCreate = true;
 
             _errors["SelectedAvailable"] = "Товар из наличия не выбран";
+            IsChangeClient = false;
             UpdateIsValid();
         }
 

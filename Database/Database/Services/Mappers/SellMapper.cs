@@ -25,9 +25,7 @@ namespace Database.Model.Database.Services
                         throw new Exception();
 
                     available.Count = available.Count - obj.Count;
-                    if (available.Count != 0)
-                        connection.Availability.Update(available);
-                    else connection.Availability.Remove(available);
+                    connection.Availability.Update(available);
                     connection.SaveChanges();
                     NotifyObserver();
                 }

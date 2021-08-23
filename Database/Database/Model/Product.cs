@@ -14,6 +14,7 @@ namespace Database.Model.Database.Tables
         public double SellCost { get; set; }
         public double OrderCost { get; set; }
         public double DeliverCost { get; set; }
+        public double Profit { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<DeliverProduct> DeliverProducts { get; set; }
         public virtual ICollection<Availability> Availabilities { get; set; }

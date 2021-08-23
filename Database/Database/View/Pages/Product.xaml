@@ -38,6 +38,7 @@
                 <DataGridTextColumn Header="Цена закупки" Binding="{Binding Path=OrderCost}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Цена с доставкой" Binding="{Binding Path=DeliverCost}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Цена продажи" Binding="{Binding Path=SellCost}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Прибыль" Binding="{Binding Path=Profit}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 

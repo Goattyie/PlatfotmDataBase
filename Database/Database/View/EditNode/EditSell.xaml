@@ -60,21 +60,43 @@
 
         <Grid Grid.Row="2" Margin="0,8,0,8">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="407*"/>
-                <ColumnDefinition Width="39*"/>
+                <ColumnDefinition Width="413*"/>
+                <ColumnDefinition Width="33*"/>
             </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
             <TextBox
                 Style="{StaticResource TextBoxWithWatermark}"
-                Tag="Номер клиента"
-                Text="{Binding Phone}"
-               
+                Tag="Номер покупателя"
+                Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,14" Grid.RowSpan="2"
                 />
             <Button 
                 Grid.Column="1"
                 Style="{StaticResource BaseButton}"
                 Content="+"
                 Command="{Binding AddClient}"/>
+
+            <TextBlock 
+                FontSize="{StaticResource Small}"
+                Grid.Row="1" 
+                FontFamily="{StaticResource Comic Sans MS}">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsChangeClient}" Value="False">
+                                <Setter Property="Text" Value="Клиент не выбран"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsChangeClient}" Value="True">
+                                <Setter Property="Text" Value="Клиент выбран"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
         </Grid>
 
         <Grid Grid.Row="3">
@@ -166,7 +188,7 @@
 
             <DatePicker
                 Grid.Row="1"
-                Text="{Binding SellDate}"
+                SelectedDate="{Binding SellDate}"
                 />
         </Grid>
 

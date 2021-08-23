@@ -86,7 +86,7 @@ namespace Database.VeiwModel.EditNode
                 _availability.Count = value; 
                 OnPropertyChanged(nameof(Count));
 
-                if (_availability.Count > 0)
+                if (_availability.Count >= 0)
                     _errors["Count"] = null;
                 else _errors["Count"] = "Количество не может быть меньше 0";
                 UpdateIsValid();

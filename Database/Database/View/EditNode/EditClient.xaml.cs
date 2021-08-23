@@ -26,5 +26,10 @@ namespace Database.View.EditNode
             InitializeComponent();
             DataContext = new ClientViewModel();
         }
+        public EditClient(string phone)
+        {
+            InitializeComponent();
+            DataContext = new ClientViewModel(phone);
+        }
     }
 }

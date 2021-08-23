@@ -24,7 +24,7 @@
             <RowDefinition Height="362*"/>
             <RowDefinition Height="51*"/>
         </Grid.RowDefinitions>
-        <TextBlock Margin="10,10,0,0" FontSize="18">Таблица: Поставщик-Товар</TextBlock>
+        <TextBlock Margin="10,10,0,0" FontSize="18">Таблица: Товары поставщиков</TextBlock>
 
         <DataGrid CanUserAddRows="False"
                   AutoGenerateColumns="False"

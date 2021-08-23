@@ -45,5 +45,9 @@ namespace Database.VeiwModel.EditNode
         {
             _client = new Client();
         }
+        public ClientViewModel(string phone):this()
+        {
+            _client.Phone = phone;
+        }
     }
 }

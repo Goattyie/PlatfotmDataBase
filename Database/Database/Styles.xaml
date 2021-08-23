@@ -35,7 +35,6 @@
     </Style>
 
     <Style x:Key="BaseComboBox" TargetType="{x:Type ComboBox}">
-        <Setter Property="Background" Value="{StaticResource LightVioletBrush}"/>
         <Setter Property="FontFamily" Value="{StaticResource Comic Sans MS}"/>
         <Setter Property="FontWeight" Value="Light"/>
         <Setter Property="FontSize" Value="{StaticResource Medium}"/>

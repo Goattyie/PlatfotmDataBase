@@ -48,6 +48,7 @@ namespace Database.VeiwModel.EditNode
                     _errors["SellCost"] = "Ошибка";
                 else _errors["SellCost"] = null;
                 UpdateIsValid();
+                _product.Profit = SellCost - DeliverCost;
             }
         }    
         public double OrderCost
@@ -74,6 +75,7 @@ namespace Database.VeiwModel.EditNode
                     _errors["DeliverCost"] = "Ошибка";
                 else _errors["DeliverCost"] = null;
                 UpdateIsValid();
+                _product.Profit = SellCost - DeliverCost;
             }
         }
         #endregion

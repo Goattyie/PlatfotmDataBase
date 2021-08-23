@@ -64,6 +64,16 @@ namespace Database.VeiwModel.EditNode
         public BindingList<Deliver> DeliverList { get; set; }
 
         #region Property
+
+        public DateTime OrderDate
+        {
+            get { return DateTime.Parse(_order.OrderDate); }
+            set 
+            { 
+                _order.OrderDate = value.Date.ToString("d"); 
+                OnPropertyChanged(nameof(OrderDate)); 
+            }
+        }
         public int Count
         {
             get { return _order.Count; }
@@ -127,6 +137,7 @@ namespace Database.VeiwModel.EditNode
             _executeDelegate = new Action(Create);
             _errors["SelectedDeliver"] = "Error";
             _errors["SelectedProduct"] = "Error";
+            OrderDate = DateTime.Now;
             UpdateIsValid();
         }
         public OrderViewModel(Order order)

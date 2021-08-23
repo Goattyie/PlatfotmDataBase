@@ -20,6 +20,7 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
@@ -176,9 +177,26 @@
                 Text="{Binding CurrentCost}"/>
         </Grid>
 
+        <Grid Grid.Row="8">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Style="{StaticResource HeadTextBlock}"
+                Text="Дата заказа"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"/>
+
+            <DatePicker
+                Grid.Row="1"
+                SelectedDate="{Binding OrderDate}"/>
+        </Grid>
         <Button 
             Style="{StaticResource BaseButton}"
-            Grid.Row="8" 
+            Grid.Row="9" 
             Content="Сохранить" 
             VerticalAlignment="Center" 
             HorizontalAlignment="Center"

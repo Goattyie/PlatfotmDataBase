@@ -33,7 +33,7 @@
                   SelectedItem="{Binding SelectedOrder}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Width="50" Binding="{Binding Path=Id}"/>
-                <DataGridTextColumn Header="Товар" Width="320" Binding="{Binding Path=Product.Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Товар" Width="220" Binding="{Binding Path=Product.Name}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Количество" Width="130" Binding="{Binding Path=Count}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Получено" Width="130" Binding="{Binding Path=CurrentCount}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Цена закупки" Width="130" Binding="{Binding Path=OrderCost}"></DataGridTextColumn>
@@ -41,6 +41,7 @@
                 <DataGridTextColumn Header="Цена оплаты" Width="130" Binding="{Binding Path=SummCost}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Оплачено" Width="130" Binding="{Binding Path=CurrentCost}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Поставщик" Width="140" Binding="{Binding Path=Deliver.Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Дата заказа" Width="130" Binding="{Binding Path=OrderDate}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="2">

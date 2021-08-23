@@ -22,7 +22,8 @@
             <RowDefinition Height="51*"/>
         </Grid.RowDefinitions>
         <TextBlock Margin="10,10,0,0" FontSize="18">Таблица: Наличие</TextBlock>
-        <DataGrid AutoGenerateColumns="False" 
+        <DataGrid 
+                  AutoGenerateColumns="False" 
                   CanUserAddRows="False"
                   Grid.Row="1" 
                   Grid.ColumnSpan="3" 
@@ -36,10 +37,19 @@
                 <DataGridTextColumn Header="Количество" Width="*" Binding="{Binding Path=Count}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Цена закупки" Width="*" Binding="{Binding Path=BuyCost}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Цена с доставкой" Width="*" Binding="{Binding Path=DeliverCost}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Ценап продажи" Width="*" Binding="{Binding Path=SellCost}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Цена продажи" Width="*" Binding="{Binding Path=SellCost}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Профиль" Width="*" Binding="{Binding Path=Profile.Name}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Примечание" Width="*" Binding="{Binding Path=Comment}"></DataGridTextColumn>
             </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=Count}" Value="0">
+                            <Setter Property="Background" Value="Gray"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
         </DataGrid>
         
         <Grid Grid.Row="2">

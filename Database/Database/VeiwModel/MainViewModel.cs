@@ -56,7 +56,7 @@ namespace Database.VeiwModel
             _profilePage = new Profile();
             _cardPage = new Card();
 
-            _currentPage = null;
+            _currentPage = _sellPage;
         }
         private void NewTablePage(object tableName)
         {

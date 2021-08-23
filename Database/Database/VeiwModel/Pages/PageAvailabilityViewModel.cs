@@ -74,6 +74,7 @@ namespace Database.VeiwModel.Pages
         {
             AvailabilityList = new BindingList<Availability>();
             Service.availabilityMapper.AddObserver(this);
+            Service.sellMapper.AddObserver(this);
             Execute();
         }
 

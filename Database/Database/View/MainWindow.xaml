@@ -19,15 +19,9 @@
             <RowDefinition Height="21*"/>
             <RowDefinition Height="731*"/>
         </Grid.RowDefinitions>
-        
+
         <Menu Margin="0,0,0,0">
 
-            <MenuItem Header="Файл" x:Name="MI">
-                <MenuItem Header="Сохранить бд" Padding="0"></MenuItem>
-                <MenuItem Header="Сохранить бд в облако"></MenuItem>
-                <MenuItem Header="Распечатать товары в наличии"></MenuItem>
-            </MenuItem>
-            
             <MenuItem Header="Таблицы">
                 <MenuItem Header="Товар в наличии" Command="{Binding TableClick}" CommandParameter="AvailableTable"></MenuItem>
                 <MenuItem Header="Проданный товар" Command="{Binding TableClick}" CommandParameter="SellTable"></MenuItem>
@@ -37,13 +31,9 @@
                 <MenuItem Header="Профиль" Command="{Binding TableClick}" CommandParameter="ProfileTable"></MenuItem>
                 <MenuItem Header="Карты" Command="{Binding TableClick}" CommandParameter="CardTable"></MenuItem>
                 <MenuItem Header="Поставщики" Command="{Binding TableClick}" CommandParameter="DeliverTable"></MenuItem>
-                <MenuItem Header="Поставщики товары" Command="{Binding TableClick}" CommandParameter="DeliverProductTable"></MenuItem>
+                <MenuItem Header="Товары поставщиков" Command="{Binding TableClick}" CommandParameter="DeliverProductTable"></MenuItem>
             </MenuItem>
-            
-            <MenuItem Header="Запросы"></MenuItem>
-            
-            <MenuItem Header="Анализ"></MenuItem>
-            
+                     
             <MenuItem Header="Excel">
                 
                 <MenuItem Header="Импортировать данные"></MenuItem>

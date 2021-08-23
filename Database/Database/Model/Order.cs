@@ -23,6 +23,7 @@ namespace Database.Model.Database.Tables
         /// Сколько товара получено на данный момент
         /// </summary>
         public int CurrentCount { get; set; }
+        public string OrderDate { get; set; }
         public virtual Product Product { get; set; }
         public virtual Deliver Deliver { get; set; }
     }
