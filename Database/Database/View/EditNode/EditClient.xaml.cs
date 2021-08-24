@@ -31,5 +31,10 @@ namespace Database.View.EditNode
             InitializeComponent();
             DataContext = new ClientViewModel(phone);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

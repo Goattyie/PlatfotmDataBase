@@ -135,6 +135,7 @@ namespace Database.VeiwModel.EditNode
 
             _selectedProduct = ProductList.Where(p => p.Id == availability.ProductId).FirstOrDefault();
             _selectedProfile = ProfileList.Where(p => p.Id == availability.ProfileId).FirstOrDefault();
+            UpdateIsValid();
         }
         private void Create()
         {

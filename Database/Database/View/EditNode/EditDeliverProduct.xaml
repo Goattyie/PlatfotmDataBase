@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Database.View.EditNode"
         mc:Ignorable="d"
-        Title="EditDeliverProduct" Height="263" Width="345">
+        Title="Товары поставщиков" Height="263" Width="345">
     <Grid Margin="10,10,10,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="91*"/>
@@ -61,7 +61,7 @@
             HorizontalAlignment="Center"
             Grid.Row="2" 
             Content="Добавить" 
-            Command="{Binding AddCommand}" Height="32" Width="85"/>
+            Command="{Binding AddCommand}" Height="32" Width="85" Click="Button_Click"/>
 
     </Grid>
 </Window>

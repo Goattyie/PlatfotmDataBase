@@ -86,7 +86,7 @@
             Command="{Binding AddButtonClick}"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            IsEnabled="{Binding IsValid}"/>
+            IsEnabled="{Binding IsValid}" Click="Button_Click"/>
 
     </Grid>
 </Window>

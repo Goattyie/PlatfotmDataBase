@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Database.View.EditNode"
         mc:Ignorable="d"
-        Title="EditSell" Height="613" Width="466">
+        Title="Продажи" Height="613" Width="466">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -71,8 +71,8 @@
 
             <TextBox
                 Style="{StaticResource TextBoxWithWatermark}"
-                Tag="Номер покупателя"
-                Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,14" Grid.RowSpan="2"
+                Tag="Телефон"
+                Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}"
                 />
             <Button 
                 Grid.Column="1"
@@ -88,10 +88,10 @@
                     <Style TargetType="TextBlock">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsChangeClient}" Value="False">
-                                <Setter Property="Text" Value="Клиент не выбран"/>
+                                <Setter Property="Text" Value="Телефон не найден"/>
                             </DataTrigger>
                             <DataTrigger Binding="{Binding IsChangeClient}" Value="True">
-                                <Setter Property="Text" Value="Клиент выбран"/>
+                                <Setter Property="Text" Value="Телефон найден"/>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>

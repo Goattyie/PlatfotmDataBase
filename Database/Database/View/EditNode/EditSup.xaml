@@ -23,6 +23,6 @@
             HorizontalAlignment="Center"
             Grid.Row="1"
             Content="Сохранить"
-            Command="{Binding AddCommand}" Height="31" Width="91"></Button>
+            Command="{Binding AddCommand}" Height="31" Width="91" Click="Button_Click"></Button>
     </Grid>
 </Window>

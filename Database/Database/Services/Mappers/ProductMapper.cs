@@ -81,6 +81,7 @@ namespace Database.Model.Database.Services
             {
                 connection.Products.Update(obj);
                 connection.SaveChanges();
+                MessageBox.Show("Запись обновлена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                 NotifyObserver();
             }
         }

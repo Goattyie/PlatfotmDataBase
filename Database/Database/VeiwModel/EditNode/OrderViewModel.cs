@@ -160,8 +160,8 @@ namespace Database.VeiwModel.EditNode
             if (_selectedProduct != null)
             {
                 OrderCost = _selectedProduct.OrderCost * Count;
-                SummCost = _selectedProduct.DeliverCost * Count;
-                DeliverCost = SummCost - OrderCost;
+                DeliverCost = (_selectedProduct.DeliverCost - _selectedProduct.OrderCost) * Count;
+                SummCost = OrderCost + DeliverCost;
             }
             else
             {

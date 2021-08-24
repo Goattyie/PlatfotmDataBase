@@ -32,5 +32,10 @@ namespace Database.View.EditNode
             InitializeComponent();
             DataContext = new ProductViewModel(product);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

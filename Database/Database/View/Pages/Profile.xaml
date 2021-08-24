@@ -43,7 +43,6 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button Grid.Row="2" Grid.Column="0" Style="{Binding Source={StaticResource Btn}}" Content="Добавить профиль" Margin="10,0,10,10" Command="{Binding AddCommand}"/>
             <Button Grid.Row="2" Grid.Column="2" Style="{Binding Source={StaticResource Btn}}" Content="Удалить профиль" Margin="10,0,10,10" Command="{Binding RemoveCommand}"/>

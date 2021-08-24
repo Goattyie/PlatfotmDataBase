@@ -33,5 +33,10 @@ namespace Database.View.EditNode
             InitializeComponent();
             DataContext = new AvailabilityViewModel(availability);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -32,6 +32,6 @@
             Content="Сохранить" 
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            Command="{Binding AddCommand}" Height="31" Width="91"/>
+            Command="{Binding AddCommand}" Height="31" Width="91" Click="Button_Click"/>
     </Grid>
 </Window>

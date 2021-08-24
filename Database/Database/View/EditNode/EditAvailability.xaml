@@ -154,7 +154,7 @@
             Grid.Row="7"
             Content="Сохранить"
             Command="{Binding ExecuteCommand}"
-            IsEnabled="{Binding IsValid}"
+            IsEnabled="{Binding IsValid}" Click="Button_Click"
             />
     </Grid>
 </Window>

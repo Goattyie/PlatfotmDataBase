@@ -147,7 +147,7 @@
 
             <TextBlock
                 Style="{StaticResource HeadTextBlock}"
-                Text="Цена оплаты"
+                Text="Цена с доставкой"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"/>
 
@@ -201,6 +201,6 @@
             VerticalAlignment="Center" 
             HorizontalAlignment="Center"
             Command="{Binding ExecuteCommand}" 
-            IsEnabled="{Binding IsValid}"/>
+            IsEnabled="{Binding IsValid}" Click="Button_Click"/>
     </Grid>
 </Window>

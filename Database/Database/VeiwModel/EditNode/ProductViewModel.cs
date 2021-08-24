@@ -56,8 +56,9 @@ namespace Database.VeiwModel.EditNode
             get { return _product.OrderCost; }
             set 
             {
-                _product.OrderCost = value; 
-                OnPropertyChanged(nameof(_product.OrderCost));
+                _product.OrderCost = value;
+                DeliverCost = OrderCost + 0.15 * OrderCost;
+                OnPropertyChanged(nameof(OrderCost));
                 if (value < 0)
                     _errors["OrderCost"] = "Ошибка";
                 else _errors["OrderCost"] = null;
@@ -70,7 +71,7 @@ namespace Database.VeiwModel.EditNode
             set 
             { 
                 _product.DeliverCost = value; 
-                OnPropertyChanged(nameof(_product.OrderCost));
+                OnPropertyChanged(nameof(DeliverCost));
                 if (value < 0)
                     _errors["DeliverCost"] = "Ошибка";
                 else _errors["DeliverCost"] = null;
