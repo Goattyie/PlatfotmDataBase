@@ -1,9 +1,12 @@
 ﻿using Database.Model.Database.ExcelWorkers;
 using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
+using Database.Services;
+using Database.Services.Builder;
 using Database.VeiwModel;
 using Database.View.EditNode;
 using OfficeOpenXml;
+using System.IO;
 using System.Windows;
 
 namespace Database
@@ -18,7 +21,6 @@ namespace Database
             InitializeComponent();
             DataContext = new MainViewModel();
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            //new ProductExcelWorker().Read(@"D:\PlaygroundDataBase\Database\Database\bin\Debug\net5.0-windows\import\Наличие.xlsx");
         }
     }
 }

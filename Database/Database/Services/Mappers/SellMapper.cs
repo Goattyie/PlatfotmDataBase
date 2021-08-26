@@ -19,6 +19,23 @@ namespace Database.Model.Database.Services
                 try
                 {
                     connection.Sells.Add(obj);
+                    connection.SaveChanges();
+                    NotifyObserver();
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка добавления записи", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        public void CreateAndUpdateAvailability(Sell obj)
+        {
+            using (var connection = new SqlModel())
+            {
+                try
+                {
+                    connection.Sells.Add(obj);
                     var available = new AvailabilityMapper().GetElementByProductId(obj.ProductId);
 
                     if (available is null)

@@ -2,6 +2,18 @@
   "version": 3,
   "targets": {
     "net5.0-windows7.0": {
+      "DynamicExpresso.Core/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/DynamicExpresso.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/DynamicExpresso.Core.dll": {}
+        }
+      },
       "EPPlus/5.7.2": {
         "type": "package",
         "dependencies": {
@@ -1564,6 +1576,20 @@
     }
   },
   "libraries": {
+    "DynamicExpresso.Core/2.8.1": {
+      "sha512": "pvBpQOCy1eqAjSWhLf34GUYMvxuiZfm2P7L0mFa4wqXuucbnB6RHoMcQb0RxGZADXrqQrt4ZDPu/3HXJFj9snw==",
+      "type": "package",
+      "path": "dynamicexpresso.core/2.8.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "dynamicexpresso.core.2.8.1.nupkg.sha512",
+        "dynamicexpresso.core.nuspec",
+        "lib/net45/DynamicExpresso.Core.dll",
+        "lib/net461/DynamicExpresso.Core.dll",
+        "lib/netstandard2.0/DynamicExpresso.Core.dll"
+      ]
+    },
     "EPPlus/5.7.2": {
       "sha512": "iKN/pYXY9FZ6x1+u9pHJdG/cWTaphvKOIawyQrq6W9XbDXj9eo5dmmTVMD/MhNc7skVzYEmBUbdQHuPkU8pytQ==",
       "type": "package",
@@ -5415,6 +5441,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0-windows7.0": [
+      "DynamicExpresso.Core >= 2.8.1",
       "EPPlus >= 5.7.2",
       "Microsoft.EntityFrameworkCore >= 5.0.8",
       "Microsoft.EntityFrameworkCore.Sqlite >= 5.0.8",
@@ -5460,6 +5487,10 @@
       "net5.0-windows7.0": {
         "targetAlias": "net5.0-windows",
         "dependencies": {
+          "DynamicExpresso.Core": {
+            "target": "Package",
+            "version": "[2.8.1, )"
+          },
           "EPPlus": {
             "target": "Package",
             "version": "[5.7.2, )"

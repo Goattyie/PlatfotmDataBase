@@ -40,6 +40,10 @@
         "net5.0-windows7.0": {
           "targetAlias": "net5.0-windows",
           "dependencies": {
+            "DynamicExpresso.Core": {
+              "target": "Package",
+              "version": "[2.8.1, )"
+            },
             "EPPlus": {
               "target": "Package",
               "version": "[5.7.2, )"

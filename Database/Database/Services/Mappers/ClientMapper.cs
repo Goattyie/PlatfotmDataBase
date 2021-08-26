@@ -46,7 +46,6 @@ namespace Database.Model.Database.Services
             }
             return clients;
         }
-
         public async Task<IEnumerable<Client>> GetAllAsync()
         {
             var clients = new List<Client>();
@@ -56,10 +55,18 @@ namespace Database.Model.Database.Services
             }
             return clients;
         }
-
         public void Update(Client obj)
         {
             throw new NotImplementedException();
+        }
+        public Client GetElementByPhone(string phone)
+        {
+            Client client;
+            using (var connection = new SqlModel())
+            {
+                client = connection.Clients.Where(x => x.Phone == phone).FirstOrDefault();
+            }
+            return client;
         }
     }
 }

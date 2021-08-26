@@ -221,7 +221,7 @@ namespace Database.VeiwModel.EditNode
 
         private void Create()
         {
-            Service.sellMapper.Create(_sell);
+            Service.sellMapper.CreateAndUpdateAvailability(_sell);
             _sell.Id = 0;
 
             UpdateAvailabilityList();//Обновляем список наличия

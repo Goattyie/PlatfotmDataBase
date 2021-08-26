@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "PipJmxTu7mS9nPocofjOycmpw2rLXEGtVoNJwYA8wK1cpfWHNrK4GV9okAaKZxYq4x486nGvqysN+VIG4zIsJA==",
+  "dgSpecHash": "NVSQAilpG+xgPB65dQGrtwNNN5GBaTxRwa/S/OBo1ppkekamyxfrZuphnjaKSMyyCoONr0Q7asnX74FXXUwjGQ==",
   "success": true,
   "projectFilePath": "D:\\PlaygroundDataBase\\Database\\Database\\Database.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Goattyie\\.nuget\\packages\\dynamicexpresso.core\\2.8.1\\dynamicexpresso.core.2.8.1.nupkg.sha512",
     "C:\\Users\\Goattyie\\.nuget\\packages\\epplus\\5.7.2\\epplus.5.7.2.nupkg.sha512",
     "C:\\Users\\Goattyie\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Goattyie\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

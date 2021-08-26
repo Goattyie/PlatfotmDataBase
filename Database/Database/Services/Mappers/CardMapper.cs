@@ -65,5 +65,14 @@ namespace Database.Model.Database.Services
         {
             throw new NotImplementedException();
         }
+        public Card GetElementByName(string name)
+        {
+            Card card;
+            using (var connection = new SqlModel())
+            {
+                card = connection.Cards.Where(x => x.Name == name).FirstOrDefault();
+            }
+            return card;
+        }
     }
 }

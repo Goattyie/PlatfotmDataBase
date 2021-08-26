@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using Database.VeiwModel.Commands;
+using Database.View;
 using Database.View.Pages;
 using Database.View.Pages.Tables;
 
@@ -26,6 +27,12 @@ namespace Database.VeiwModel
 
         private BaseCommand _tableClick;
         private BaseCommand _exportTable;
+        private BaseCommand _importV3;
+
+        public BaseCommand ImportV3
+        {
+            get { return _importV3 ?? (_importV3 = new BaseCommand(obj => { new ImportV3().Show(); })); }
+        }
 
         public BaseCommand TableClick
         {
