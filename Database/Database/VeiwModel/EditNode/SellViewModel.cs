@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Database.VeiwModel.EditNode
 {
@@ -221,19 +222,34 @@ namespace Database.VeiwModel.EditNode
 
         private void Create()
         {
-            Service.sellMapper.CreateAndUpdateAvailability(_sell);
-            _sell.Id = 0;
-
-            UpdateAvailabilityList();//Обновляем список наличия
-            Count = 1;
+            try
+            {
+                Service.sellMapper.CreateAndUpdateAvailability(_sell);
+                _sell.Id = 0;
+                UpdateAvailabilityList();//Обновляем список наличия
+                Count = 1;
+                Service.sellMapper.NotifyObserver();
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка! В записи есть ошибки либо она уже существует.", "Ошибка добавления", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Update()
         {
-            _sell.Card = null;
-            _sell.Client = null;
-            _sell.Product = null;
-            Service.sellMapper.Update(_sell);
+            try
+            {
+                _sell.Card = null;
+                _sell.Client = null;
+                _sell.Product = null;
+                Service.sellMapper.Update(_sell);
+                Service.sellMapper.NotifyObserver();
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка! Запись нельзя обновить таким образом.", "Ошибка обновления", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         private void UpdateAvailabilityList()
         {

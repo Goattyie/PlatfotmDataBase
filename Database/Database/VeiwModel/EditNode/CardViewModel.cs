@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Database.VeiwModel.EditNode
 {
@@ -27,7 +28,19 @@ namespace Database.VeiwModel.EditNode
         #endregion
         public BaseCommand AddCommand
         {
-            get { return _addCommand ?? (_addCommand = new BaseCommand(obj => { Service.cardMapper.Create(_card); _card.Id = 0; })); }
+            get { return _addCommand ??= new BaseCommand(obj =>
+            {
+                try
+                {
+                    Service.cardMapper.Create(_card); 
+                    _card.Id = 0;
+                    Service.cardMapper.NotifyObserver();
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка! В записи есть ошибки либо она уже существует.", "Ошибка добавления", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }); }
         }
         public CardViewModel()
         {

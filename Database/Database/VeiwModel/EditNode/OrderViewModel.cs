@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Database.VeiwModel.EditNode
 {
@@ -27,7 +28,7 @@ namespace Database.VeiwModel.EditNode
         };
         public BaseCommand ExecuteCommand
         {
-            get { return _executeCommand ?? (_executeCommand = new BaseCommand(obj => { _executeDelegate?.Invoke(); })); }
+            get { return _executeCommand ??= new BaseCommand(obj => { _executeDelegate?.Invoke(); }); }
         }
         public Product SelectedProduct
         {
@@ -172,14 +173,30 @@ namespace Database.VeiwModel.EditNode
         }
         private void Create()
         {
-            _order.Deliver = null;
-            _order.Product = null;
-            Service.orderMapper.Create(_order);
-            _order.Id = 0;
+            try
+            {
+                _order.Deliver = null;
+                _order.Product = null;
+                Service.orderMapper.Create(_order);
+                _order.Id = 0;
+                Service.orderMapper.NotifyObserver();
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка! В записи есть ошибки либо она уже существует.", "Ошибка добавления", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         private void Update()
         {
-            Service.orderMapper.Update(_order);
+            try
+            {
+                Service.orderMapper.Update(_order);
+                Service.orderMapper.NotifyObserver();
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка! Запись нельзя обновить таким образом.", "Ошибка обновления", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         private void LoadProducts()
         {

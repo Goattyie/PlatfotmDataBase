@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Database.VeiwModel.EditNode
 {
@@ -101,7 +102,7 @@ namespace Database.VeiwModel.EditNode
         #endregion
         public BaseCommand ExecuteCommand
         {
-            get { return _executeCommand ?? (_executeCommand = new BaseCommand(obj => { _executeDelegate?.Invoke();})); }
+            get { return _executeCommand ??= new BaseCommand(obj => { _executeDelegate?.Invoke();}); }
         }
         public AvailabilityViewModel()
         {
@@ -139,13 +140,29 @@ namespace Database.VeiwModel.EditNode
         }
         private void Create()
         {
-            Service.availabilityMapper.Create(_availability);
-            _availability.Id = 0;
+            try
+            {
+                Service.availabilityMapper.Create(_availability);
+                _availability.Id = 0;
+                Service.availabilityMapper.NotifyObserver();
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка! В записи есть ошибки.", "Ошибка добавления", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         private void Update()
         {
-            _availability.Profile = null;
-            Service.availabilityMapper.Update(_availability);
+            try
+            {
+                _availability.Profile = null;
+                Service.availabilityMapper.Update(_availability);
+                Service.availabilityMapper.NotifyObserver();
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка! Запись нельзя обновить таким образом.", "Ошибка обновления", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

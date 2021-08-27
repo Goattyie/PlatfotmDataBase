@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Database.VeiwModel.EditNode
 {
@@ -41,7 +42,19 @@ namespace Database.VeiwModel.EditNode
         }
         public BaseCommand AddCommand
         {
-            get { return _addCommand ?? (_addCommand = new BaseCommand(obj => { Service.deliverProductMapper.Create(_deliverProduct); _deliverProduct.Id = 0; })); }
+            get { return _addCommand ??= new BaseCommand(obj =>
+            {
+                try
+                {
+                    Service.deliverProductMapper.Create(_deliverProduct);
+                    _deliverProduct.Id = 0;
+                    Service.deliverProductMapper.NotifyObserver();
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка! В записи есть ошибки либо она уже существует.", "Ошибка добавления", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }); }
         }
         public BindingList<Product> ProductList { get; set; }
         public BindingList<Deliver> DeliverList { get; set; }

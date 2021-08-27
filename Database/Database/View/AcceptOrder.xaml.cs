@@ -27,5 +27,10 @@ namespace Database.View
             InitializeComponent();
             DataContext = new AcceptProductViewModel(order);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

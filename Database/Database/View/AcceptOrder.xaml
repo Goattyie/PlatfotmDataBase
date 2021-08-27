@@ -57,6 +57,6 @@
           HorizontalAlignment="Center"
           Content="Принять товар"
           Command="{Binding AcceptProductCommand}"
-          IsEnabled="{Binding IsValid}"/>
+          IsEnabled="{Binding IsValid}" Click="Button_Click"/>
     </Grid>
 </Window>

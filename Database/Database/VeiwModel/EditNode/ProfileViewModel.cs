@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Database.VeiwModel.Pages
 {
@@ -27,7 +28,19 @@ namespace Database.VeiwModel.Pages
         #endregion
         public BaseCommand AddCommand
         {
-            get { return _addCommand ?? (_addCommand = new BaseCommand(obj => { Service.profileMapper.Create(_profile); _profile.Id = 0; })); }
+            get { return _addCommand ??= new BaseCommand(obj => 
+            {
+                try
+                {
+                    Service.profileMapper.Create(_profile);
+                    _profile.Id = 0;
+                    Service.profileMapper.NotifyObserver();
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка! В записи есть ошибки либо она уже существует.", "Ошибка добавления", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }); }
         }
         public ProfileViewModel()
         {

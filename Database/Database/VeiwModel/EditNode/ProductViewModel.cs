@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Database.VeiwModel.EditNode
 {
@@ -82,7 +83,7 @@ namespace Database.VeiwModel.EditNode
         #endregion
         public BaseCommand AddButtonClick 
         { 
-            get { return _buttonClick ?? (_buttonClick = new BaseCommand(obj => { _command?.Invoke(); })); } 
+            get { return _buttonClick ??= new BaseCommand(obj => { _command?.Invoke(); }); } 
         }
 
 
@@ -101,16 +102,35 @@ namespace Database.VeiwModel.EditNode
         }
         private void CreateNode()
         {
-            Service.productMapper.Create(_product);
-            _product = new Product();
-            OnPropertyChanged(nameof(_product.Name));
-            OnPropertyChanged(nameof(_product.SellCost));
-            OnPropertyChanged(nameof(_product.DeliverCost));
-            OnPropertyChanged(nameof(_product.OrderCost));
+            try
+            {
+                Service.productMapper.Create(_product);
+                _product = new Product();
+                Service.productMapper.NotifyObserver();
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка! В записи есть ошибки либо она уже существует.", "Ошибка добавления", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                OnPropertyChanged(nameof(_product.Name));
+                OnPropertyChanged(nameof(_product.SellCost));
+                OnPropertyChanged(nameof(_product.DeliverCost));
+                OnPropertyChanged(nameof(_product.OrderCost));
+            }
         }
         private void EditNode()
         {
-            Service.productMapper.Update(_product);
+            try
+            {
+                Service.productMapper.Update(_product);
+                Service.productMapper.NotifyObserver();
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка! Запись нельзя обновить таким образом.", "Ошибка обновления", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

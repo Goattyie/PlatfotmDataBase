@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Database.VeiwModel
 {
@@ -19,7 +20,18 @@ namespace Database.VeiwModel
         private BaseCommand _acceptProductCommand;
         public BaseCommand AcceptProductCommand
         {
-            get { return _acceptProductCommand ?? (_acceptProductCommand = new BaseCommand(obj => { Service.orderMapper.AcceptOrder(_order, _count); })); }
+            get { return _acceptProductCommand ??= new BaseCommand(obj => 
+            {
+                try
+                {
+                    Service.orderMapper.AcceptOrder(_order, _count);
+                    Service.orderMapper.NotifyObserver();
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка принятия товара.", "Ошибка принятия товара", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }); }
         }
         //Сколько получено с приезда Евгения
         private int _count;
