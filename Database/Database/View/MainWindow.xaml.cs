@@ -1,4 +1,4 @@
-﻿using Database.Model.Database.ExcelWorkers;
+﻿
 using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
 using Database.Services;
@@ -21,6 +21,7 @@ namespace Database
             InitializeComponent();
             DataContext = new MainViewModel();
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
         }
     }
 }

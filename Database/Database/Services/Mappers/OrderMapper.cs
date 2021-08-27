@@ -16,32 +16,16 @@ namespace Database.Model.Database.Services
         {
             using (var connection = new SqlModel())
             {
-                try
-                {
                     connection.Orders.Add(obj);
                     connection.SaveChanges();
-                    NotifyObserver();
-                }
-                catch
-                {
-                    MessageBox.Show("Ошибка добавления записи", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
             }
         }
         public void Delete(Order[] obj)
         {
             using (var connection = new SqlModel())
             {
-                try
-                {
                     connection.Orders.RemoveRange(obj);
                     connection.SaveChanges();
-                    NotifyObserver();
-                }
-                catch
-                {
-
-                }
             }
         }
         public IEnumerable<Order> GetAll()
@@ -66,25 +50,14 @@ namespace Database.Model.Database.Services
         {
             using(var connection = new SqlModel())
             {
-                try
-                {
                     connection.Orders.Update(obj);
                     connection.SaveChanges();
-                    NotifyObserver();
-                    MessageBox.Show("Запись обновлена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                catch
-                {
-                    MessageBox.Show("Ошибка обновления записи", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
             }
         }
         public void AcceptOrder(Order obj, int count)
         {
             using(var connection = new SqlModel())
             {
-                try
-                {
                     obj.CurrentCount += count;
                     connection.Orders.Update(obj);
 
@@ -108,12 +81,6 @@ namespace Database.Model.Database.Services
 
                     connection.SaveChanges();
                     MessageBox.Show("Товар принят", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                    NotifyObserver();
-                }
-                catch
-                {
-                    MessageBox.Show("Ошибка принятия товара", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
             }
         }
     }

@@ -16,16 +16,8 @@ namespace Database.Model.Database.Services
         {
             using(var connection = new SqlModel())
             {
-                try
-                {
                     connection.Products.Add(obj);
                     connection.SaveChanges();
-                    NotifyObserver();
-                }
-                catch
-                {
-                    MessageBox.Show("Ошибка добавления записи. Возможно, запись уже существует.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
             }
         }
         public void Delete(Product[] obj)
@@ -34,7 +26,6 @@ namespace Database.Model.Database.Services
             {
                 connection.Products.RemoveRange(obj);
                 connection.SaveChanges();
-                NotifyObserver();
             }
         }
         public IEnumerable<Product> GetAll()
@@ -81,8 +72,6 @@ namespace Database.Model.Database.Services
             {
                 connection.Products.Update(obj);
                 connection.SaveChanges();
-                MessageBox.Show("Запись обновлена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                NotifyObserver();
             }
         }
     }

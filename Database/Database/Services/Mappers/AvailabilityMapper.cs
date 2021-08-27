@@ -16,16 +16,8 @@ namespace Database.Model.Database.Services
         {
             using (var connection = new SqlModel())
             {
-                try
-                {
-                    connection.Availability.Add(obj);
-                    connection.SaveChanges();
-                    NotifyObserver();
-                }
-                catch
-                {
-                    MessageBox.Show("Запись уже существует", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                connection.Availability.Add(obj);
+                connection.SaveChanges();
             }
         }
 
@@ -35,7 +27,6 @@ namespace Database.Model.Database.Services
             {
                 connection.Availability.RemoveRange(obj);
                 connection.SaveChanges();
-                NotifyObserver();
             }
         }
 
@@ -73,17 +64,8 @@ namespace Database.Model.Database.Services
         {
             using (var connection = new SqlModel())
             {
-                try
-                {
                     connection.Availability.Update(obj);
                     connection.SaveChanges();
-                    MessageBox.Show("Запись обновлена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                    NotifyObserver();
-                }
-                catch
-                {
-                    MessageBox.Show("Запись не может быть обновлена", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
             }
         }
 

@@ -16,16 +16,8 @@ namespace Database.Model.Database.Services
         {
             using (var connection = new SqlModel())
             {
-                try
-                {
                     connection.Sells.Add(obj);
                     connection.SaveChanges();
-                    NotifyObserver();
-                }
-                catch
-                {
-                    MessageBox.Show("Ошибка добавления записи", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
             }
         }
 
@@ -33,23 +25,15 @@ namespace Database.Model.Database.Services
         {
             using (var connection = new SqlModel())
             {
-                try
-                {
-                    connection.Sells.Add(obj);
-                    var available = new AvailabilityMapper().GetElementByProductId(obj.ProductId);
+                connection.Sells.Add(obj);
+                var available = new AvailabilityMapper().GetElementByProductId(obj.ProductId);
 
-                    if (available is null)
-                        throw new Exception();
+                if (available is null)
+                    throw new Exception();
 
-                    available.Count = available.Count - obj.Count;
-                    connection.Availability.Update(available);
-                    connection.SaveChanges();
-                    NotifyObserver();
-                }
-                catch
-                {
-                    MessageBox.Show("Ошибка добавления записи", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                available.Count = available.Count - obj.Count;
+                connection.Availability.Update(available);
+                connection.SaveChanges();
             }
         }
 
@@ -57,17 +41,8 @@ namespace Database.Model.Database.Services
         {
             using (var connection = new SqlModel())
             {
-                try
-                {
-                    connection.Sells.AddRange(obj);
-                    connection.SaveChanges();
-                    MessageBox.Show("Записи добавлены", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                    NotifyObserver();
-                }
-                catch
-                {
-                    MessageBox.Show("Ошибка создания записей", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                connection.Sells.AddRange(obj);
+                connection.SaveChanges();
             }
         }
 
@@ -93,7 +68,6 @@ namespace Database.Model.Database.Services
             {
                 connection.Sells.RemoveRange(obj);
                 connection.SaveChanges();
-                NotifyObserver();
             }
         }
 
@@ -126,17 +100,8 @@ namespace Database.Model.Database.Services
         {
             using(var connection = new SqlModel())
             {
-                try
-                {
-                    connection.Sells.Update(obj);
-                    connection.SaveChanges();
-                    MessageBox.Show("Запись успешно обновлена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                    NotifyObserver();
-                }
-                catch
-                {
-                    MessageBox.Show("Ошибка обновления записи", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                connection.Sells.Update(obj);
+                connection.SaveChanges();
             }
         }
     }

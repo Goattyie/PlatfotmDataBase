@@ -16,16 +16,8 @@ namespace Database.Model.Database.Services
         {
             using (var connection = new SqlModel())
             {
-                try
-                {
                     connection.Cards.Add(obj);
                     connection.SaveChanges();
-                    NotifyObserver();
-                }
-                catch
-                {
-                    MessageBox.Show("Запись уже существует", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
             }
         }
 
@@ -35,7 +27,6 @@ namespace Database.Model.Database.Services
             {
                 connection.Cards.RemoveRange(obj);
                 connection.SaveChanges();
-                NotifyObserver();
             }
         }
 

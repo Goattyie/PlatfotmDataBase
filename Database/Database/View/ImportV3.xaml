@@ -5,8 +5,143 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Database.View"
         mc:Ignorable="d"
-        Title="ImportV3" Height="450" Width="800">
+        Title="Импорт из V3" Height="400" Width="664">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="96*"/>
+            <RowDefinition Height="96*"/>
+            <RowDefinition Height="43*"/>
+            <RowDefinition Height="149*"/>
+        </Grid.RowDefinitions>
+        <Grid Margin="10,10,10,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45*"/>
+                <RowDefinition Height="31*"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="71*"/>
+                    <ColumnDefinition Width="21*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock
+                        Style="{StaticResource HeadTextBlock}"
+                        FontSize="{StaticResource Small}"
+                        Text="Импорт таблицы 'Наличиe'"/>
+
+                    <StackPanel 
+                        Grid.Row="1" 
+                        Orientation="Horizontal">
+
+                        <TextBlock
+                            Style="{StaticResource HeadTextBlock}"
+                            FontSize="{StaticResource Small}"
+                            Text="Статус: "/>
+
+                        <TextBlock
+                            Style="{StaticResource HeadTextBlock}"
+                            FontSize="{StaticResource Small}"
+                            Text="{Binding AvailabilityStatus}"/>
+
+                    </StackPanel>
+
+                </Grid>
+                <Button
+                    Style="{StaticResource BaseButton}"
+                    Grid.Column="1"
+                    Content="Выбрать файл"
+                    Margin="0,0,0,10"
+                    Command="{Binding ChangeAvailabilityCommand}"/>
+            </Grid>
+            <ProgressBar Grid.Row="1"
+                         Value="{Binding AvailabilityProgressBarValue}"/>
+        </Grid>
+        <Grid
+             Grid.Row="1"
+             Margin="10,10,10,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45*"/>
+                <RowDefinition Height="31*"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="71*"/>
+                    <ColumnDefinition Width="21*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock
+                        Style="{StaticResource HeadTextBlock}"
+                        FontSize="{StaticResource Small}"
+                        Text="Импорт таблицы 'Продажи'"/>
+
+                    <StackPanel 
+                        Grid.Row="1" 
+                        Orientation="Horizontal">
+
+                        <TextBlock
+                            Style="{StaticResource HeadTextBlock}"
+                            FontSize="{StaticResource Small}"
+                            Text="Статус: "/>
+
+                        <TextBlock
+                            Style="{StaticResource HeadTextBlock}"
+                            FontSize="{StaticResource Small}"
+                            Text="{Binding SellStatus}"/>
+
+                    </StackPanel>
+                </Grid>
+                <Button
+                    Style="{StaticResource BaseButton}"
+                    Grid.Column="1"
+                    Content="Выбрать файл"
+                    Margin="0,0,0,10"
+                    Command="{Binding ChangeSellComand}"/>
+            </Grid>
+            <ProgressBar Grid.Row="1"
+                         Value="{Binding SellProgressBarValue}"/>
+        </Grid>
+        <Button
+            Grid.Row="2"
+            Style="{StaticResource BaseButton}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Content="Импортировать"
+            Command="{Binding ImportCommand}"/>
+        <Grid
+            Grid.Row="3"
+            Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="26*"/>
+                <RowDefinition Height="123*"/>
+            </Grid.RowDefinitions>
+            <TextBlock
+                Style="{StaticResource HeadTextBlock}"
+                Text="Ошибки"
+                FontSize="{StaticResource Small}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center" Height="15" Width="42"/>
+
+            <DataGrid
+                AutoGenerateColumns="False" 
+                ItemsSource="{Binding Errors}"
+                Grid.Row="1">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Файл" Width="50" Binding="{Binding Path=Table}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Строка" Width="*" Binding="{Binding Path=Row}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </Window>

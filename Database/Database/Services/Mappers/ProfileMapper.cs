@@ -17,16 +17,8 @@ namespace Database.Model.Database.Services
         {
             using (var connection = new SqlModel())
             {
-                try
-                {
                     connection.Profiles.Add(obj);
                     connection.SaveChanges();
-                    NotifyObserver();
-                }
-                catch
-                {
-                    MessageBox.Show("Запись уже существует", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
             }
         }
         public void Delete(Profile[] obj)
@@ -35,7 +27,6 @@ namespace Database.Model.Database.Services
             {
                 connection.Profiles.RemoveRange(obj);
                 connection.SaveChanges();
-                NotifyObserver();
             }
         }
         public IEnumerable<Profile> GetAll()
