@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Database.Services.ExcelParser
 {
-    class V3AvailabilityStrategy : IReaderStrategy
+    class AvailabilityReaderStrategy : IExcelReaderStrategy
     {
         public void DownloadNode(ExcelWorksheet worksheet, int row)
         {
@@ -47,5 +47,6 @@ namespace Database.Services.ExcelParser
             availability.Comment = worksheet.Cells[row, 2].Comment?.Text;
             Service.availabilityMapper.Create(availability);
         }
+
     }
 }

@@ -26,12 +26,12 @@ namespace Database.VeiwModel
         private Page _cardPage;
 
         private BaseCommand _tableClick;
-        private BaseCommand _exportTable;
-        private BaseCommand _importV3;
+        private BaseCommand _exportDatabase;
+        private BaseCommand _importDatabase;
 
-        public BaseCommand ImportV3
+        public BaseCommand ImportDatabase
         {
-            get { return _importV3 ?? (_importV3 = new BaseCommand(obj => { new ImportV3().Show(); })); }
+            get { return _importDatabase ?? (_importDatabase = new BaseCommand(obj => { new ImportExportDatabase(true).Show(); })); }
         }
 
         public BaseCommand TableClick
@@ -42,9 +42,9 @@ namespace Database.VeiwModel
                   (_tableClick = new BaseCommand((obj) => { NewTablePage(obj); }));
             }
         }
-        public BaseCommand ExportTable 
+        public BaseCommand ExportDatabase 
         {
-            get { return _exportTable ?? (_exportTable = new BaseCommand(obj => { })); }
+            get { return _exportDatabase ?? (_exportDatabase = new BaseCommand(obj => { new ImportExportDatabase(false).Show(); })); }
         }
         public Page CurrentPage
         {

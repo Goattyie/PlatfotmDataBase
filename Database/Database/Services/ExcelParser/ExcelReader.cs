@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Database.Services.ExcelParser
 {
-    class ExcelDownloader
+    class ExcelReader
     {
         public event Action<int> NewIterationEvent;
         public event Action<string, int> ErrorDownloadEvent;
-        public IReaderStrategy _strategy;
+        public IExcelReaderStrategy _strategy;
         public string _filename;
-        public ExcelDownloader(IReaderStrategy strategy, string filename)
+        public ExcelReader(IExcelReaderStrategy strategy, string filename)
         {
             _strategy = strategy;
             _filename = filename;

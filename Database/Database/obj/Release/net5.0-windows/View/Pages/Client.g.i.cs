@@ -54,7 +54,7 @@ namespace Database.View.Pages.Tables {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Database;component/view/pages/client.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Database;V1.0.0.0;component/view/pages/client.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\View\Pages\Client.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

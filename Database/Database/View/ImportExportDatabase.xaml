@@ -1,11 +1,11 @@
-﻿<Window x:Class="Database.View.ImportV3"
+﻿<Window x:Class="Database.View.ImportExportDatabase"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Database.View"
         mc:Ignorable="d"
-        Title="Импорт из V3" Height="400" Width="664">
+        Title="Экспорт и импорт" Height="400" Width="664">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="96*"/>
@@ -33,7 +33,7 @@
                     <TextBlock
                         Style="{StaticResource HeadTextBlock}"
                         FontSize="{StaticResource Small}"
-                        Text="Импорт таблицы 'Наличиe'"/>
+                        Text="Таблица 'Наличиe'"/>
 
                     <StackPanel 
                         Grid.Row="1" 
@@ -84,7 +84,7 @@
                     <TextBlock
                         Style="{StaticResource HeadTextBlock}"
                         FontSize="{StaticResource Small}"
-                        Text="Импорт таблицы 'Продажи'"/>
+                        Text="Таблица 'Продажи'"/>
 
                     <StackPanel 
                         Grid.Row="1" 
@@ -117,8 +117,8 @@
             Style="{StaticResource BaseButton}"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Content="Импортировать"
-            Command="{Binding ImportCommand}"/>
+            Content="СТАРТ"
+            Command="{Binding ExecuteCommand}"/>
         <Grid
             Grid.Row="3"
             Margin="10">

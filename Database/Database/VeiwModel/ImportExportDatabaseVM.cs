@@ -14,14 +14,15 @@ namespace Database.VeiwModel
         public string Table { get; set; }
         public int Row { get; set; }
     }
-    class V3ImporterVM : BasePropertyChanged
+    class ImportExportDatabaseVM : BasePropertyChanged
     {
         private Dispatcher _dispatcher;
+        private Action _executeAction;
         private string _availabilityFilename;
         private string _sellFilename;
         private BaseCommand _changeAvailabilityCommand;
         private BaseCommand _changeSellCommand;
-        private BaseCommand _importCommand;
+        private BaseCommand _executeCommand;
         private int _availabilityProgressBarValue;
         private int _sellProgressBarValue;
         private string _availabilityStatus;
@@ -51,9 +52,9 @@ namespace Database.VeiwModel
             }); }
         }
 
-        public BaseCommand ImportCommand
+        public BaseCommand ExecuteCommand
         {
-            get { return _importCommand ??= new BaseCommand(obj => { ImportFiles();  }); }
+            get { return _executeCommand ??= new BaseCommand(obj => { _executeAction();  }); }
         }
         public int AvailabilityProgressBarValue
         {
@@ -78,26 +79,59 @@ namespace Database.VeiwModel
         }
         #endregion
         public BindingList<Error> Errors { get; set; } = new BindingList<Error>();
-        public V3ImporterVM(Dispatcher dispatcher)
+        public ImportExportDatabaseVM(Dispatcher dispatcher, bool import)
         {
+            if (import)
+                _executeAction = new Action(ImportFiles);
+            else
+                _executeAction = new Action(ExportFiles);
             _dispatcher = dispatcher;
             AvailabilityStatus = "Файл не выбран";
             SellStatus = "Файл не выбран";
         }
+
+
         private void SelectExcelFile()
         {
             _fileDialog = new OpenFileDialog();
             _fileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
             _fileDialog.ShowDialog();
         }
+        private void ExportFiles()
+        {
+            if (_availabilityFilename != null)
+            {
+                _availabilityThread = new Thread(() =>
+                {
+                    var excelWriter = new ExcelWriter(new AvailabilityWriterStrategy(), _availabilityFilename);
+                    excelWriter.NewIterationEvent += UpdateAvailabilityProgressBar;
+                    excelWriter.WriteNodes();
+                });
+                _availabilityThread.Priority = ThreadPriority.Highest;
+                _availabilityThread.IsBackground = false;
+                _availabilityThread.Start();
+            }
 
+            if (_sellFilename != null)
+            {
+                _sellThread = new Thread(() =>
+                {
+                    var excelWriter = new ExcelWriter(new SellWriterStrategy(), _sellFilename);
+                    excelWriter.NewIterationEvent += UpdateSellProgressBar;
+                    excelWriter.WriteNodes();
+                });
+                _sellThread.Priority = ThreadPriority.Highest;
+                _sellThread.IsBackground = false;
+                _sellThread.Start();
+            }
+        }
         private void ImportFiles()
         {
             if (_availabilityFilename != null)
             {
                 _availabilityThread = new Thread(() =>
                 {
-                    var excelDownloader = new ExcelDownloader(new V3AvailabilityStrategy(), _availabilityFilename);
+                    var excelDownloader = new ExcelReader(new AvailabilityReaderStrategy(), _availabilityFilename);
                     excelDownloader.NewIterationEvent += UpdateAvailabilityProgressBar;
                     excelDownloader.ErrorDownloadEvent += UpdateErrors;
                     excelDownloader.DownloadNodes();
@@ -117,7 +151,7 @@ namespace Database.VeiwModel
             {
                 _sellThread = new Thread(() =>
                 {
-                    var excelDownloader = new ExcelDownloader(new V3SellStrategy(), _sellFilename);
+                    var excelDownloader = new ExcelReader(new SellReaderStrategy(), _sellFilename);
                     excelDownloader.NewIterationEvent += UpdateSellProgressBar;
                     excelDownloader.ErrorDownloadEvent += UpdateErrors;
                     excelDownloader.DownloadNodes();

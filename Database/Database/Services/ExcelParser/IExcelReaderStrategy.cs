@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Database.Services.ExcelParser
 {
-    interface IReaderStrategy
+    interface IExcelReaderStrategy
     {
         public void DownloadNode(ExcelWorksheet worksheet, int row);
     }

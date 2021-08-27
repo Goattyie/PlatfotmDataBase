@@ -173,6 +173,6 @@ D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\View\Pages\Orde
 D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\View\Pages\Product.baml
 D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\View\Pages\Profile.baml
 D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\View\Pages\Sell.baml
-D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\View\ImportV3.g.cs
-D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\View\ImportV3.baml
 D:\PlaygroundDataBase\Database\Database\bin\Debug\net5.0-windows\DynamicExpresso.Core.dll
+D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\View\ImportExportDatabase.g.cs
+D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\View\ImportExportDatabase.baml

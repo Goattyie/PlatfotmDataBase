@@ -8,7 +8,6 @@ FD:\PlaygroundDataBase\Database\Database\View\EditNode\EditOrder.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\EditNode\EditProduct.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\EditNode\EditSell.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\EditNode\EditSup.xaml;;
-FD:\PlaygroundDataBase\Database\Database\View\ImportV3.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\MainWindow.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\Pages\Availability.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\Pages\Card.xaml;;
@@ -19,4 +18,5 @@ FD:\PlaygroundDataBase\Database\Database\View\Pages\Order.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\Pages\Product.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\Pages\Profile.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\Pages\Sell.xaml;;
+FD:\PlaygroundDataBase\Database\Database\View\ImportExportDatabase.xaml;;
 

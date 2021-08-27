@@ -10,11 +10,11 @@ none
 false
 TRACE;RELEASE;NET;NET5_0;NETCOREAPP
 D:\PlaygroundDataBase\Database\Database\App.xaml
-211481442080
+221538062163
 
-76428304031
-223-1070292952
-Colors.xaml;Fonts.xaml;Styles.xaml;View\AcceptOrder.xaml;View\EditNode\EditAvailability.xaml;View\EditNode\EditClient.xaml;View\EditNode\EditDeliverProduct.xaml;View\EditNode\EditOrder.xaml;View\EditNode\EditProduct.xaml;View\EditNode\EditSell.xaml;View\EditNode\EditSup.xaml;View\MainWindow.xaml;View\Pages\Availability.xaml;View\Pages\Card.xaml;View\Pages\Client.xaml;View\Pages\Deliver.xaml;View\Pages\DeliverProduct.xaml;View\Pages\Order.xaml;View\Pages\Product.xaml;View\Pages\Profile.xaml;View\Pages\Sell.xaml;
+841259973576
+224144744470
+Colors.xaml;Fonts.xaml;Styles.xaml;View\AcceptOrder.xaml;View\EditNode\EditAvailability.xaml;View\EditNode\EditClient.xaml;View\EditNode\EditDeliverProduct.xaml;View\EditNode\EditOrder.xaml;View\EditNode\EditProduct.xaml;View\EditNode\EditSell.xaml;View\EditNode\EditSup.xaml;View\ImportExportDatabase.xaml;View\MainWindow.xaml;View\Pages\Availability.xaml;View\Pages\Card.xaml;View\Pages\Client.xaml;View\Pages\Deliver.xaml;View\Pages\DeliverProduct.xaml;View\Pages\Order.xaml;View\Pages\Product.xaml;View\Pages\Profile.xaml;View\Pages\Sell.xaml;
 
 False
 

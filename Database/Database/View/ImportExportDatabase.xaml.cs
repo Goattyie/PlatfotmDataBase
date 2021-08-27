@@ -23,12 +23,12 @@ namespace Database.View
     /// <summary>
     /// Логика взаимодействия для ImportV3.xaml
     /// </summary>
-    public partial class ImportV3 : Window
+    public partial class ImportExportDatabase : Window
     {
-        public ImportV3()
+        public ImportExportDatabase(bool import)
         {
             InitializeComponent();
-            DataContext = new V3ImporterVM(this.Dispatcher);
+            DataContext = new VeiwModel.ImportExportDatabaseVM(this.Dispatcher, import);
         }
     }
 }

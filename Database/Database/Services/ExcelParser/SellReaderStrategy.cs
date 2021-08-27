@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace Database.Services.ExcelParser
 {
-    class V3SellStrategy : IReaderStrategy
+    class SellReaderStrategy : IExcelReaderStrategy
     {
+        public List<string> Titles { get; set; } = new List<string>() { "Наименование товара",  "Количество", "Прибыль", "Дата продажи", "Телефон", "Описание", "Карта" };
         public void DownloadNode(ExcelWorksheet worksheet, int row)
         {
             Product product;
@@ -73,6 +74,11 @@ namespace Database.Services.ExcelParser
             sell.CardId = card?.Id;
 
             Service.sellMapper.Create(sell);
+        }
+
+        public void WriteNode(ExcelWorksheet worksheet, int row)
+        {
+            throw new NotImplementedException();
         }
     }
 }

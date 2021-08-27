@@ -35,10 +35,10 @@
             </MenuItem>
                      
             <MenuItem Header="Excel">
-                
-                <MenuItem Header="Импортировать данные"></MenuItem>
-                <MenuItem Header="Экспортировать данные"></MenuItem>
-                <MenuItem Header="Импортировать данные из V3" Command="{Binding ImportV3}"></MenuItem>
+
+                <MenuItem Header="Импортировать данные" Command="{Binding ImportDatabase}"></MenuItem>
+                <MenuItem Header="Экспортировать данные" Command="{Binding ExportDatabase}"></MenuItem>
+
                 
             </MenuItem>
             

@@ -6,6 +6,17 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v5.0": {
+      "DynamicExpresso.Core/2.8.1": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/DynamicExpresso.Core.dll": {
+            "assemblyVersion": "0.0.1.0",
+            "fileVersion": "0.0.1.0"
+          }
+        }
+      },
       "EPPlus/5.7.2": {
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "5.0.0",
@@ -1375,6 +1386,13 @@
     }
   },
   "libraries": {
+    "DynamicExpresso.Core/2.8.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pvBpQOCy1eqAjSWhLf34GUYMvxuiZfm2P7L0mFa4wqXuucbnB6RHoMcQb0RxGZADXrqQrt4ZDPu/3HXJFj9snw==",
+      "path": "dynamicexpresso.core/2.8.1",
+      "hashPath": "dynamicexpresso.core.2.8.1.nupkg.sha512"
+    },
     "EPPlus/5.7.2": {
       "type": "package",
       "serviceable": true,

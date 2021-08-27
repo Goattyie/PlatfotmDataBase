@@ -31,7 +31,7 @@
     <Compile Update="View\EditNode\EditSup.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\ImportV3.xaml.cs">
+    <Compile Update="View\ImportExportDatabase.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Pages\Availability.xaml.cs">
@@ -96,7 +96,7 @@
     <Page Update="View\EditNode\EditSup.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\ImportV3.xaml">
+    <Page Update="View\ImportExportDatabase.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\MainWindow.xaml">
