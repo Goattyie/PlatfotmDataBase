@@ -24,7 +24,7 @@ namespace Database.Services.ExcelParser
 
             var profile = (worksheet.Cells[row, 5].Text != "" && worksheet.Cells[row, 5].Text != "-") ? new Profile() { Name = worksheet.Cells[row, 5].Text } : null;
 
-            string productName = worksheet.Cells[row, 1].Text;
+            string productName = worksheet.Cells[row, 1].Text.Trim();
             var product = Service.productMapper.GetElementByName(productName) ?? new Product() { Name = productName, OrderCost = availability.BuyCost, DeliverCost = availability.DeliverCost, SellCost = availability.SellCost, Profit = availability.SellCost - availability.DeliverCost };
 
             if (profile != null)
@@ -45,6 +45,13 @@ namespace Database.Services.ExcelParser
             availability.ProductId = product.Id;
             availability.ProfileId = profile?.Id ?? null;
             availability.Comment = worksheet.Cells[row, 2].Comment?.Text;
+
+            if (availability.Comment != null)
+            {
+                availability.Comment = availability.Comment.Replace("Автор:", "");
+                availability.Comment = availability.Comment.Replace("\n", "");
+            }
+            availability.Profit = availability.SellCost - availability.DeliverCost;
             Service.availabilityMapper.Create(availability);
         }
 

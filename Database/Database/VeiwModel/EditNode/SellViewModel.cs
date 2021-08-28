@@ -98,8 +98,8 @@ namespace Database.VeiwModel.EditNode
         }
         public DateTime SellDate
         {
-            get { return DateTime.Parse(_sell.SellDate); }
-            set { _sell.SellDate = value.Date.ToString("d"); OnPropertyChanged(nameof(SellDate)); }
+            get { return _sell.SellDate; }
+            set { _sell.SellDate = value; OnPropertyChanged(nameof(SellDate)); }
         }
         public double Profit
         {
@@ -151,8 +151,7 @@ namespace Database.VeiwModel.EditNode
                 new EditClient(Phone).ShowDialog();  
                 var clients = new ClientMapper().GetAll(); 
                 ClientList.Clear();
-                foreach (var item in clients)
-                    ClientList.Add(item);
+                ClientList = new BindingList<Client>(clients.ToList());
                 SelectedClient = ClientList.Where(c => c.Phone == Phone).FirstOrDefault();
                 IsChangeClient = (SelectedClient == null) ? false : true;
                 }));
@@ -167,23 +166,17 @@ namespace Database.VeiwModel.EditNode
         public SellViewModel()
         {
             _sell = new Sell();
-            _sell.SellDate = DateTime.Now.Date.ToString("d");
-            AvailabilityList = new BindingList<Availability>();
-            CardList = new BindingList<Card>();
+            _sell.SellDate = DateTime.Now;
+            
             ClientList = new BindingList<Client>();
 
             var available = new AvailabilityMapper().GetAll();
             var cards = new CardMapper().GetAll();
             var clients = new ClientMapper().GetAll();
 
-            foreach (var item in available)
-                if(item.Count>0)
-                    AvailabilityList.Add(item);
-            foreach (var item in cards)
-                CardList.Add(item);
-            foreach (var item in clients)
-                ClientList.Add(item);
-
+            AvailabilityList = new BindingList<Availability>(available.Where(x=>x.Count > 0).ToList());
+            CardList = new BindingList<Card>(cards.ToList());
+            ClientList = new BindingList<Client>(clients.ToList());
 
             _executeDelegate = new Action(Create);
             Count = 1;
@@ -197,20 +190,14 @@ namespace Database.VeiwModel.EditNode
         public SellViewModel(Sell sell)
         {
             _sell = sell;
-            AvailabilityList = new BindingList<Availability>();
-            CardList = new BindingList<Card>();
-            ClientList = new BindingList<Client>();
 
             var available = new AvailabilityMapper().GetAll();
             var cards = new CardMapper().GetAll();
             var clients = new ClientMapper().GetAll();
 
-            foreach (var item in available)
-                AvailabilityList.Add(item);
-            foreach (var item in cards)
-                CardList.Add(item);
-            foreach (var item in clients)
-                ClientList.Add(item);
+            AvailabilityList = new BindingList<Availability>(available.ToList());
+            CardList = new BindingList<Card>(cards.ToList());
+            ClientList = new BindingList<Client>(clients.ToList());
 
             _executeDelegate = new Action(Update);
             _isCreate = false;
@@ -225,9 +212,6 @@ namespace Database.VeiwModel.EditNode
             try
             {
                 Service.sellMapper.CreateAndUpdateAvailability(_sell);
-                _sell.Id = 0;
-                UpdateAvailabilityList();//Обновляем список наличия
-                Count = 1;
                 Service.sellMapper.NotifyObserver();
             }
             catch
@@ -250,14 +234,6 @@ namespace Database.VeiwModel.EditNode
             {
                 MessageBox.Show("Ошибка! Запись нельзя обновить таким образом.", "Ошибка обновления", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-        private void UpdateAvailabilityList()
-        {
-            AvailabilityList.Clear();
-            var available = new AvailabilityMapper().GetAll();
-
-            foreach (var item in available)
-                AvailabilityList.Add(item);
         }
     }
 }

@@ -68,10 +68,10 @@ namespace Database.VeiwModel.EditNode
 
         public DateTime OrderDate
         {
-            get { return DateTime.Parse(_order.OrderDate); }
+            get { return _order.OrderDate; }
             set 
             { 
-                _order.OrderDate = value.Date.ToString("d"); 
+                _order.OrderDate = value; 
                 OnPropertyChanged(nameof(OrderDate)); 
             }
         }
@@ -129,12 +129,9 @@ namespace Database.VeiwModel.EditNode
         {
             _order = new Order();
             Count = 1;
-            DeliverList = new BindingList<Deliver>();
             ProductList = new BindingList<Product>();
             var delivers = new DeliverMapper().GetAll();
-            foreach (var item in delivers)
-                DeliverList.Add(item);
-
+            DeliverList = new BindingList<Deliver>(delivers.ToList());
             _executeDelegate = new Action(Create);
             _errors["SelectedDeliver"] = "Error";
             _errors["SelectedProduct"] = "Error";
@@ -144,12 +141,9 @@ namespace Database.VeiwModel.EditNode
         public OrderViewModel(Order order)
         {
             _order = order;
-            DeliverList = new BindingList<Deliver>();
             ProductList = new BindingList<Product>();
             var delivers = new DeliverMapper().GetAll();
-            foreach (var item in delivers)
-                DeliverList.Add(item);
-
+            DeliverList = new BindingList<Deliver>(delivers.ToList());
             _selectedDeliver = DeliverList.Where(p=>p.Id == _order.DeliverId).FirstOrDefault();
             LoadProducts();
             _selectedProduct = ProductList.Where(p => p.Id == _order.ProductId).FirstOrDefault();
@@ -202,8 +196,8 @@ namespace Database.VeiwModel.EditNode
         {
             var products = new DeliverProductMapper().GetProductByDeliverId(_selectedDeliver.Id);
             ProductList.Clear();
-            foreach (var item in products)
-                ProductList.Add(item);
+            foreach (var p in products)
+                ProductList.Add(p);
         }
     }
 }

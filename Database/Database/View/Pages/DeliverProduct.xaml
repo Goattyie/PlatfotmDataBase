@@ -35,9 +35,9 @@
                   ItemsSource="{Binding DeliverProductList}"
                   SelectedItem="{Binding SelectedDeliverProduct}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Width="50" Binding="{Binding Path=Id}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Товар" Width="300*" Binding="{Binding Path=Product.Name}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Поставщик" Width="300*" Binding="{Binding Path=Deliver.Name}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Id" Width="50" Binding="{Binding Path=Id}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Товар" Width="300*" Binding="{Binding Path=Product.Name}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Поставщик" Width="300*" Binding="{Binding Path=Deliver.Name}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 
@@ -46,8 +46,8 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Row="2" Grid.Column="0" Style="{Binding Source={StaticResource Btn}}" Content="Добавить запись" Margin="10,0,10,10" Command="{Binding AddCommand}"/>
-            <Button Grid.Row="2" Grid.Column="2" Style="{Binding Source={StaticResource Btn}}" Content="Удалить запись" Margin="10,0,10,10" Command="{Binding RemoveCommand}"/>
+            <Button Grid.Row="2" Grid.Column="0" Style="{Binding Source={StaticResource BlueButton}}" Content="Добавить запись" Margin="10,0,10,10" Command="{Binding AddCommand}"/>
+            <Button Grid.Row="2" Grid.Column="2" Style="{Binding Source={StaticResource BlueButton}}" Content="Удалить запись" Margin="10,0,10,10" Command="{Binding RemoveCommand}"/>
         </Grid>
     </Grid>
 </Page>

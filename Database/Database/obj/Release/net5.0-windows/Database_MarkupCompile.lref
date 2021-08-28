@@ -1,4 +1,4 @@
-﻿D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\GeneratedInternalTypeHelper.g.cs
+﻿
 FD:\PlaygroundDataBase\Database\Database\App.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\AcceptOrder.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\EditNode\EditAvailability.xaml;;
@@ -8,6 +8,7 @@ FD:\PlaygroundDataBase\Database\Database\View\EditNode\EditOrder.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\EditNode\EditProduct.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\EditNode\EditSell.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\EditNode\EditSup.xaml;;
+FD:\PlaygroundDataBase\Database\Database\View\ImportExportDatabase.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\MainWindow.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\Pages\Availability.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\Pages\Card.xaml;;

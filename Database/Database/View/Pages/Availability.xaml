@@ -32,14 +32,15 @@
                   ItemsSource="{Binding AvailabilityList}"
                   SelectedItem="{Binding SelectedAvailability}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Width="50" Binding="{Binding Path=Id}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Товар" Width="*" Binding="{Binding Path=Product.Name}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Количество" Width="*" Binding="{Binding Path=Count}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Цена закупки" Width="*" Binding="{Binding Path=BuyCost}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Цена с доставкой" Width="*" Binding="{Binding Path=DeliverCost}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Цена продажи" Width="*" Binding="{Binding Path=SellCost}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Профиль" Width="*" Binding="{Binding Path=Profile.Name}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Примечание" Width="*" Binding="{Binding Path=Comment}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Id" Width="50" Binding="{Binding Path=Id}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Товар" Width="*" Binding="{Binding Path=Product.Name}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" FontWeight="Bold" Foreground="Purple" Header="Количество" Width="*" Binding="{Binding Path=Count}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}"  CellStyle="{StaticResource CenterGridColumn}" FontWeight="Bold" Foreground="Purple" Header="Цена продажи" Width="*" Binding="{Binding Path=SellCost}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" Header="Цена закупки" Width="*" Binding="{Binding Path=BuyCost}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}"  CellStyle="{StaticResource CenterGridColumn}" Header="Цена с доставкой" Width="*" Binding="{Binding Path=DeliverCost}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}"  CellStyle="{StaticResource CenterGridColumn}" Header="Профиль" Width="*" Binding="{Binding Path=Profile.Name}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Примечание" Width="*" Binding="{Binding Path=Comment}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}"  CellStyle="{StaticResource CenterGridColumn}" Header="Прибыль" Width="*" Binding="{Binding Path=Profit}"></DataGridTextColumn>
             </DataGrid.Columns>
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
@@ -58,9 +59,9 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Row="2" Grid.Column="0" Style="{Binding Source={StaticResource Btn}}" Content="Добавить товар" Margin="10,0,10,10" Command="{Binding AddCommand}"/>
-            <Button Grid.Row="2" Grid.Column="1" Style="{Binding Source={StaticResource Btn}}" Content="Редактировать запись" Margin="10,0,10,10" Command="{Binding EditCommand}"/>
-            <Button Grid.Row="2" Grid.Column="2" Style="{Binding Source={StaticResource Btn}}" Content="Удалить запись" Margin="10,0,10,10" Command="{Binding RemoveCommand}"/>
+            <Button Grid.Row="2" Grid.Column="0" Style="{Binding Source={StaticResource BlueButton}}" Content="Добавить товар" Margin="10,0,10,10" Command="{Binding AddCommand}"/>
+            <Button Grid.Row="2" Grid.Column="1" Style="{Binding Source={StaticResource BlueButton}}" Content="Редактировать запись" Margin="10,0,10,10" Command="{Binding EditCommand}"/>
+            <Button Grid.Row="2" Grid.Column="2" Style="{Binding Source={StaticResource BlueButton}}" Content="Удалить запись" Margin="10,0,10,10" Command="{Binding RemoveCommand}"/>
         </Grid>
         
     </Grid>

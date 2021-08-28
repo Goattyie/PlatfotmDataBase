@@ -17,11 +17,11 @@ namespace Database.Services.ExcelParser
             Product product;
             Client client = null;
             Card card = null;
-            string productName = worksheet.Cells[row, 1].Text;
+            string productName = worksheet.Cells[row, 1].Text.Trim();
             var sell = new Sell();
             sell.Count = int.Parse((worksheet.Cells[row, 2].Text != "") ? worksheet.Cells[row, 2].Text : "0");
             sell.Profit = double.Parse((worksheet.Cells[row, 3].Text != "") ? worksheet.Cells[row, 3].Text : "0");
-            sell.SellDate = worksheet.Cells[row, 4].Text;
+            sell.SellDate = DateTime.Parse(worksheet.Cells[row, 4].Text);
 
             //Цена закупки и цена продажи
             var numberDirector = new NumberDirector(new NumberBuilder());
@@ -33,6 +33,12 @@ namespace Database.Services.ExcelParser
                 sell.BuyCost = double.Parse((profitText.Split("-").Length == 2) ? (profitText.Split("-")[1] != "") ? profitText.Split("-")[1] : "0" : "0");
             }
             sell.Comment = worksheet.Cells[row, 3].Comment?.Text;
+            if(sell.Comment != null)
+            {
+                sell.Comment = sell.Comment.Replace("Автор:", "");
+                sell.Comment = sell.Comment.Replace("Влад:", "");
+                sell.Comment = sell.Comment.Replace("\n", "");
+            }
 
             //поиск товара в бд
             product = Service.productMapper.GetElementByName(productName);
@@ -52,7 +58,7 @@ namespace Database.Services.ExcelParser
                 {
                     client = new Client();
                     client.Phone = worksheet.Cells[row, 5].Text;
-                    client.Description = worksheet.Cells[row, 6].Text + worksheet.Cells[row, 7].Text;
+                    client.Description = worksheet.Cells[row, 6].Text + worksheet.Cells[row, 6]?.Comment?.Text + worksheet.Cells[row, 7].Text;
                     Service.clientMapper.Create(client);
                     client = Service.clientMapper.GetElementByPhone(worksheet.Cells[row, 5].Text);
                 }
@@ -67,6 +73,7 @@ namespace Database.Services.ExcelParser
                 {
                     card = new Card();
                     card.Name = worksheet.Cells[row, 8].Text;
+                    card.Name = card.Name.Replace(".", "");
                     Service.cardMapper.Create(card);
                     card = Service.cardMapper.GetElementByName(worksheet.Cells[row, 8].Text);
                 }

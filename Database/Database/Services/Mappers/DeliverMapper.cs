@@ -28,6 +28,16 @@ namespace Database.Model.Database.Services
                 connection.SaveChanges();
             }
         }
+
+        public Deliver GetElementByName(string name)
+        {
+            var deliver = new Deliver();
+            using (var connection = new SqlModel())
+            {
+                deliver = connection.Delivers.Where(p => p.Name == name).FirstOrDefault();
+            }
+            return deliver;
+        }
         public IEnumerable<Deliver> GetAll()
         {
             var delivers = new List<Deliver>();

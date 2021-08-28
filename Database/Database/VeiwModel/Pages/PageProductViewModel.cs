@@ -73,6 +73,7 @@ namespace Database.VeiwModel.Pages
         {
             ProductList.Clear();
             var products =await new ProductMapper().GetAllAsync();
+            products = products.OrderBy(x => x.Name);
             foreach (var item in products)
             {
                 ProductList.Add(item);

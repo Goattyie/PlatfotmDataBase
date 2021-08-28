@@ -34,9 +34,9 @@
                   ItemsSource="{Binding ClientList}"
                   SelectedItem="{Binding SelectedClient}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Width="50" Binding="{Binding Path=Id}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Телефон" Width="100" Binding="{Binding Path=Phone}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Описание" Width="300*" Binding="{Binding Path=Description}"/>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Id" Width="50" Binding="{Binding Path=Id}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Телефон" Width="100" Binding="{Binding Path=Phone}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Описание" Width="300*" Binding="{Binding Path=Description}"/>
             </DataGrid.Columns>
         </DataGrid>
 
@@ -45,8 +45,8 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Row="2" Grid.Column="0" Style="{Binding Source={StaticResource Btn}}" Content="Добавить клиента" Margin="10,0,10,10" Command="{Binding AddCommand}"/>
-            <Button Grid.Row="2" Grid.Column="2" Style="{Binding Source={StaticResource Btn}}" Content="Удалить клиента" Margin="10,0,10,10" Command="{Binding RemoveCommand}"/>
+            <Button Grid.Row="2" Grid.Column="0" Style="{Binding Source={StaticResource BlueButton}}" Content="Добавить клиента" Margin="10,0,10,10" Command="{Binding AddCommand}"/>
+            <Button Grid.Row="2" Grid.Column="2" Style="{Binding Source={StaticResource BlueButton}}" Content="Удалить клиента" Margin="10,0,10,10" Command="{Binding RemoveCommand}"/>
         </Grid>
         
     </Grid>

@@ -9,7 +9,7 @@ namespace Database.Model.Database.Tables
     public class Sell
     {
         public int Id { get; set; }
-        public string SellDate { get; set; }
+        public DateTime SellDate { get; set; }
         public int ProductId { get; set; }
         public int Count { get; set; }
         public double BuyCost { get; set; }

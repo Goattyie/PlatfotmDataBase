@@ -66,14 +66,18 @@ namespace Database.VeiwModel.Pages
         {
             SellList = new BindingList<Sell>();
             Service.sellMapper.AddObserver(this);
+            Service.productMapper.AddObserver(this);
+            Service.clientMapper.AddObserver(this);
+            Service.cardMapper.AddObserver(this);
             Execute();
         }
 
         public async void Execute()
         {
             SellList.Clear();
-            var products = await new SellMapper().GetAllAsync();
-            foreach (var item in products)
+            var sell = await new SellMapper().GetAllAsync();
+            sell = sell.OrderByDescending(x => x.SellDate);
+            foreach (var item in sell)
             {
                 SellList.Add(item);
             }

@@ -107,14 +107,7 @@ namespace Database.VeiwModel.EditNode
         public AvailabilityViewModel()
         {
             _availability = new Availability();
-            ProductList = new BindingList<Product>();
-            ProfileList = new BindingList<Profile>();
-            var products = new ProductMapper().GetAll();
-            var profiles = new ProfileMapper().GetAll();
-            foreach(var item in products)
-                ProductList.Add(item);
-            foreach (var item in profiles)
-                ProfileList.Add(item);
+            LoadLists();
             _executeDelegate = new Action(Create);
 
             Count = 1;
@@ -124,26 +117,24 @@ namespace Database.VeiwModel.EditNode
         public AvailabilityViewModel(Availability availability)
         {
             _availability = availability;
-            ProductList = new BindingList<Product>();
-            ProfileList = new BindingList<Profile>();
-            var products = new ProductMapper().GetAll();
-            var profiles = new ProfileMapper().GetAll();
-            foreach (var item in products)
-                ProductList.Add(item);
-            foreach (var item in profiles)
-                ProfileList.Add(item);
+            LoadLists();
             _executeDelegate = new Action(Update);
 
             _selectedProduct = ProductList.Where(p => p.Id == availability.ProductId).FirstOrDefault();
             _selectedProfile = ProfileList.Where(p => p.Id == availability.ProfileId).FirstOrDefault();
             UpdateIsValid();
         }
+        private void LoadLists()
+        {
+            ProductList = new BindingList<Product>(new ProductMapper().GetAll().OrderBy(x=>x.Name).ToList());
+            ProfileList = new BindingList<Profile>(new ProfileMapper().GetAll().OrderBy(x => x.Name).ToList());
+        }
         private void Create()
         {
             try
             {
+                _availability.Profit = _availability.SellCost - _availability.DeliverCost;
                 Service.availabilityMapper.Create(_availability);
-                _availability.Id = 0;
                 Service.availabilityMapper.NotifyObserver();
             }
             catch
@@ -155,6 +146,7 @@ namespace Database.VeiwModel.EditNode
         {
             try
             {
+                _availability.Profit = _availability.SellCost - _availability.DeliverCost; 
                 _availability.Profile = null;
                 Service.availabilityMapper.Update(_availability);
                 Service.availabilityMapper.NotifyObserver();

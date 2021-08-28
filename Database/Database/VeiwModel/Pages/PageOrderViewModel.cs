@@ -71,6 +71,7 @@ namespace Database.VeiwModel.Pages
         {
             OrderList = new BindingList<Order>();
             Service.orderMapper.AddObserver(this);
+            Service.productMapper.AddObserver(this);
             Execute();
         }
 

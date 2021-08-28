@@ -55,7 +55,7 @@ namespace Database.View.EditNode {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Database;V1.0.0.0;component/view/editnode/editproduct.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Database;component/view/editnode/editproduct.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\View\EditNode\EditProduct.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -73,6 +73,7 @@ namespace Database.VeiwModel.Pages
         public PageAvailabilityViewModel()
         {
             AvailabilityList = new BindingList<Availability>();
+            Service.productMapper.AddObserver(this);
             Service.availabilityMapper.AddObserver(this);
             Service.sellMapper.AddObserver(this);
             Service.orderMapper.AddObserver(this);
@@ -82,8 +83,9 @@ namespace Database.VeiwModel.Pages
         public async void Execute()
         {
             AvailabilityList.Clear();
-            var profiles = await new AvailabilityMapper().GetAllAsync();
-            foreach (var item in profiles)
+            var availability = await new AvailabilityMapper().GetAllAsync();
+            availability = availability.OrderBy(x => x.Product.Name);
+            foreach (var item in availability)
             {
                 AvailabilityList.Add(item);
             }

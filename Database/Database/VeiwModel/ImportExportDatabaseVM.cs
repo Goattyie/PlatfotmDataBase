@@ -20,18 +20,37 @@ namespace Database.VeiwModel
         private Action _executeAction;
         private string _availabilityFilename;
         private string _sellFilename;
+        private string _delProdFilename;
+        private BaseCommand _changeDeliverProductCommand;
         private BaseCommand _changeAvailabilityCommand;
         private BaseCommand _changeSellCommand;
         private BaseCommand _executeCommand;
+        private int _deliverProductBarBalue;
         private int _availabilityProgressBarValue;
         private int _sellProgressBarValue;
+        private string _delProdStatus;
         private string _availabilityStatus;
         private string _sellStatus;
         private OpenFileDialog _fileDialog;
         private Thread _availabilityThread;
         private Thread _sellThread;
+        private Thread _delProdThread;
 
         #region Properties
+
+        public BaseCommand ChangeDeliverProductCommand
+        {
+            get
+            {
+                return _changeDeliverProductCommand ??= new BaseCommand(obj =>
+                {
+                    SelectExcelFile();
+                    _delProdFilename = (_fileDialog.FileName != "") ? _fileDialog.FileName : null;
+                    if (_delProdFilename != null)
+                        DeliverProductStatus = "Файл выбран";
+                });
+            }
+        }
         public BaseCommand ChangeAvailabilityCommand
         {
             get { return _changeAvailabilityCommand ??= new BaseCommand(obj => 
@@ -56,6 +75,11 @@ namespace Database.VeiwModel
         {
             get { return _executeCommand ??= new BaseCommand(obj => { _executeAction();  }); }
         }
+        public int DeliverProductProgressBarValue
+        {
+            get { return _deliverProductBarBalue; }
+            set { _deliverProductBarBalue = value; OnPropertyChanged(nameof(DeliverProductProgressBarValue)); }
+        }
         public int AvailabilityProgressBarValue
         {
             get { return _availabilityProgressBarValue; }
@@ -71,6 +95,12 @@ namespace Database.VeiwModel
             get { return _availabilityStatus; }
             set { _availabilityStatus = value; OnPropertyChanged(nameof(AvailabilityStatus)); }
         }
+        public string DeliverProductStatus
+        {
+            get { return _delProdStatus; }
+            set { _delProdStatus = value; OnPropertyChanged(nameof(DeliverProductStatus)); }
+        }
+       
 
         public string SellStatus
         {
@@ -94,7 +124,7 @@ namespace Database.VeiwModel
         private void SelectExcelFile()
         {
             _fileDialog = new OpenFileDialog();
-            _fileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
+            _fileDialog.Filter = "Excel Files|*.xlsx;*.xlsm";
             _fileDialog.ShowDialog();
         }
         private void ExportFiles()
@@ -143,7 +173,7 @@ namespace Database.VeiwModel
                     }));
                 });
                 _availabilityThread.Priority = ThreadPriority.Highest;
-                _availabilityThread.IsBackground = false;
+                _availabilityThread.IsBackground = true;
                 _availabilityThread.Start();
             }
 
@@ -164,10 +194,35 @@ namespace Database.VeiwModel
                     }));
                 });
                 _sellThread.Priority = ThreadPriority.Highest;
-                _sellThread.IsBackground = false;
+                _sellThread.IsBackground = true;
                 _sellThread.Start();
             }
 
+            if(_delProdFilename != null)
+            {
+                _delProdThread = new Thread(()=>
+                {
+                    var excelDownloader = new ExcelReader(new DeliverProductReaderStrategy(), _delProdFilename);
+                    excelDownloader.NewIterationEvent += UpdateDeliverProductProgressBar;
+                    excelDownloader.ErrorDownloadEvent += UpdateErrors;
+                    excelDownloader.DownloadNodes();
+                    _dispatcher.Invoke((Action)(() =>
+                    {
+                        Service.deliverMapper.NotifyObserver();
+                        Service.deliverProductMapper.NotifyObserver();
+                        Service.productMapper.NotifyObserver();
+                    }));
+                });
+                _delProdThread.Priority = ThreadPriority.Highest;
+                _delProdThread.IsBackground = true;
+                _delProdThread.Start();
+            }
+
+        }
+
+        private void UpdateDeliverProductProgressBar(int obj)
+        {
+            DeliverProductProgressBarValue = obj;
         }
 
         private void UpdateErrors(string arg1, int arg2)

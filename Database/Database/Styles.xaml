@@ -47,4 +47,22 @@
         <Setter Property="FontSize" Value="{StaticResource Medium}"/>
         <Setter Property="FontWeight" Value="Normal"/>
     </Style>
+
+    <Style x:Key="BlueButton" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{StaticResource LightBlueBrush}"/>
+        <Setter Property="Padding" Value="10,5,10,5"/>
+        <Setter Property="FontFamily" Value="{StaticResource Comic Sans MS}"/>
+        <Setter Property="FontSize" Value="{StaticResource Big}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <Style x:Key="CenterGridColumn" TargetType="DataGridCell">
+        <Style.Setters>
+            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+        </Style.Setters>
+    </Style>
+
+    <Style x:Key="HeaderCenterDataGrid" TargetType="DataGridColumnHeader">
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+    </Style>
 </ResourceDictionary>

@@ -61,8 +61,9 @@ namespace Database.VeiwModel.Pages
         public async void Execute()
         {
             CardList.Clear();
-            var profiles = await new CardMapper().GetAllAsync();
-            foreach (var item in profiles)
+            var card = await new CardMapper().GetAllAsync();
+            card = card.OrderBy(x => x.Name);
+            foreach (var item in card)
             {
                 CardList.Add(item);
             }

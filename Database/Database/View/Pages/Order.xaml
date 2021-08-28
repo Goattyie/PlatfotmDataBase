@@ -32,16 +32,16 @@
                   ItemsSource="{Binding OrderList}"
                   SelectedItem="{Binding SelectedOrder}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Width="50" Binding="{Binding Path=Id}"/>
-                <DataGridTextColumn Header="Товар" Width="220" Binding="{Binding Path=Product.Name}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Количество" Width="130" Binding="{Binding Path=Count}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Получено" Width="130" Binding="{Binding Path=CurrentCount}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Цена закупки" Width="130" Binding="{Binding Path=OrderCost}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Цена доставки" Width="130" Binding="{Binding Path=DeliverCost}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Цена оплаты" Width="130" Binding="{Binding Path=SummCost}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Оплачено" Width="130" Binding="{Binding Path=CurrentCost}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Поставщик" Width="140" Binding="{Binding Path=Deliver.Name}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Дата заказа" Width="130" Binding="{Binding Path=OrderDate}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Id" Width="50" Binding="{Binding Path=Id}"/>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Товар" Width="220" Binding="{Binding Path=Product.Name}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Количество" Width="130" Binding="{Binding Path=Count}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Получено" Width="130" Binding="{Binding Path=CurrentCount}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Цена закупки" Width="130" Binding="{Binding Path=OrderCost}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Цена доставки" Width="130" Binding="{Binding Path=DeliverCost}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Цена оплаты" Width="130" Binding="{Binding Path=SummCost}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Оплачено" Width="130" Binding="{Binding Path=CurrentCost}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Поставщик" Width="140" Binding="{Binding Path=Deliver.Name}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Дата заказа" Width="130" Binding="{Binding Path=OrderDate,  StringFormat=dd/MM/yy}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="2">
@@ -51,10 +51,10 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Row="2" Grid.Column="0" Style="{Binding Source={StaticResource Btn}}" Content="Добавить заказ" Margin="10,0,10,10" Command="{Binding AddCommand}"/>
-            <Button Grid.Row="2" Grid.Column="1" Style="{Binding Source={StaticResource Btn}}" Content="Редактировать" Margin="10,0,10,10" Command="{Binding EditCommand}"/>
-            <Button Grid.Row="2" Grid.Column="2" Style="{Binding Source={StaticResource Btn}}" Content="Удалить заказ" Margin="10,0,10,10" Command="{Binding RemoveCommand}"/>
-            <Button Grid.Row="2" Grid.Column="3" Style="{Binding Source={StaticResource Btn}}" Content="Принять товар" Margin="10,0,10,10" Command="{Binding AcceptCommand}"/>
+            <Button Grid.Row="2" Grid.Column="0" Style="{Binding Source={StaticResource BlueButton}}" Content="Добавить заказ" Margin="10,0,10,10" Command="{Binding AddCommand}"/>
+            <Button Grid.Row="2" Grid.Column="1" Style="{Binding Source={StaticResource BlueButton}}" Content="Редактировать" Margin="10,0,10,10" Command="{Binding EditCommand}"/>
+            <Button Grid.Row="2" Grid.Column="2" Style="{Binding Source={StaticResource BlueButton}}" Content="Удалить заказ" Margin="10,0,10,10" Command="{Binding RemoveCommand}"/>
+            <Button Grid.Row="2" Grid.Column="3" Style="{Binding Source={StaticResource BlueButton}}" Content="Принять товар" Margin="10,0,10,10" Command="{Binding AcceptCommand}"/>
         </Grid>
 
     </Grid>
