@@ -6,6 +6,7 @@ using Database.VeiwModel.Commands;
 using Database.View.EditNode;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,7 @@ namespace Database.VeiwModel.Pages
             get { return _selectedCard; }
             set { _selectedCard = value; OnPropertyChanged(nameof(SelectedCard)); }
         }
-        public BindingList<Card> CardList { get; set; }
+        public ObservableCollection<Card> CardList { get; set; }
 
         public BaseCommand AddCommand
         {
@@ -52,7 +53,7 @@ namespace Database.VeiwModel.Pages
 
         public PageCardViewModel()
         {
-            CardList = new BindingList<Card>();
+            CardList = new ObservableCollection<Card>();
             Service.cardMapper.AddObserver(this);
             Execute();
         }

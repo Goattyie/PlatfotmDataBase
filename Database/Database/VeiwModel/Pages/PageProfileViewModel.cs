@@ -6,6 +6,7 @@ using Database.VeiwModel.Commands;
 using Database.View.EditNode;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,7 @@ namespace Database.VeiwModel.Pages
             get { return _selectedProfile; }
             set { _selectedProfile = value; OnPropertyChanged(nameof(SelectedProfile)); }
         }
-        public BindingList<Profile> ProfileList { get; set; }
+        public ObservableCollection<Profile> ProfileList { get; set; }
         public BaseCommand AddCommand
         {
             get
@@ -48,7 +49,7 @@ namespace Database.VeiwModel.Pages
         }
         public PageProfileViewModel()
         {
-            ProfileList = new BindingList<Profile>();
+            ProfileList = new ObservableCollection<Profile>();
             Service.profileMapper.AddObserver(this);
             Execute();
         }

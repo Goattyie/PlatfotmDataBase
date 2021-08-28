@@ -24,7 +24,11 @@
             <RowDefinition Height="362*"/>
             <RowDefinition Height="51*"/>
         </Grid.RowDefinitions>
-        <TextBlock Margin="10,10,0,0" FontSize="18">Таблица: Профиль</TextBlock>
+        <TextBlock 
+            Margin="10,10,0,0"
+            VerticalAlignment="Center"
+            Style="{StaticResource HeadTextBlock}"   
+            FontSize="{StaticResource Big}">Таблица: Профиль</TextBlock>
         <DataGrid AutoGenerateColumns="False" 
                   CanUserAddRows="False"
                   Grid.Row="1" 

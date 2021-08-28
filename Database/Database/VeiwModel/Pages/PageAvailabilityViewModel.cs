@@ -6,6 +6,7 @@ using Database.VeiwModel.Commands;
 using Database.View.EditNode;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -21,12 +22,27 @@ namespace Database.VeiwModel.Pages
         private BaseCommand _editCommand;
         private Availability _selectedAvailability;
 
+        private double _deliverSum;
+        private int _availabilityCount;
+
+        public double DeliverSum
+        {
+            get { return _deliverSum; }
+            set { _deliverSum = value; OnPropertyChanged(nameof(DeliverSum)); }
+        }
+
+        public int AvailabilityCount
+        {
+            get { return _availabilityCount; }
+            set { _availabilityCount = value; OnPropertyChanged(nameof(AvailabilityCount)); }
+        }
+
         public Availability SelectedAvailability
         {
             get { return _selectedAvailability; }
             set { _selectedAvailability = value; OnPropertyChanged(nameof(SelectedAvailability)); }
         }
-        public BindingList<Availability> AvailabilityList { get; set; }
+        public ObservableCollection<Availability> AvailabilityList { get; set; }
 
         public BaseCommand AddCommand
         {
@@ -72,7 +88,7 @@ namespace Database.VeiwModel.Pages
 
         public PageAvailabilityViewModel()
         {
-            AvailabilityList = new BindingList<Availability>();
+            AvailabilityList = new ObservableCollection<Availability>();
             Service.productMapper.AddObserver(this);
             Service.availabilityMapper.AddObserver(this);
             Service.sellMapper.AddObserver(this);
@@ -82,11 +98,14 @@ namespace Database.VeiwModel.Pages
 
         public async void Execute()
         {
+            DeliverSum = 0;
             AvailabilityList.Clear();
             var availability = await new AvailabilityMapper().GetAllAsync();
             availability = availability.OrderBy(x => x.Product.Name);
+            AvailabilityCount = availability.Count();
             foreach (var item in availability)
             {
+                DeliverSum += item.DeliverCost;
                 AvailabilityList.Add(item);
             }
         }

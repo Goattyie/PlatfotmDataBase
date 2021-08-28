@@ -6,6 +6,7 @@ using Database.VeiwModel.Commands;
 using Database.View.EditNode;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -17,20 +18,46 @@ namespace Database.VeiwModel.Pages
     {
         private BaseCommand _addCommand;
         private BaseCommand _removeCommand;
+        private BaseCommand _searchCommand;
         private Client _selectedClient;
+        private string _searchPhone;
 
+        public string SearchPhone
+        {
+            get { return _searchPhone; }
+            set { _searchPhone = value; OnPropertyChanged(nameof(SearchPhone)); }
+        }
         public Client SelectedClient
         {
             get { return _selectedClient; }
             set { _selectedClient = value; OnPropertyChanged(nameof(SelectedClient)); }
         }
-        public BindingList<Client> ClientList { get; set; }
+        public ObservableCollection<Client> ClientList { get; set; }
+
+        public BaseCommand SearchCommand
+        {
+            get
+            {
+                return _searchCommand ??= new BaseCommand(async obj => { await FindClient(); });
+            }
+        }
+
+        private async Task FindClient()
+        {
+            var clients = await new ClientMapper().GetAllAsync();
+            clients = clients.Where(x => x.Phone.Contains(SearchPhone));
+            ClientList.Clear();
+            foreach (var item in clients)
+            {
+                ClientList.Add(item);
+            }
+        }
 
         public BaseCommand AddCommand
         {
             get
             {
-                return _addCommand ?? (_addCommand = new BaseCommand(obj => { new EditClient().Show(); }));
+                return _addCommand ??= new BaseCommand(obj => { new EditClient().Show(); });
             }
         }
 
@@ -52,7 +79,7 @@ namespace Database.VeiwModel.Pages
 
         public PageClientViewModel()
         {
-            ClientList = new BindingList<Client>();
+            ClientList = new ObservableCollection<Client>();
             Service.clientMapper.AddObserver(this);
             Execute();
         }

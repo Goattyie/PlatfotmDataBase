@@ -175,3 +175,4 @@ D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\View\Pages\Sell
 D:\PlaygroundDataBase\Database\Database\bin\Debug\net5.0-windows\DynamicExpresso.Core.dll
 D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\View\ImportExportDatabase.g.cs
 D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\View\ImportExportDatabase.baml
+D:\PlaygroundDataBase\Database\Database\obj\Debug\net5.0-windows\Database.csproj.AssemblyReference.cache

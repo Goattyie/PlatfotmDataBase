@@ -106,7 +106,7 @@
             </Grid.RowDefinitions>
             <TextBlock
                 Style="{StaticResource HeadTextBlock}"
-                Text="Цена покупки"
+                Text="Цена покупки(с доставкой)"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"/>
 

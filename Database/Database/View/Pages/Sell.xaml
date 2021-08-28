@@ -8,9 +8,6 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Sell" Background="White">
 
-    <Page.DataContext>
-        <pages:PageSellViewModel/>
-    </Page.DataContext>
     <Page.Resources>
         <Style x:Key="Btn" TargetType="Button">
             <Setter Property="Margin" Value="10,0,10,10"></Setter>
@@ -24,7 +21,11 @@
             <RowDefinition Height="362*"/>
             <RowDefinition Height="51*"/>
         </Grid.RowDefinitions>
-        <TextBlock Margin="10,10,0,0" FontSize="18">Таблица: Продажа</TextBlock>
+        <TextBlock 
+            Margin="10,10,0,0" 
+            VerticalAlignment="Center"
+            Style="{StaticResource HeadTextBlock}"   
+            FontSize="{StaticResource Big}">Таблица: Продажа</TextBlock>
         <DataGrid CanUserAddRows="False"
                   AutoGenerateColumns="False"
                   Grid.Row="1" 
@@ -34,16 +35,15 @@
                   ItemsSource="{Binding SellList}"
                   SelectedItem="{Binding SelectedSell}">
             <DataGrid.Columns>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Id" Width="50" Binding="{Binding Path=Id}"></DataGridTextColumn>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Товар" Width="200" Binding="{Binding Path=Product.Name}"></DataGridTextColumn>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" Header="Прибыль" Width="100" Binding="{Binding Path=Profit}"></DataGridTextColumn>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" Header="Цена закупки" Width="100" Binding="{Binding Path=BuyCost}"></DataGridTextColumn>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" FontWeight="Bold" Foreground="{StaticResource DarkBlueBrush}"  Header="Цена продажи" Width="110" Binding="{Binding Path=SellCost}"></DataGridTextColumn>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" Header="Количество" FontWeight="Bold"  Foreground="{StaticResource DarkBlueBrush}"  Width="140" Binding="{Binding Path=Count}"></DataGridTextColumn>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" Header="Дата продажи" Width="170" Binding="{Binding Path=SellDate,  StringFormat=dd/MM/yy}"></DataGridTextColumn>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Телефон" Width="130" Binding="{Binding Path=Client.Phone}"></DataGridTextColumn>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Описание" Width="130" Binding="{Binding Path=Client.Description}"></DataGridTextColumn>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Карта" Width="70" Binding="{Binding Path=Card.Name}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}"  Header="Товар" Width="500" Binding="{Binding Path=Product.Name}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" FontWeight="Bold" Foreground="{StaticResource DarkBlueBrush}" CellStyle="{StaticResource CenterGridColumn}" Header="Прибыль" Width="100" Binding="{Binding Path=Profit}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" Header="Цена закупки" Width="70" Binding="{Binding Path=BuyCost}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" Header="Цена продажи" Width="70" Binding="{Binding Path=SellCost}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" Header="Количество" FontWeight="Bold"  Foreground="{StaticResource DarkBlueBrush}"  Width="70" Binding="{Binding Path=Count}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" Header="Дата продажи" Width="70" Binding="{Binding Path=SellDate,  StringFormat=dd/MM/yy}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Телефон" Width="70" Binding="{Binding Path=Client.Phone}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Описание" Width="500" Binding="{Binding Path=Client.Description}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" Header="Карта" Width="70" Binding="{Binding Path=Card.Name}"></DataGridTextColumn>
                 <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Примечание" Width="100*" Binding="{Binding Path=Comment}"></DataGridTextColumn>
             </DataGrid.Columns>
            

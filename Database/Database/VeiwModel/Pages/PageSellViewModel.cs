@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Database.Services;
+using System.Collections.ObjectModel;
 
 namespace Database.VeiwModel.Pages
 {
@@ -25,7 +26,7 @@ namespace Database.VeiwModel.Pages
             get { return _selectedSell; }
             set { _selectedSell = value; OnPropertyChanged(nameof(SelectedSell)); }
         }
-        public BindingList<Sell> SellList { get; set; }
+        public ObservableCollection<Sell> SellList { get; set; }
 
         public BaseCommand AddCommand
         {
@@ -64,7 +65,7 @@ namespace Database.VeiwModel.Pages
 
         public PageSellViewModel()
         {
-            SellList = new BindingList<Sell>();
+            SellList = new ObservableCollection<Sell>();
             Service.sellMapper.AddObserver(this);
             Service.productMapper.AddObserver(this);
             Service.clientMapper.AddObserver(this);

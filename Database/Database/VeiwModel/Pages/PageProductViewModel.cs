@@ -6,6 +6,7 @@ using Database.VeiwModel.Commands;
 using Database.View.EditNode;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,7 @@ namespace Database.VeiwModel.Pages
             get { return _selectedProduct; }
             set { _selectedProduct = value; OnPropertyChanged(nameof(SelectedProduct)); }
         }
-        public BindingList<Product> ProductList { get; set; }
+        public ObservableCollection<Product> ProductList { get; set; }
 
         public BaseCommand AddCommand
         {
@@ -64,7 +65,7 @@ namespace Database.VeiwModel.Pages
 
         public PageProductViewModel()
         {
-            ProductList = new BindingList<Product>();
+            ProductList = new ObservableCollection<Product>();
             Service.productMapper.AddObserver(this);
             Execute();
         }

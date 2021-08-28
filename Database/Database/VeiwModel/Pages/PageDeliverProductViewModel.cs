@@ -6,6 +6,7 @@ using Database.VeiwModel.Commands;
 using Database.View.EditNode;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,7 @@ namespace Database.VeiwModel.Pages
             get { return _selectedDeliverProduct; }
             set { _selectedDeliverProduct = value; OnPropertyChanged(nameof(SelectedDeliverProduct)); }
         }
-        public BindingList<DeliverProduct> DeliverProductList { get; set; }
+        public ObservableCollection<DeliverProduct> DeliverProductList { get; set; }
 
         public BaseCommand AddCommand
         {
@@ -52,7 +53,7 @@ namespace Database.VeiwModel.Pages
 
         public PageDeliverProductViewModel()
         {
-            DeliverProductList = new BindingList<DeliverProduct>();
+            DeliverProductList = new ObservableCollection<DeliverProduct>();
             Service.deliverProductMapper.AddObserver(this);
             Execute();
         }

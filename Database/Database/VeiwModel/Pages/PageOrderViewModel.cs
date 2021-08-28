@@ -7,6 +7,7 @@ using Database.View;
 using Database.View.EditNode;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -22,12 +23,32 @@ namespace Database.VeiwModel.Pages
         private BaseCommand _acceptCommand;
         private Order _selectedOrder;
 
+        private double _orderSum;
+        private double _deliverSum;
+        private double _allSum;
+
+
+        public double OrderSum
+        {
+            get { return _orderSum; }
+            set { _orderSum = value; OnPropertyChanged(nameof(OrderSum)); }
+        }
+        public double DeliverSum
+        {
+            get { return _deliverSum; }
+            set { _deliverSum = value; OnPropertyChanged(nameof(DeliverSum)); }
+        }
+        public double AllSum
+        {
+            get { return _allSum; }
+            set { _allSum = value; OnPropertyChanged(nameof(AllSum)); }
+        }
         public Order SelectedOrder
         {
             get { return _selectedOrder; }
             set { _selectedOrder = value; OnPropertyChanged(nameof(SelectedOrder)); }
         }
-        public BindingList<Order> OrderList { get; set; }
+        public ObservableCollection<Order> OrderList { get; set; }
 
         public BaseCommand AddCommand
         {
@@ -69,7 +90,7 @@ namespace Database.VeiwModel.Pages
 
         public PageOrderViewModel()
         {
-            OrderList = new BindingList<Order>();
+            OrderList = new ObservableCollection<Order>();
             Service.orderMapper.AddObserver(this);
             Service.productMapper.AddObserver(this);
             Execute();
@@ -77,12 +98,20 @@ namespace Database.VeiwModel.Pages
 
         public async void Execute()
         {
+            OrderSum = 0;
+            DeliverSum = 0;
+            AllSum = 0;
             OrderList.Clear();
             var products = await new OrderMapper().GetAllAsync();
+            products = products.OrderByDescending(x => x.Count - x.CurrentCount);
             foreach (var item in products)
             {
+                OrderSum += item.OrderCost;
+                DeliverSum += item.DeliverCost;
                 OrderList.Add(item);
             }
+            OrderList = OrderList;
+            AllSum = OrderSum + DeliverSum;
         }
     }
 }

@@ -205,6 +205,8 @@ namespace Database.VeiwModel.EditNode
             _selectedAvailable = AvailabilityList.Where(a => a.ProductId == _sell.ProductId).FirstOrDefault();
             _selectedCard = CardList.Where(c => c.Id == _sell.CardId).FirstOrDefault();
             _selectedClient = ClientList.Where(c => c.Id == _sell.ClientId).FirstOrDefault();
+            Phone = _selectedClient?.Phone;
+            IsValid = true;
         }
 
         private void Create()

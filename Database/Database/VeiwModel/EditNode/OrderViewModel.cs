@@ -194,7 +194,7 @@ namespace Database.VeiwModel.EditNode
         }
         private void LoadProducts()
         {
-            var products = new DeliverProductMapper().GetProductByDeliverId(_selectedDeliver.Id);
+            var products = new DeliverProductMapper().GetProductByDeliverId(_selectedDeliver.Id).OrderBy(x=>x.Name);
             ProductList.Clear();
             foreach (var p in products)
                 ProductList.Add(p);

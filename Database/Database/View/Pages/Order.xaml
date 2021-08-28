@@ -8,9 +8,6 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Order" Background="White">
 
-    <Page.DataContext>
-        <pages:PageOrderViewModel/>
-    </Page.DataContext>
     <Page.Resources>
         <Style x:Key="Btn" TargetType="Button">
             <Setter Property="Margin" Value="10,0,10,10"></Setter>
@@ -24,7 +21,74 @@
             <RowDefinition Height="362*"/>
             <RowDefinition Height="51*"/>
         </Grid.RowDefinitions>
-        <TextBlock Margin="10,10,0,0" FontSize="18">Таблица: Заказы</TextBlock>
+        <Grid Margin="10,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock 
+                Style="{StaticResource HeadTextBlock}" 
+                VerticalAlignment="Center"
+                FontSize="{StaticResource Big}"
+                Text="Таблица: Заказы"/>
+
+            <StackPanel 
+                Grid.Column="2"
+                Orientation="Horizontal">
+                
+                <TextBlock 
+                Style="{StaticResource HeadTextBlock}" 
+                FontSize="{StaticResource Medium}"
+                VerticalAlignment="Center"
+                Text="Сумма доставки: "/>
+                
+                <TextBlock 
+                Style="{StaticResource HeadTextBlock}" 
+                FontSize="{StaticResource Medium}"
+                VerticalAlignment="Center"
+                Text="{Binding DeliverSum}"/>
+                
+            </StackPanel>
+
+            <StackPanel 
+                Grid.Column="3"
+                Orientation="Horizontal">
+
+                <TextBlock 
+                Style="{StaticResource HeadTextBlock}" 
+                FontSize="{StaticResource Medium}"
+                VerticalAlignment="Center"
+                Text="Общая сумма: "/>
+
+                <TextBlock 
+                Style="{StaticResource HeadTextBlock}" 
+                FontSize="{StaticResource Medium}"
+                VerticalAlignment="Center"
+                Text="{Binding AllSum}"/>
+
+            </StackPanel>
+
+            <StackPanel 
+                Grid.Column="1"
+                Orientation="Horizontal">
+
+                <TextBlock 
+                Style="{StaticResource HeadTextBlock}" 
+                FontSize="{StaticResource Medium}"
+                VerticalAlignment="Center"
+                Text="Сумма закупки: "/>
+
+                <TextBlock 
+                Style="{StaticResource HeadTextBlock}" 
+                FontSize="{StaticResource Medium}"
+                VerticalAlignment="Center"
+                Text="{Binding OrderSum}"/>
+
+            </StackPanel>
+        </Grid>
         <DataGrid Grid.Row="1" CanUserAddRows="False"
                   AutoGenerateColumns="False"
                   Margin="10,10,10,10"
@@ -32,16 +96,15 @@
                   ItemsSource="{Binding OrderList}"
                   SelectedItem="{Binding SelectedOrder}">
             <DataGrid.Columns>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Id" Width="50" Binding="{Binding Path=Id}"/>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Товар" Width="220" Binding="{Binding Path=Product.Name}"></DataGridTextColumn>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Количество" Width="130" Binding="{Binding Path=Count}"></DataGridTextColumn>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Получено" Width="130" Binding="{Binding Path=CurrentCount}"></DataGridTextColumn>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Цена закупки" Width="130" Binding="{Binding Path=OrderCost}"></DataGridTextColumn>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Цена доставки" Width="130" Binding="{Binding Path=DeliverCost}"></DataGridTextColumn>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Цена оплаты" Width="130" Binding="{Binding Path=SummCost}"></DataGridTextColumn>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Оплачено" Width="130" Binding="{Binding Path=CurrentCost}"></DataGridTextColumn>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Поставщик" Width="140" Binding="{Binding Path=Deliver.Name}"></DataGridTextColumn>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Дата заказа" Width="130" Binding="{Binding Path=OrderDate,  StringFormat=dd/MM/yy}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Товар" Width="450" Binding="{Binding Path=Product.Name}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" Header="Количество" Width="100" Binding="{Binding Path=Count}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" Header="Получено" Width="100" Binding="{Binding Path=CurrentCount}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" Header="Цена закупки" Width="100" Binding="{Binding Path=OrderCost}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" Header="Цена доставки" Width="100" Binding="{Binding Path=DeliverCost}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" Header="Цена оплаты" Width="100" Binding="{Binding Path=SummCost}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" Header="Оплачено" Width="100" Binding="{Binding Path=CurrentCost}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" Header="Поставщик" Width="140" Binding="{Binding Path=Deliver.Name}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" Header="Дата заказа" Width="140" Binding="{Binding Path=OrderDate,  StringFormat=dd/MM/yy}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="2">
