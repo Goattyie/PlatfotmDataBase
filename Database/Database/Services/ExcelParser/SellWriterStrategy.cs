@@ -26,7 +26,7 @@ namespace Database.Services.ExcelParser
             worksheet.Cells[row, 2].Value = _list[row - 2].Count;
             worksheet.Cells[row, 3].Value = _list[row - 2].Profit;
             worksheet.Cells[row, 3].AddComment($"{_list[row - 2].SellCost} - {_list[row - 2].BuyCost}", "REF");
-            worksheet.Cells[row, 4].Value = _list[row - 2].SellDate;
+            worksheet.Cells[row, 4].Value = _list[row - 2].SellDate.ToString("d");
             worksheet.Cells[row, 5].Value = _list[row - 2].Client?.Phone;
             worksheet.Cells[row, 6].Value = _list[row - 2].Client?.Description;
             worksheet.Cells[row, 8].Value = _list[row - 2].Card?.Name;

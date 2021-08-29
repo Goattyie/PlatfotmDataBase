@@ -5,6 +5,7 @@ using Microsoft.Win32;
 using System;
 using System.ComponentModel;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Threading;
 
 namespace Database.VeiwModel
@@ -32,12 +33,15 @@ namespace Database.VeiwModel
         private string _availabilityStatus;
         private string _sellStatus;
         private OpenFileDialog _fileDialog;
-        private Thread _availabilityThread;
-        private Thread _sellThread;
-        private Thread _delProdThread;
+        private bool _startEnabled = true;
 
         #region Properties
 
+        public bool StartEnabled
+        {
+            get { return _startEnabled; }
+            set { _startEnabled = value; OnPropertyChanged(nameof(StartEnabled)); }
+        }
         public BaseCommand ChangeDeliverProductCommand
         {
             get
@@ -119,8 +123,6 @@ namespace Database.VeiwModel
             AvailabilityStatus = "Файл не выбран";
             SellStatus = "Файл не выбран";
         }
-
-
         private void SelectExcelFile()
         {
             _fileDialog = new OpenFileDialog();
@@ -131,106 +133,109 @@ namespace Database.VeiwModel
         {
             if (_availabilityFilename != null)
             {
-                _availabilityThread = new Thread(() =>
+                new Thread(() =>
                 {
                     var excelWriter = new ExcelWriter(new AvailabilityWriterStrategy(), _availabilityFilename);
                     excelWriter.NewIterationEvent += UpdateAvailabilityProgressBar;
                     excelWriter.WriteNodes();
-                });
-                _availabilityThread.Priority = ThreadPriority.Highest;
-                _availabilityThread.IsBackground = false;
-                _availabilityThread.Start();
+                })
+                { Priority = ThreadPriority.Highest, IsBackground = false }.Start();
             }
 
             if (_sellFilename != null)
             {
-                _sellThread = new Thread(() =>
+                 new Thread(() =>
                 {
                     var excelWriter = new ExcelWriter(new SellWriterStrategy(), _sellFilename);
                     excelWriter.NewIterationEvent += UpdateSellProgressBar;
                     excelWriter.WriteNodes();
-                });
-                _sellThread.Priority = ThreadPriority.Highest;
-                _sellThread.IsBackground = false;
-                _sellThread.Start();
-            }
-        }
-        private void ImportFiles()
-        {
-            if (_availabilityFilename != null)
-            {
-                _availabilityThread = new Thread(() =>
-                {
-                    var excelDownloader = new ExcelReader(new AvailabilityReaderStrategy(), _availabilityFilename);
-                    excelDownloader.NewIterationEvent += UpdateAvailabilityProgressBar;
-                    excelDownloader.ErrorDownloadEvent += UpdateErrors;
-                    excelDownloader.DownloadNodes();
-                    _dispatcher.Invoke((Action)(() => 
-                    {
-                        Service.availabilityMapper.NotifyObserver();
-                        Service.productMapper.NotifyObserver();
-                        Service.cardMapper.NotifyObserver();
-                    }));
-                });
-                _availabilityThread.Priority = ThreadPriority.Highest;
-                _availabilityThread.IsBackground = true;
-                _availabilityThread.Start();
-            }
-
-            if (_sellFilename != null)
-            {
-                _sellThread = new Thread(() =>
-                {
-                    var excelDownloader = new ExcelReader(new SellReaderStrategy(), _sellFilename);
-                    excelDownloader.NewIterationEvent += UpdateSellProgressBar;
-                    excelDownloader.ErrorDownloadEvent += UpdateErrors;
-                    excelDownloader.DownloadNodes();
-                    _dispatcher.Invoke((Action)(() =>
-                    {
-                        Service.sellMapper.NotifyObserver();
-                        Service.productMapper.NotifyObserver();
-                        Service.cardMapper.NotifyObserver();
-                        Service.clientMapper.NotifyObserver();
-                    }));
-                });
-                _sellThread.Priority = ThreadPriority.Highest;
-                _sellThread.IsBackground = true;
-                _sellThread.Start();
+                })
+                 { Priority = ThreadPriority.Highest, IsBackground = false }.Start();
             }
 
             if(_delProdFilename != null)
             {
-                _delProdThread = new Thread(()=>
+                new Thread(() =>
                 {
-                    var excelDownloader = new ExcelReader(new DeliverProductReaderStrategy(), _delProdFilename);
-                    excelDownloader.NewIterationEvent += UpdateDeliverProductProgressBar;
-                    excelDownloader.ErrorDownloadEvent += UpdateErrors;
-                    excelDownloader.DownloadNodes();
-                    _dispatcher.Invoke((Action)(() =>
-                    {
-                        Service.deliverMapper.NotifyObserver();
-                        Service.deliverProductMapper.NotifyObserver();
-                        Service.productMapper.NotifyObserver();
-                    }));
-                });
-                _delProdThread.Priority = ThreadPriority.Highest;
-                _delProdThread.IsBackground = true;
-                _delProdThread.Start();
+                    var excelWriter = new ExcelWriter(new DeliverProductWriterStrategy(), _delProdFilename);
+                    excelWriter.NewIterationEvent += UpdateDeliverProductProgressBar;
+                    excelWriter.WriteNodes();
+                })
+                { Priority = ThreadPriority.Highest, IsBackground = false }.Start();
             }
-
         }
+        private void ImportFiles()
+        {
+            if (_availabilityFilename != null || _sellFilename != null || _delProdFilename != null)
+            {
+                new Thread(() =>
+                {
+                    StartEnabled = false;
+                    ExcelReader excelDownloader;
+                    if (_availabilityFilename != null)
+                    {
+                        excelDownloader = new ExcelReader(new AvailabilityReaderStrategy(), _availabilityFilename);
+                        excelDownloader.NewIterationEvent += UpdateAvailabilityProgressBar;
+                        excelDownloader.ErrorDownloadEvent += UpdateErrors;
+                        excelDownloader.DownloadNodes();
+                        _dispatcher.Invoke((Action)(() =>
+                        {
+                            Service.availabilityMapper.NotifyObserver();
+                            Service.productMapper.NotifyObserver();
+                            Service.cardMapper.NotifyObserver();
+                            Service.profileMapper.NotifyObserver();
+                        }
+                        ));
+                    }
 
+                    if (_sellFilename != null)
+                    {
+                        excelDownloader = new ExcelReader(new SellReaderStrategy(), _sellFilename);
+                        excelDownloader.NewIterationEvent += UpdateSellProgressBar;
+                        excelDownloader.ErrorDownloadEvent += UpdateErrors;
+                        excelDownloader.DownloadNodes();
+                        _dispatcher.Invoke((Action)(() =>
+                        {
+                            Service.sellMapper.NotifyObserver();
+                            Service.productMapper.NotifyObserver();
+                            Service.cardMapper.NotifyObserver();
+                            Service.clientMapper.NotifyObserver();
+                        }
+                        ));
+                    }
+
+                    if (_delProdFilename != null)
+                    {
+                        excelDownloader = new ExcelReader(new DeliverProductReaderStrategy(), _delProdFilename);
+                        excelDownloader.NewIterationEvent += UpdateDeliverProductProgressBar;
+                        excelDownloader.ErrorDownloadEvent += UpdateErrors;
+                        excelDownloader.DownloadNodes();
+                        _dispatcher.Invoke((Action)(() =>
+                        {
+                            Service.deliverMapper.NotifyObserver();
+                            Service.productMapper.NotifyObserver();
+                            Service.deliverProductMapper.NotifyObserver();
+                        }
+                        ));
+                    }
+                    StartEnabled = true;
+                })  { Priority = ThreadPriority.Highest,  IsBackground = true  }.Start();
+            }
+        }
         private void UpdateDeliverProductProgressBar(int obj)
         {
             DeliverProductProgressBarValue = obj;
         }
 
-        private void UpdateErrors(string arg1, int arg2)
+        private async void UpdateErrors(string arg1, int arg2)
         {
-            _dispatcher.Invoke((Action)(() =>
-            {
-                Errors.Add(new Error() { Table = arg1, Row = arg2 });
-            }));
+            await Task.Run(() => {
+                _dispatcher.Invoke((Action)(() =>
+                {
+                    Errors.Add(new Error() { Table = arg1, Row = arg2 });
+                }));
+            });
+
         }
 
         private void UpdateSellProgressBar(int obj)

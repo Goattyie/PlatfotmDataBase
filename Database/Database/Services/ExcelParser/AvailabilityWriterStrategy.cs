@@ -28,6 +28,7 @@ namespace Database.Services.ExcelParser
             worksheet.Cells[row, 3].Value = _list[row - 2].Count;
             worksheet.Cells[row, 4].Value = _list[row - 2].SellCost;
             worksheet.Cells[row, 5].Value = _list[row - 2].Profile?.Name;
+            worksheet.Cells[row, 6].Value = _list[row - 2].Comment;
         }
     }
 }

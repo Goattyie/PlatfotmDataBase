@@ -166,11 +166,12 @@
 
         <Button
             Grid.Row="3"
-                Style="{StaticResource BaseButton}"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Content="СТАРТ"
-                Command="{Binding ExecuteCommand}" Height="32" Width="66"/>
+            IsEnabled="{Binding StartEnabled}"
+            Style="{StaticResource BaseButton}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Content="СТАРТ"
+            Command="{Binding ExecuteCommand}" Height="32" Width="66"/>
 
         <Grid
             Grid.Row="4"

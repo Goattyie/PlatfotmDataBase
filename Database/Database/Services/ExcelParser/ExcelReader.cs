@@ -30,9 +30,9 @@ namespace Database.Services.ExcelParser
 
                 for (int row = 2; row <= rowCount; row++)
                 {
+                    NewIterationEvent?.Invoke((int)((double)row / rowCount * 100));
                     try
                     {
-                        NewIterationEvent?.Invoke((int)((double)row / rowCount * 100));
                         _strategy.DownloadNode(worksheet, row);
                     }
                     catch

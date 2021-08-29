@@ -25,6 +25,8 @@ namespace Database.Services.ExcelParser
             {
                 var workbook = package.Workbook;
                 var worksheet = workbook.Worksheets[0];
+                package.Workbook.Worksheets.Delete(worksheet);
+                worksheet = package.Workbook.Worksheets.Add("Лист 1");
                 int rowCount = _strategy.NodesCount;
 
                 for (int column = 1; column <= _strategy.Titles.Count; column++)

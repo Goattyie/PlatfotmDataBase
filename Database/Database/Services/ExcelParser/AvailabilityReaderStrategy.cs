@@ -44,7 +44,7 @@ namespace Database.Services.ExcelParser
 
             availability.ProductId = product.Id;
             availability.ProfileId = profile?.Id ?? null;
-            availability.Comment = worksheet.Cells[row, 2].Comment?.Text;
+            availability.Comment = worksheet.Cells[row, 6].Text;
 
             if (availability.Comment != null)
             {
