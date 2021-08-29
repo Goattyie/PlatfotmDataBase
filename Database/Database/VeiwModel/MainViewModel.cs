@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using Database.Model;
 using Database.VeiwModel.Commands;
 using Database.View;
 using Database.View.Pages;
@@ -20,15 +22,21 @@ namespace Database.VeiwModel
         private Page _productPage;
         private Page _deliverPage;
         private Page _deliverProductPage;
-        private Page _orderPage;
         private Page _sellPage;
         private Page _profilePage;
         private Page _cardPage;
 
+        private BaseCommand _openOrderCommand;
         private BaseCommand _tableClick;
         private BaseCommand _exportDatabase;
         private BaseCommand _importDatabase;
 
+        public ObservableCollection<QueryListItem> QueryList { get; set; }
+
+        public BaseCommand OpenOrderCommand
+        {
+            get { return _openOrderCommand ??= new BaseCommand((obj) => { new OrderWindow(bool.Parse(obj.ToString())).Show(); }); }
+        }
         public BaseCommand ImportDatabase
         {
             get { return _importDatabase ?? (_importDatabase = new BaseCommand(obj => { new ImportExportDatabase(true).Show(); })); }
@@ -59,12 +67,22 @@ namespace Database.VeiwModel
             _productPage = new Product();
             _deliverPage = new Deliver();
             _deliverProductPage = new DeliverProduct();
-            _orderPage = new Order();
             _profilePage = new Profile();
             _cardPage = new Card();
 
             _currentPage = _sellPage;
+            AddQueryes();
         }
+
+        private void AddQueryes()
+        {
+            QueryList = new ObservableCollection<QueryListItem>();
+            QueryList.Add(new QueryListItem { Name = "Какие товары проданы за указанный период времени", ExecuteCommand = new BaseCommand((obj) => { new InputDates().Show();  }) }); ;
+            QueryList.Add(new QueryListItem { Name = "Сколько было продано данного товара по месяцам за данный период времени", ExecuteCommand = new BaseCommand((obj) => { }) }); ;
+            QueryList.Add(new QueryListItem { Name = "Вывести продажи по номеру телефона", ExecuteCommand = new BaseCommand((obj) => { }) }); ;
+            QueryList.Add(new QueryListItem { Name = "Вывести все проданные товары, их общее количество и суммарную прибыль", ExecuteCommand = new BaseCommand((obj) => { }) }); ;
+        }
+
         private void NewTablePage(object tableName)
         {
             switch (tableName.ToString())
@@ -89,9 +107,6 @@ namespace Database.VeiwModel
                     break;
                 case "DeliverProductTable":
                     CurrentPage = _deliverProductPage;
-                    break;
-                case "OrderTable":
-                    CurrentPage = _orderPage;
                     break;
                 case "ProfileTable":
                     CurrentPage = _profilePage;

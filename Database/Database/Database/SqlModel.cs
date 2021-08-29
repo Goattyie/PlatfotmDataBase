@@ -46,21 +46,21 @@ namespace Database.Model.Database
                 .Property(d => d.ProductId).IsRequired();
             modelBuilder.Entity<DeliverProduct>()
                 .Property(d => d.DeliverId).IsRequired();
-            modelBuilder.Entity<Order>()
+            modelBuilder.Entity<OrderNode>()
                 .Property(d => d.ProductId).IsRequired();
-            modelBuilder.Entity<Order>()
+            modelBuilder.Entity<OrderNode>()
                 .Property(d => d.DeliverId).IsRequired();
-            modelBuilder.Entity<Order>()
+            modelBuilder.Entity<OrderNode>()
                 .Property(d => d.Count).IsRequired();
-            modelBuilder.Entity<Order>()
+            modelBuilder.Entity<OrderNode>()
                 .Property(d => d.OrderCost).IsRequired();
-            modelBuilder.Entity<Order>()
+            modelBuilder.Entity<OrderNode>()
                 .Property(d => d.DeliverCost).IsRequired();
-            modelBuilder.Entity<Order>()
+            modelBuilder.Entity<OrderNode>()
                 .Property(d => d.SummCost).IsRequired();
-            modelBuilder.Entity<Order>()
+            modelBuilder.Entity<OrderNode>()
                 .Property(d => d.CurrentCost).IsRequired();
-            modelBuilder.Entity<Order>()
+            modelBuilder.Entity<OrderNode>()
                 .Property(d => d.CurrentCount).IsRequired();
             modelBuilder.Entity<Profile>()
                 .Property(d => d.Name).IsRequired();
@@ -78,6 +78,7 @@ namespace Database.Model.Database
         public DbSet<Deliver> Delivers { get; set; }
         public DbSet<DeliverProduct> DeliversProducts { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderNode> OrderNodes { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Sell> Sells { get; set; }

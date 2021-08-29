@@ -20,7 +20,13 @@ namespace Database.VeiwModel.Pages
         private BaseCommand _editCommand;
         private BaseCommand _removeCommand;
         private Sell _selectedSell;
+        private int _rowsCount;
 
+        public int RowsCount
+        {
+            get { return _rowsCount; }
+            set { _rowsCount = value; OnPropertyChanged(nameof(RowsCount)); }
+        }
         public Sell SelectedSell
         {
             get { return _selectedSell; }
@@ -78,6 +84,7 @@ namespace Database.VeiwModel.Pages
             SellList.Clear();
             var sell = await new SellMapper().GetAllAsync();
             sell = sell.OrderByDescending(x => x.SellDate);
+            RowsCount = sell.Count();
             foreach (var item in sell)
             {
                 SellList.Add(item);

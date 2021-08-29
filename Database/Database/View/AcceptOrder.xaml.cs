@@ -22,7 +22,7 @@ namespace Database.View
     /// </summary>
     public partial class AcceptOrder : Window
     {
-        public AcceptOrder(Order order)
+        public AcceptOrder(OrderNode order)
         {
             InitializeComponent();
             DataContext = new AcceptProductViewModel(order);

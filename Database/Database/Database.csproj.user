@@ -19,7 +19,7 @@
     <Compile Update="View\EditNode\EditDeliverProduct.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\EditNode\EditOrder.xaml.cs">
+    <Compile Update="View\EditNode\EditOrderNode.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\EditNode\EditProduct.xaml.cs">
@@ -32,6 +32,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\ImportExportDatabase.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\InputDates.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\OrderWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Pages\Availability.xaml.cs">
@@ -47,9 +53,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Pages\DeliverProduct.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\Pages\Order.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Pages\Product.xaml.cs">
@@ -84,7 +87,7 @@
     <Page Update="View\EditNode\EditDeliverProduct.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\EditNode\EditOrder.xaml">
+    <Page Update="View\EditNode\EditOrderNode.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\EditNode\EditProduct.xaml">
@@ -99,7 +102,13 @@
     <Page Update="View\ImportExportDatabase.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\InputDates.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\OrderWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Pages\Availability.xaml">
@@ -115,9 +124,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Pages\DeliverProduct.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Pages\Order.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Pages\Product.xaml">

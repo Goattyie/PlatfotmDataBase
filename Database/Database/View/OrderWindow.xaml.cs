@@ -1,4 +1,4 @@
-﻿using Database.VeiwModel.Pages;
+﻿using Database.VeiwModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,20 +11,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Database.View.Pages.Tables
+namespace Database.View
 {
     /// <summary>
-    /// Логика взаимодействия для Order.xaml
+    /// Логика взаимодействия для OrderWindow.xaml
     /// </summary>
-    public partial class Order : Page
+    public partial class OrderWindow : Window
     {
-        public Order()
+        public OrderWindow(bool isActive)
         {
             InitializeComponent();
-            DataContext = new PageOrderViewModel();
+            DataContext = new OrderWindowVM(isActive);
         }
     }
 }

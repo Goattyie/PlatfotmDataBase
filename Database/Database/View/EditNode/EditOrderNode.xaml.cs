@@ -1,4 +1,5 @@
-﻿using Database.Model.Database.Services;
+﻿using Database.Model;
+using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
 using Database.VeiwModel.EditNode;
 using System;
@@ -20,17 +21,17 @@ namespace Database.View.EditNode
     /// <summary>
     /// Логика взаимодействия для EditOrder.xaml
     /// </summary>
-    public partial class EditOrder : Window
+    public partial class EditOrderNode : Window
     {
-        public EditOrder()
-        {
-            InitializeComponent();
-            DataContext = new OrderViewModel();
-        }
-        public EditOrder(Order order)
+        public EditOrderNode(Order order)
         {
             InitializeComponent();
             DataContext = new OrderViewModel(order);
+        }
+        public EditOrderNode(OrderNode orderNode)
+        {
+            InitializeComponent();
+            DataContext = new OrderViewModel(orderNode);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

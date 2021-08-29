@@ -1,30 +1,19 @@
-﻿using System;
+﻿using Database.Model.Database.Tables;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Database.Model.Database.Tables
+namespace Database.Model
 {
     public class Order
     {
         public int Id { get; set; }
-        public int ProductId { get; set; }
-        public int DeliverId { get; set; }
-        public int Count { get; set; }
-        public double OrderCost { get; set; }
-        public double DeliverCost { get; set; }
-        public double SummCost { get; set; }
-        /// <summary>
-        /// Сколько заплачено на данный момент
-        /// </summary>
-        public double CurrentCost { get; set; }
-        /// <summary>
-        /// Сколько товара получено на данный момент
-        /// </summary>
-        public int CurrentCount { get; set; }
-        public DateTime OrderDate { get; set; }
-        public virtual Product Product { get; set; }
-        public virtual Deliver Deliver { get; set; }
+        public DateTime Date { get; set; }
+        public double OrderSum { get; set; }
+        public double DeliverSum { get; set; }
+        public double AllSum { get; set; }
+        public virtual ICollection<OrderNode> OrderNodes { get; set; }
     }
 }

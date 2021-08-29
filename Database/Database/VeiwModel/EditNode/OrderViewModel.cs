@@ -1,4 +1,5 @@
-﻿using Database.Model.Database.Services;
+﻿using Database.Model;
+using Database.Model.Database.Services;
 using Database.Model.Database.Tables;
 using Database.Services;
 using Database.VeiwModel.Commands;
@@ -16,9 +17,10 @@ namespace Database.VeiwModel.EditNode
     {
         private Product _selectedProduct;
         private Deliver _selectedDeliver;
-        private Order _order;
+        private OrderNode _orderNode;
         private BaseCommand _executeCommand;
         private Action _executeDelegate;
+        private Order _order;
         protected override Dictionary<string, string> _errors { get; set; } = new Dictionary<string, string>()
         {
             ["SelectedProduct"] = null,
@@ -36,7 +38,7 @@ namespace Database.VeiwModel.EditNode
             set 
             {
                 _selectedProduct = value;
-                _order.ProductId = _selectedProduct?.Id ?? 0;
+                _orderNode.ProductId = _selectedProduct?.Id ?? 0;
                 OnPropertyChanged(nameof(SelectedProduct));
                 UpdateCost();
 
@@ -50,7 +52,7 @@ namespace Database.VeiwModel.EditNode
             set 
             {
                 _selectedDeliver = value;
-                _order.DeliverId = _selectedDeliver?.Id ?? 0;
+                _orderNode.DeliverId = _selectedDeliver?.Id ?? 0;
                 SelectedProduct = null;
                 LoadProducts();
                 OnPropertyChanged(nameof(SelectedDeliver));
@@ -60,27 +62,25 @@ namespace Database.VeiwModel.EditNode
                 UpdateIsValid();
             }
         }
-    
         public BindingList<Product> ProductList { get; set; }
         public BindingList<Deliver> DeliverList { get; set; }
-
         #region Property
 
         public DateTime OrderDate
         {
-            get { return _order.OrderDate; }
+            get { return _orderNode.OrderDate; }
             set 
             { 
-                _order.OrderDate = value; 
+                _orderNode.OrderDate = value; 
                 OnPropertyChanged(nameof(OrderDate)); 
             }
         }
         public int Count
         {
-            get { return _order.Count; }
+            get { return _orderNode.Count; }
             set 
             { 
-                _order.Count = value; 
+                _orderNode.Count = value; 
                 OnPropertyChanged(nameof(Count));
                 UpdateCost();
                 
@@ -90,10 +90,10 @@ namespace Database.VeiwModel.EditNode
         }
         public int CurrentCount
         {
-            get { return _order.CurrentCount; }
+            get { return _orderNode.CurrentCount; }
             set 
             { 
-                _order.CurrentCount = value; 
+                _orderNode.CurrentCount = value; 
                 OnPropertyChanged(nameof(CurrentCount));
                 
                 _errors["CurrentCount"] = (value < 0 || value > Count) ? "Неверное полученное количество" : null;
@@ -102,32 +102,34 @@ namespace Database.VeiwModel.EditNode
         }
         public double OrderCost
         {
-            get { return _order.OrderCost; }
+            get { return _orderNode.OrderCost; }
             set 
             { 
-                _order.OrderCost = value; 
+                _orderNode.OrderCost = value; 
                 OnPropertyChanged(nameof(OrderCost));
             }
         }
         public double DeliverCost
         {
-            get { return _order.DeliverCost; }
-            set { _order.DeliverCost = value; OnPropertyChanged(nameof(DeliverCost)); }
+            get { return _orderNode.DeliverCost; }
+            set { _orderNode.DeliverCost = value; OnPropertyChanged(nameof(DeliverCost)); }
         }
         public double SummCost
         {
-            get { return _order.SummCost; }
-            set { _order.SummCost = value; OnPropertyChanged(nameof(SummCost)); }
+            get { return _orderNode.SummCost; }
+            set { _orderNode.SummCost = value; OnPropertyChanged(nameof(SummCost)); }
         }
         public double CurrentCost
         {
-            get { return _order.CurrentCost; }
-            set { _order.CurrentCost = value; OnPropertyChanged(nameof(CurrentCost)); }
+            get { return _orderNode.CurrentCost; }
+            set { _orderNode.CurrentCost = value; OnPropertyChanged(nameof(CurrentCost)); }
         }
         #endregion
-        public OrderViewModel()
+        public OrderViewModel(Order order)
         {
-            _order = new Order();
+            _order = order;
+            _orderNode = new OrderNode();
+            _orderNode.OrderId = order.Id;
             Count = 1;
             ProductList = new BindingList<Product>();
             var delivers = new DeliverMapper().GetAll();
@@ -138,15 +140,15 @@ namespace Database.VeiwModel.EditNode
             OrderDate = DateTime.Now;
             UpdateIsValid();
         }
-        public OrderViewModel(Order order)
+        public OrderViewModel(OrderNode orderNode)
         {
-            _order = order;
+            _orderNode = orderNode;
             ProductList = new BindingList<Product>();
             var delivers = new DeliverMapper().GetAll();
             DeliverList = new BindingList<Deliver>(delivers.ToList());
-            _selectedDeliver = DeliverList.Where(p=>p.Id == _order.DeliverId).FirstOrDefault();
+            _selectedDeliver = DeliverList.Where(p=>p.Id == _orderNode.DeliverId).FirstOrDefault();
             LoadProducts();
-            _selectedProduct = ProductList.Where(p => p.Id == _order.ProductId).FirstOrDefault();
+            _selectedProduct = ProductList.Where(p => p.Id == _orderNode.ProductId).FirstOrDefault();
             _executeDelegate = new Action(Update);
             IsValid = true;
         }
@@ -169,11 +171,12 @@ namespace Database.VeiwModel.EditNode
         {
             try
             {
-                _order.Deliver = null;
-                _order.Product = null;
-                Service.orderMapper.Create(_order);
-                _order.Id = 0;
-                Service.orderMapper.NotifyObserver();
+                _orderNode.Deliver = null;
+                _orderNode.Product = null;
+                Service.orderNodeMapper.Create(_orderNode);
+                _order.OrderNodes.Add(_orderNode);
+                Service.orderMapper.ReCalculate(_order);
+                Service.orderNodeMapper.NotifyObserver();
             }
             catch
             {
@@ -184,8 +187,13 @@ namespace Database.VeiwModel.EditNode
         {
             try
             {
-                Service.orderMapper.Update(_order);
-                Service.orderMapper.NotifyObserver();
+                _orderNode.Product = null;
+                _orderNode.Deliver = null;
+                Service.orderNodeMapper.Update(_orderNode);
+
+                var order = Service.orderMapper.GetAll().ToList().Find(x => x.Id == _orderNode.OrderId);
+                Service.orderMapper.ReCalculate(order);
+                Service.orderNodeMapper.NotifyObserver();
             }
             catch
             {

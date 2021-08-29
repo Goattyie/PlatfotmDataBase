@@ -25,7 +25,10 @@
             <MenuItem Header="Таблицы">
                 <MenuItem Header="Товар в наличии" Command="{Binding TableClick}" CommandParameter="AvailableTable"></MenuItem>
                 <MenuItem Header="Проданный товар" Command="{Binding TableClick}" CommandParameter="SellTable"></MenuItem>
-                <MenuItem Header="Заказы" Command="{Binding TableClick}" CommandParameter="OrderTable"></MenuItem>
+                <MenuItem Header="Заказы">
+                    <MenuItem Header="Текущие заказы" Command="{Binding OpenOrderCommand}" CommandParameter="True"></MenuItem>
+                    <MenuItem Header="Архив заказов" Command="{Binding OpenOrderCommand}" CommandParameter="False"></MenuItem>
+                </MenuItem>
                 <MenuItem Header="Товар" Command="{Binding TableClick}" CommandParameter="ProductTable"></MenuItem>
                 <MenuItem Header="Клиенты" Command="{Binding TableClick}" CommandParameter="ClientTable"></MenuItem>
                 <MenuItem Header="Профиль" Command="{Binding TableClick}" CommandParameter="ProfileTable"></MenuItem>
@@ -33,15 +36,20 @@
                 <MenuItem Header="Поставщики" Command="{Binding TableClick}" CommandParameter="DeliverTable"></MenuItem>
                 <MenuItem Header="Товары поставщиков" Command="{Binding TableClick}" CommandParameter="DeliverProductTable"></MenuItem>
             </MenuItem>
-                     
-            <MenuItem Header="Excel">
 
+            <MenuItem Header="Excel">
                 <MenuItem Header="Импортировать данные" Command="{Binding ImportDatabase}"></MenuItem>
                 <MenuItem Header="Экспортировать данные" Command="{Binding ExportDatabase}"></MenuItem>
-
-                
             </MenuItem>
-            
+
+            <MenuItem Header="Запросы" ItemsSource="{Binding QueryList}" DisplayMemberPath="Name">
+                <MenuItem.ItemContainerStyle>
+                    <Style TargetType="{x:Type MenuItem}">
+                        <Setter Property="Command" Value="{Binding ExecuteCommand}" />
+                    </Style>
+                </MenuItem.ItemContainerStyle>
+            </MenuItem>
+
         </Menu>
         <Frame Grid.Row="1" Content="{Binding CurrentPage}" NavigationUIVisibility="Hidden" Margin="0,4,0,0"/>
     </Grid>

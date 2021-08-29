@@ -21,7 +21,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="37*"/>
             <RowDefinition Height="362*"/>
-            <RowDefinition Height="51*"/>
+            <RowDefinition Height="31*"/>
         </Grid.RowDefinitions>
         <TextBlock 
             Margin="10,10,0,0"

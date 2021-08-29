@@ -21,7 +21,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="37*"/>
             <RowDefinition Height="362*"/>
-            <RowDefinition Height="51*"/>
+            <RowDefinition Height="31*"/>
         </Grid.RowDefinitions>
         <TextBlock 
             Margin="10,10,0,0" 
@@ -37,12 +37,12 @@
                   ItemsSource="{Binding ProductList}"
                   SelectedItem="{Binding SelectedProduct}">
             <DataGrid.Columns>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Id" Width="50" Binding="{Binding Path=Id}"></DataGridTextColumn>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Название" Width="*" Binding="{Binding Path=Name}"></DataGridTextColumn>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}"  Header="Цена закупки" Binding="{Binding Path=OrderCost}"></DataGridTextColumn>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}"  Header="Цена с доставкой" Binding="{Binding Path=DeliverCost}"></DataGridTextColumn>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}"  Header="Цена продажи" Binding="{Binding Path=SellCost}"></DataGridTextColumn>
-                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}"  Header="Прибыль" Binding="{Binding Path=Profit}"></DataGridTextColumn>
+                
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Название" Width="400" Binding="{Binding Path=Name}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" Width="120"  Header="Цена закупки" Binding="{Binding Path=OrderCost}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" Width="120" Header="Цена с доставкой" Binding="{Binding Path=DeliverCost}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" Width="120" Header="Цена продажи" Binding="{Binding Path=SellCost}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" CellStyle="{StaticResource CenterGridColumn}" Width="120" Header="Прибыль" Binding="{Binding Path=Profit}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 

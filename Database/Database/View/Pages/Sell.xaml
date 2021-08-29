@@ -19,13 +19,35 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="37*"/>
             <RowDefinition Height="362*"/>
-            <RowDefinition Height="51*"/>
+            <RowDefinition Height="31*"/>
         </Grid.RowDefinitions>
-        <TextBlock 
-            Margin="10,10,0,0" 
+        <Grid Margin="10,10,0,0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="200*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock 
             VerticalAlignment="Center"
             Style="{StaticResource HeadTextBlock}"   
             FontSize="{StaticResource Big}">Таблица: Продажа</TextBlock>
+
+            <StackPanel
+                Grid.Column="1"
+                Orientation="Horizontal">
+
+                <TextBlock 
+                    VerticalAlignment="Center"
+                    Style="{StaticResource HeadTextBlock}"   
+                    FontSize="{StaticResource Medium}">Количество записей: </TextBlock>
+
+                <TextBlock 
+                    VerticalAlignment="Center"
+                    Style="{StaticResource HeadTextBlock}"   
+                    FontSize="{StaticResource Medium}"
+                    Text="{Binding RowsCount}"/>
+
+            </StackPanel>
+        </Grid>
         <DataGrid CanUserAddRows="False"
                   AutoGenerateColumns="False"
                   Grid.Row="1" 

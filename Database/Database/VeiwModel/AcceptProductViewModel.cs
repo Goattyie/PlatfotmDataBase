@@ -24,8 +24,8 @@ namespace Database.VeiwModel
             {
                 try
                 {
-                    Service.orderMapper.AcceptOrder(_order, _count);
-                    Service.orderMapper.NotifyObserver();
+                    Service.orderNodeMapper.AcceptOrder(_order, _count);
+                    Service.orderNodeMapper.NotifyObserver();
                 }
                 catch
                 {
@@ -35,7 +35,7 @@ namespace Database.VeiwModel
         }
         //Сколько получено с приезда Евгения
         private int _count;
-        private Order _order;
+        private OrderNode _order;
         public int Count
         {
             get { return _count; }
@@ -52,7 +52,7 @@ namespace Database.VeiwModel
         {
             get { return _order.Product.Name; }
         }
-        public AcceptProductViewModel(Order order)
+        public AcceptProductViewModel(OrderNode order)
         {
             _order = order;
             Count = 0;

@@ -40,7 +40,7 @@ namespace Database.View.EditNode {
     /// <summary>
     /// EditOrder
     /// </summary>
-    public partial class EditOrder : System.Windows.Window, System.Windows.Markup.IComponentConnector {
+    public partial class EditOrderNode : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         private bool _contentLoaded;
         

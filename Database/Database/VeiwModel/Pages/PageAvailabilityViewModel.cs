@@ -92,20 +92,24 @@ namespace Database.VeiwModel.Pages
             Service.productMapper.AddObserver(this);
             Service.availabilityMapper.AddObserver(this);
             Service.sellMapper.AddObserver(this);
-            Service.orderMapper.AddObserver(this);
+            Service.orderNodeMapper.AddObserver(this);
             Execute();
         }
 
         public async void Execute()
         {
             DeliverSum = 0;
+            AvailabilityCount = 0;
             AvailabilityList.Clear();
             var availability = await new AvailabilityMapper().GetAllAsync();
             availability = availability.OrderBy(x => x.Product.Name);
-            AvailabilityCount = availability.Count();
             foreach (var item in availability)
             {
-                DeliverSum += item.DeliverCost;
+                if (item.Count > 0)
+                {
+                    DeliverSum += item.DeliverCost * item.Count;
+                    AvailabilityCount += 1;
+                }
                 AvailabilityList.Add(item);
             }
         }

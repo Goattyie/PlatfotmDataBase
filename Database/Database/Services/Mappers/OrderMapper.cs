@@ -1,4 +1,7 @@
-﻿using Database.Model.Database.Tables;
+﻿using Database.Model;
+using Database.Model.Database;
+using Database.Model.Database.Services;
+using Database.Model.Database.Tables;
 using Database.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -6,81 +9,68 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
-namespace Database.Model.Database.Services
+namespace Database.Services.Mappers
 {
-    public class OrderMapper : Observable, IMapper<Order>
+    class OrderMapper : Observable, IMapper<Order>
     {
         public void Create(Order obj)
         {
             using (var connection = new SqlModel())
             {
-                    connection.Orders.Add(obj);
-                    connection.SaveChanges();
+                connection.Orders.Add(obj);
+                connection.SaveChanges();
             }
         }
+
         public void Delete(Order[] obj)
         {
-            using (var connection = new SqlModel())
-            {
-                    connection.Orders.RemoveRange(obj);
-                    connection.SaveChanges();
-            }
+            throw new NotImplementedException();
         }
+
         public IEnumerable<Order> GetAll()
         {
-            var items = new List<Order>();
+            var list = new List<Order>();
             using (var connection = new SqlModel())
             {
-                items = connection.Orders.Include(a => a.Product).Include(a => a.Deliver).ToList();
+                list = connection.Orders.Include(x => x.OrderNodes).ThenInclude(p => p.Product)
+                    .Include(x=>x.OrderNodes).ThenInclude(d=>d.Deliver).ToList();
             }
-            return items;
+            return list;
         }
-        public  async  Task<IEnumerable<Order>> GetAllAsync()
+
+        public async Task<IEnumerable<Order>> GetAllAsync()
         {
-            var items = new List<Order>();
-            using (var connection = new SqlModel())
+            var list = new List<Order>();
+            using(var connection = new SqlModel())
             {
-                items = await connection.Orders.Include(a => a.Product).Include(a => a.Deliver).ToListAsync();
+                list =await connection.Orders.Include(x => x.OrderNodes).ToListAsync();
             }
-            return items;
+            return list;
         }
+
         public void Update(Order obj)
         {
-            using(var connection = new SqlModel())
+            using (var connection = new SqlModel())
             {
-                    connection.Orders.Update(obj);
-                    connection.SaveChanges();
+                connection.Orders.Update(obj);
+                connection.SaveChanges();
             }
         }
-        public void AcceptOrder(Order obj, int count)
+        public void ReCalculate(Order obj)
         {
-            using(var connection = new SqlModel())
+            using (var connection = new SqlModel())
             {
-                    obj.CurrentCount += count;
-                    connection.Orders.Update(obj);
-
-                    var available = new AvailabilityMapper().GetElementByProductId(obj.ProductId);
-                    
-                    if (available != null)
-                    {
-                        available.Count += count;
-                        connection.Availability.Update(available);
-                    }
-                    else
-                    {
-                        available = new Availability();
-                        available.Count = count;
-                        available.ProductId = obj.ProductId;
-                        available.BuyCost = obj.Product.OrderCost;
-                        available.DeliverCost = obj.Product.DeliverCost;
-                        available.SellCost = obj.Product.SellCost;
-                        connection.Availability.Add(available);
-                    }
-
-                    connection.SaveChanges();
-                    MessageBox.Show("Товар принят", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                obj.OrderSum = 0;
+                obj.DeliverSum = 0;
+                foreach (var item in obj.OrderNodes)
+                {
+                    obj.OrderSum += item.OrderCost;
+                    obj.DeliverSum += item.DeliverCost;
+                }
+                obj.AllSum = obj.DeliverSum + obj.OrderSum;
+                connection.Orders.Update(obj);
+                connection.SaveChanges();
             }
         }
     }

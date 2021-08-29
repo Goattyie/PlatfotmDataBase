@@ -1,5 +1,6 @@
 ﻿using Database.Model.Database.Services;
 using Database.Services.Interfaces;
+using Database.Services.Mappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace Database.Services
         public static DeliverMapper deliverMapper = new DeliverMapper();
         public static DeliverProductMapper deliverProductMapper = new DeliverProductMapper();
         public static OrderMapper orderMapper = new OrderMapper();
+        public static OrderNodeMapper orderNodeMapper = new OrderNodeMapper();
         public static ProductMapper productMapper = new ProductMapper();
         public static ProfileMapper profileMapper = new ProfileMapper();
         public static SellMapper sellMapper = new SellMapper();
