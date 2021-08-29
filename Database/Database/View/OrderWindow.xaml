@@ -36,13 +36,15 @@
                 Style="{StaticResource BaseButton}"
                 FontSize="{StaticResource Medium}"
                 Command="{Binding AddOrderCommand}"
-                Content="Добавить заказ"/>
+                Content="Добавить заказ"
+                IsEnabled="{Binding isActive}"/>
             <Button
                 Grid.Row="2"
                 Style="{StaticResource BaseButton}"
                 FontSize="{StaticResource Medium}"
                 Command="{Binding AddOrderToArchiveCommand}"
-                Content="Добавить в архив"/>
+                Content="Добавить в архив"
+                IsEnabled="{Binding isActive}"/>
         </Grid>
 
         <Grid
@@ -86,10 +88,10 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Row="2" Grid.Column="0" Style="{Binding Source={StaticResource BlueButton}}" Content="Добавить запись" Margin="10,0,10,10" Command="{Binding AddCommand}"/>
-                <Button Grid.Row="2" Grid.Column="1" Style="{Binding Source={StaticResource BlueButton}}" Content="Редактировать" Margin="10,0,10,10" Command="{Binding EditCommand}"/>
-                <Button Grid.Row="2" Grid.Column="2" Style="{Binding Source={StaticResource BlueButton}}" Content="Удалить запись" Margin="10,0,10,10" Command="{Binding RemoveCommand}"/>
-                <Button Grid.Row="2" Grid.Column="3" Style="{Binding Source={StaticResource BlueButton}}" Content="Принять товар" Margin="10,0,10,10" Command="{Binding AcceptCommand}"/>
+                <Button IsEnabled="{Binding isActive}" Grid.Row="2" Grid.Column="0" Style="{Binding Source={StaticResource BlueButton}}" Content="Добавить запись" Margin="10,0,10,10" Command="{Binding AddCommand}"/>
+                <Button IsEnabled="{Binding isActive}" Grid.Row="2" Grid.Column="1" Style="{Binding Source={StaticResource BlueButton}}" Content="Редактировать" Margin="10,0,10,10" Command="{Binding EditCommand}"/>
+                <Button IsEnabled="{Binding isActive}" Grid.Row="2" Grid.Column="2" Style="{Binding Source={StaticResource BlueButton}}" Content="Удалить запись" Margin="10,0,10,10" Command="{Binding RemoveCommand}"/>
+                <Button IsEnabled="{Binding isActive}" Grid.Row="2" Grid.Column="3" Style="{Binding Source={StaticResource BlueButton}}" Content="Принять товар" Margin="10,0,10,10" Command="{Binding AcceptCommand}"/>
             </Grid>
 
         </Grid>

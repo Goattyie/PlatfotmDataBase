@@ -26,8 +26,13 @@ namespace Database.VeiwModel
         private OrderNode _selecterOrderNode;
         private Model.Order _selectedOrder;
         private int _lastSelectedOrderId;
+        public bool _isActive;
 
-
+        public bool isActive
+        {
+            get { return _isActive; }
+            set { _isActive = value; OnPropertyChanged(nameof(isActive)); }
+        }
         public ObservableCollection<Model.Order> OrderList { get; set; }
         public Model.Order SelectedOrder
         {
@@ -45,7 +50,7 @@ namespace Database.VeiwModel
             {
                 try
                 {
-                    Service.orderMapper.Create(new Model.Order() { Date = DateTime.Now });
+                    Service.orderMapper.Create(new Model.Order() { Date = DateTime.Now, IsActive = true });;
                     Service.orderMapper.NotifyObserver();
                 }
                 catch
@@ -56,7 +61,15 @@ namespace Database.VeiwModel
         }
         public BaseCommand AddOrderToArchiveCommand
         {
-            get { return _addOrderToArchiveCommand ??= new BaseCommand(obj => { }); }
+            get { return _addOrderToArchiveCommand ??= new BaseCommand(obj => 
+            { 
+                if(SelectedOrder != null)
+                {
+                    SelectedOrder.IsActive = false;
+                    Service.orderMapper.Update(SelectedOrder);
+                    Service.orderMapper.NotifyObserver();
+                }
+            }); }
         }
         public OrderNode SelectedOrderNode
         {
@@ -106,6 +119,7 @@ namespace Database.VeiwModel
         }
         public OrderWindowVM(bool isActive)
         {
+            this._isActive = isActive;
             Service.orderMapper.AddObserver(this);
             Service.orderNodeMapper.AddObserver(this);
             OrderNodesList = new ObservableCollection<OrderNode>();
@@ -128,7 +142,7 @@ namespace Database.VeiwModel
         public void Execute()
         {
             OrderList.Clear();
-            var orders = Service.orderMapper.GetAll();
+            var orders = Service.orderMapper.GetAll().ToList().Where(x=>x.IsActive == _isActive);
             orders = orders.OrderByDescending(x => x.Id);
             foreach (var item in orders)
                 OrderList.Add(item);
