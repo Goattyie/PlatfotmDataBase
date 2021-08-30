@@ -24,8 +24,12 @@ namespace Database.Services.ExcelParser
             using (var package = new ExcelPackage(filename))
             {
                 var workbook = package.Workbook;
-                var worksheet = workbook.Worksheets[0];
-                package.Workbook.Worksheets.Delete(worksheet);
+                ExcelWorksheet worksheet;
+                if (workbook.Worksheets.Count != 0)
+                {
+                    worksheet = workbook.Worksheets[0];
+                    package.Workbook.Worksheets.Delete(worksheet);
+                }
                 worksheet = package.Workbook.Worksheets.Add("Лист 1");
                 int rowCount = _strategy.NodesCount;
 

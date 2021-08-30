@@ -57,7 +57,6 @@ D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\AcceptOr
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\EditNode\EditAvailability.g.cs
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\EditNode\EditClient.g.cs
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\EditNode\EditDeliverProduct.g.cs
-D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\EditNode\EditOrder.g.cs
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\EditNode\EditProduct.g.cs
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\EditNode\EditSell.g.cs
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\EditNode\EditSup.g.cs
@@ -67,7 +66,6 @@ D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\Pages\Ca
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\Pages\Client.g.cs
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\Pages\Deliver.g.cs
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\Pages\DeliverProduct.g.cs
-D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\Pages\Order.g.cs
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\Pages\Product.g.cs
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\Pages\Profile.g.cs
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\Pages\Sell.g.cs
@@ -80,7 +78,6 @@ D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\AcceptOr
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\EditNode\EditAvailability.baml
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\EditNode\EditClient.baml
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\EditNode\EditDeliverProduct.baml
-D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\EditNode\EditOrder.baml
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\EditNode\EditProduct.baml
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\EditNode\EditSell.baml
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\EditNode\EditSup.baml
@@ -90,7 +87,6 @@ D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\Pages\Ca
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\Pages\Client.baml
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\Pages\Deliver.baml
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\Pages\DeliverProduct.baml
-D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\Pages\Order.baml
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\Pages\Product.baml
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\Pages\Profile.baml
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\Pages\Sell.baml
@@ -110,3 +106,9 @@ D:\PlaygroundDataBase\Database\Database\bin\Release\net5.0-windows\DynamicExpres
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\ImportExportDatabase.g.cs
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\ImportExportDatabase.baml
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\Database.csproj.AssemblyReference.cache
+D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\EditNode\EditOrderNode.g.cs
+D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\InputDates.g.cs
+D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\OrderWindow.g.cs
+D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\EditNode\EditOrderNode.baml
+D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\InputDates.baml
+D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\OrderWindow.baml

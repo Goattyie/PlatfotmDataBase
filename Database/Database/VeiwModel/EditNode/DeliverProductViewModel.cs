@@ -64,10 +64,10 @@ namespace Database.VeiwModel.EditNode
             ProductList = new BindingList<Product>();
             DeliverList = new BindingList<Deliver>();
             _deliverProduct = new DeliverProduct();
-            var products = new ProductMapper().GetAll();
-            var delivers = new DeliverMapper().GetAll();
+            var products = new ProductMapper().GetAll().OrderBy(x=>x.Name);
+            var delivers = new DeliverMapper().GetAll().OrderBy(x => x.Name);
 
-            foreach(var item in products)
+            foreach (var item in products)
             {
                 ProductList.Add(item);
             }

@@ -28,6 +28,15 @@ namespace Database.Services.Mappers
             throw new NotImplementedException();
         }
 
+        public void Delete(Order obj)
+        {
+            using (var connection = new SqlModel())
+            {
+                connection.Orders.Remove(obj);
+                connection.SaveChanges();
+            }
+        }
+
         public IEnumerable<Order> GetAll()
         {
             var list = new List<Order>();

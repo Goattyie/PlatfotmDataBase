@@ -17,8 +17,11 @@
                 <RowDefinition Height="373*"/>
                 <RowDefinition Height="21*"/>
                 <RowDefinition Height="21*"/>
+                <RowDefinition Height="21*"/>
+                <RowDefinition Height="21*"/>
             </Grid.RowDefinitions>
-            <ListBox ItemsSource="{Binding OrderList}" SelectedItem="{Binding SelectedOrder}">
+
+            <ListBox  ItemsSource="{Binding OrderList}" SelectedItem="{Binding SelectedOrder}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -45,6 +48,18 @@
                 Command="{Binding AddOrderToArchiveCommand}"
                 Content="Добавить в архив"
                 IsEnabled="{Binding isActive}"/>
+            <Button
+                Grid.Row="3"
+                Style="{StaticResource BaseButton}"
+                FontSize="{StaticResource Medium}"
+                Command="{Binding ExcelExportCommand}"
+                Content="Вывод в Excel"/>
+            <Button
+                Grid.Row="4"
+                Style="{StaticResource BaseButton}"
+                FontSize="{StaticResource Medium}"
+                Command="{Binding RemoveOrderCommand}"
+                Content="Удалить заказ"/>
         </Grid>
 
         <Grid

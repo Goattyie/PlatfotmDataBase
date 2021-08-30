@@ -226,7 +226,6 @@ namespace Database.VeiwModel
         {
             DeliverProductProgressBarValue = obj;
         }
-
         private async void UpdateErrors(string arg1, int arg2)
         {
             await Task.Run(() => {
@@ -237,12 +236,10 @@ namespace Database.VeiwModel
             });
 
         }
-
         private void UpdateSellProgressBar(int obj)
         {
             SellProgressBarValue = obj;
         }
-
         private void UpdateAvailabilityProgressBar(int obj)
         {
             AvailabilityProgressBarValue = obj;

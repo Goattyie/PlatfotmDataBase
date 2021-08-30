@@ -1,5 +1,6 @@
 ﻿using Database.Model.Database.Tables;
 using Database.Services;
+using Database.Services.ExcelParser;
 using Database.Services.Interfaces;
 using Database.VeiwModel.Commands;
 using Database.View;
@@ -8,9 +9,11 @@ using Database.View.Pages.Tables;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Database.VeiwModel
@@ -23,6 +26,8 @@ namespace Database.VeiwModel
         private BaseCommand _editCommand;
         private BaseCommand _removeCommand;
         private BaseCommand _acceptCommand;
+        private BaseCommand _removeOrderCommand;
+        private BaseCommand _excelExportCommand;
         private OrderNode _selecterOrderNode;
         private Model.Order _selectedOrder;
         private int _lastSelectedOrderId;
@@ -95,6 +100,27 @@ namespace Database.VeiwModel
                 }));
             }
         }
+        public BaseCommand RemoveOrderCommand
+        {
+            get { return _removeOrderCommand ??= new BaseCommand((obj)=> 
+            {
+                var result = MessageBox.Show("Вы уверены что хотите удалить заказ из базы данных?", "Уведомление", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                if(result == MessageBoxResult.OK)
+                {
+                    try
+                    {
+                        Service.orderMapper.Delete(SelectedOrder);
+                        Execute();
+                        if(OrderList.Count == 0)
+                            OrderNodesList.Clear();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("При удалении произошла ошибка", "Внимание", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }); }
+        }
         public BaseCommand RemoveCommand
         {
             get
@@ -116,6 +142,10 @@ namespace Database.VeiwModel
         public BaseCommand AcceptCommand
         {
             get { return _acceptCommand ?? (_acceptCommand = new BaseCommand(obj => { if (_selecterOrderNode != null) new AcceptOrder(_selecterOrderNode).ShowDialog(); })); }
+        }
+        public BaseCommand ExcelExportCommand
+        {
+            get { return _excelExportCommand ??= new BaseCommand((obj => { ExportToExcel(); })); }
         }
         public OrderWindowVM(bool isActive)
         {
@@ -149,6 +179,26 @@ namespace Database.VeiwModel
             SelectedOrder = OrderList.FirstOrDefault(x => x.Id == _lastSelectedOrderId);
             if(SelectedOrder == null)
                 SelectedOrder = OrderList.FirstOrDefault();
+        }
+
+        private void ExportToExcel()
+        {
+            try
+            {
+                string dir = $"{Directory.GetCurrentDirectory()}\\Заказы";
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+
+                 new ExcelWriter(new OrderWriterStrategy(SelectedOrder), dir + $"\\Заказ№{SelectedOrder.Id}({SelectedOrder.Date.ToString("d")}).xlsx").WriteNodes();
+            }
+            catch
+            {
+                MessageBox.Show("При записи в файл возникла ошибка", "Внимание", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
+
         }
     }
 }
