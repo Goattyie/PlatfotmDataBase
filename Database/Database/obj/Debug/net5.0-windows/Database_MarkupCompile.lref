@@ -10,6 +10,7 @@ FD:\PlaygroundDataBase\Database\Database\View\EditNode\EditSell.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\EditNode\EditSup.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\ImportExportDatabase.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\InputDates.xaml;;
+FD:\PlaygroundDataBase\Database\Database\View\InputValue.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\MainWindow.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\OrderWindow.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\Pages\Availability.xaml;;
@@ -20,4 +21,7 @@ FD:\PlaygroundDataBase\Database\Database\View\Pages\DeliverProduct.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\Pages\Product.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\Pages\Profile.xaml;;
 FD:\PlaygroundDataBase\Database\Database\View\Pages\Sell.xaml;;
+FD:\PlaygroundDataBase\Database\Database\View\Query\SellDataGridPage.xaml;;
+FD:\PlaygroundDataBase\Database\Database\View\Query\TableChartWindow.xaml;;
+FD:\PlaygroundDataBase\Database\Database\View\Query\TableWindow.xaml;;
 

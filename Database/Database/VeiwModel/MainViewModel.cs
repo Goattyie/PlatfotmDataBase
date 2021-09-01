@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using Database.Model;
+using Database.Services.Query;
 using Database.VeiwModel.Commands;
 using Database.View;
 using Database.View.Pages;
@@ -31,8 +32,7 @@ namespace Database.VeiwModel
         private BaseCommand _exportDatabase;
         private BaseCommand _importDatabase;
 
-        public ObservableCollection<QueryListItem> QueryList { get; set; }
-
+        public ObservableCollection<Query> QueryList { get; set; }
         public BaseCommand OpenOrderCommand
         {
             get { return _openOrderCommand ??= new BaseCommand((obj) => { new OrderWindow(bool.Parse(obj.ToString())).Show(); }); }
@@ -76,11 +76,8 @@ namespace Database.VeiwModel
 
         private void AddQueryes()
         {
-            QueryList = new ObservableCollection<QueryListItem>();
-            QueryList.Add(new QueryListItem { Name = "Какие товары проданы за указанный период времени", ExecuteCommand = new BaseCommand((obj) => { new InputDates().Show();  }) }); ;
-            QueryList.Add(new QueryListItem { Name = "Сколько было продано данного товара по месяцам за данный период времени", ExecuteCommand = new BaseCommand((obj) => { }) }); ;
-            QueryList.Add(new QueryListItem { Name = "Вывести продажи по номеру телефона", ExecuteCommand = new BaseCommand((obj) => { }) }); ;
-            QueryList.Add(new QueryListItem { Name = "Вывести все проданные товары, их общее количество и суммарную прибыль", ExecuteCommand = new BaseCommand((obj) => { }) }); ;
+            QueryList = new ObservableCollection<Query>();
+            QueryList.Add(new SearchByPhone());
         }
 
         private void NewTablePage(object tableName)

@@ -37,7 +37,16 @@
     <Compile Update="View\InputDates.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\InputValue.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\OrderWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Query\SellDataGridPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Query\TableChartWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Pages\Availability.xaml.cs">
@@ -62,6 +71,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Pages\Sell.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Query\TableWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -105,10 +117,19 @@
     <Page Update="View\InputDates.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\InputValue.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\OrderWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Query\SellDataGridPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Query\TableChartWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Pages\Availability.xaml">
@@ -133,6 +154,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Pages\Sell.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Query\TableWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

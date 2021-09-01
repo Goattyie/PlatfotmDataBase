@@ -42,10 +42,11 @@
                 <MenuItem Header="Экспортировать данные" Command="{Binding ExportDatabase}"></MenuItem>
             </MenuItem>
 
-            <MenuItem Header="Запросы" ItemsSource="{Binding QueryList}" DisplayMemberPath="Name">
+            <MenuItem Header="Запросы" ItemsSource="{Binding QueryList}">
                 <MenuItem.ItemContainerStyle>
                     <Style TargetType="{x:Type MenuItem}">
-                        <Setter Property="Command" Value="{Binding ExecuteCommand}" />
+                        <Setter Property="Header" Value="{Binding Path=Name}"/>
+                        <Setter Property="Command" Value="{Binding ExecuteQueryCommand}"/>
                     </Style>
                 </MenuItem.ItemContainerStyle>
             </MenuItem>
