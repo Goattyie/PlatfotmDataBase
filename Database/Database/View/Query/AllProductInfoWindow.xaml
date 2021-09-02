@@ -1,0 +1,20 @@
+﻿<Window x:Class="Database.View.Query.AllProductInfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Database.View.Query" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        mc:Ignorable="d"
+        Title="Информация о товарах за все время" Height="768" Width="900">
+    <Grid Margin="10">
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding ProductList}">
+            <DataGrid.Columns>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Width="450"  Header="Название товара" Binding="{Binding Path=Name}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Количество" Width="100" Binding="{Binding Path=Count}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Прибыль" Width="100" Binding="{Binding Path=Profit}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Количетво (%)" Width="100" Binding="{Binding Path=PersentCount, StringFormat={}{0}%}"></DataGridTextColumn>
+                <DataGridTextColumn HeaderStyle="{StaticResource HeaderCenterDataGrid}" Header="Прибыль (%)" Width="100" Binding="{Binding Path=PersentProfit, StringFormat={}{0}%}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

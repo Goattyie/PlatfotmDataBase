@@ -25,5 +25,10 @@ namespace Database.View
             InitializeComponent();
             DataContext = new InputDatesVM();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+        }
     }
 }

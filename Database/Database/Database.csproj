@@ -12,6 +12,7 @@
   <ItemGroup>
     <PackageReference Include="DynamicExpresso.Core" Version="2.8.1" />
     <PackageReference Include="EPPlus" Version="5.7.2" />
+    <PackageReference Include="LiveCharts.Wpf.Core" Version="0.9.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.8">

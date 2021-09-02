@@ -10,6 +10,9 @@
     <Compile Update="View\AcceptOrder.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\ChangeProducts.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\EditNode\EditAvailability.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -43,10 +46,19 @@
     <Compile Update="View\OrderWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Query\SellDataGridPage.xaml.cs">
+    <Compile Update="View\Query\AllProductInfoWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Query\TableChartWindow.xaml.cs">
+    <Compile Update="View\Query\AllProfitWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Query\MonthProductInfoWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Query\PeriodProductInfoWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Query\SellDataGridWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Pages\Availability.xaml.cs">
@@ -73,9 +85,6 @@
     <Compile Update="View\Pages\Sell.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Query\TableWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Colors.xaml">
@@ -88,6 +97,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\AcceptOrder.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ChangeProducts.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\EditNode\EditAvailability.xaml">
@@ -126,10 +138,19 @@
     <Page Update="View\OrderWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Query\SellDataGridPage.xaml">
+    <Page Update="View\Query\AllProductInfoWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Query\TableChartWindow.xaml">
+    <Page Update="View\Query\AllProfitWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Query\MonthProductInfoWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Query\PeriodProductInfoWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Query\SellDataGridWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Pages\Availability.xaml">
@@ -154,9 +175,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Pages\Sell.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\Query\TableWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

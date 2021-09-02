@@ -47,6 +47,30 @@
           "lib/netstandard2.0/Humanizer.dll": {}
         }
       },
+      "LiveCharts.Core/0.9.8": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/LiveCharts.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/LiveCharts.dll": {}
+        }
+      },
+      "LiveCharts.Wpf.Core/0.9.8": {
+        "type": "package",
+        "dependencies": {
+          "LiveCharts.Core": "0.9.8"
+        },
+        "compile": {
+          "lib/net5.0-windows7.0/LiveCharts.Wpf.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0-windows7.0/LiveCharts.Wpf.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
       "Microsoft.CSharp/4.7.0": {
         "type": "package",
         "compile": {
@@ -1630,6 +1654,34 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
+      ]
+    },
+    "LiveCharts.Core/0.9.8": {
+      "sha512": "USb2TBOeER19X0ar5Zgki1ezjrSXBOmUoz3IqzTeksDm6hoaLFqs3iW9+wjHFuWNQGy9lLcVh2YIhhxVIg+zNQ==",
+      "type": "package",
+      "path": "livecharts.core/0.9.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/LiveCharts.dll",
+        "lib/netstandard2.0/LiveCharts.dll",
+        "livecharts.core.0.9.8.nupkg.sha512",
+        "livecharts.core.nuspec"
+      ]
+    },
+    "LiveCharts.Wpf.Core/0.9.8": {
+      "sha512": "jMBdknuG3EOMKA0NaqqwMjhsZpRAzd0UqP0SlwXIBJ+ZoJg5TF9C4rDdKqInEs+RycYmIwmrZWvmfDxsM5MMJw==",
+      "type": "package",
+      "path": "livecharts.wpf.core/0.9.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/LiveCharts.Wpf.dll",
+        "lib/net472/LiveCharts.Wpf.dll",
+        "lib/net5.0-windows7.0/LiveCharts.Wpf.dll",
+        "lib/netcoreapp3.1/LiveCharts.Wpf.dll",
+        "livecharts.wpf.core.0.9.8.nupkg.sha512",
+        "livecharts.wpf.core.nuspec"
       ]
     },
     "Microsoft.CSharp/4.7.0": {
@@ -5443,14 +5495,14 @@
     "net5.0-windows7.0": [
       "DynamicExpresso.Core >= 2.8.1",
       "EPPlus >= 5.7.2",
+      "LiveCharts.Wpf.Core >= 0.9.8",
       "Microsoft.EntityFrameworkCore >= 5.0.8",
       "Microsoft.EntityFrameworkCore.Sqlite >= 5.0.8",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.8"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\goattye\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\DevExpress 21.1\\Components\\Offline Packages": {}
+    "C:\\Users\\Goattyie\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -5458,22 +5510,17 @@
       "projectUniqueName": "D:\\PlaygroundDataBase\\Database\\Database\\Database.csproj",
       "projectName": "Database",
       "projectPath": "D:\\PlaygroundDataBase\\Database\\Database\\Database.csproj",
-      "packagesPath": "C:\\Users\\goattye\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Goattyie\\.nuget\\packages\\",
       "outputPath": "D:\\PlaygroundDataBase\\Database\\Database\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\DevExpress 21.1\\Components\\Offline Packages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\goattye\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 21.1.config",
+        "C:\\Users\\Goattyie\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0-windows7.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\DevExpress 21.1\\Components\\System\\Components\\Packages": {},
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
@@ -5500,6 +5547,10 @@
           "EPPlus": {
             "target": "Package",
             "version": "[5.7.2, )"
+          },
+          "LiveCharts.Wpf.Core": {
+            "target": "Package",
+            "version": "[0.9.8, )"
           },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
@@ -5534,7 +5585,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.303\\RuntimeIdentifierGraph.json"
       }
     }
   }

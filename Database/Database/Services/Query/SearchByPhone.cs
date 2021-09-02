@@ -19,7 +19,7 @@ namespace Database.Services.Query
             {
                 var phone = inputValueWindow.ValueTextBox.Text;
                 var sellList = QueryService.SearchByPhone(phone);
-                new TableWindow(new SellDataGridPage(sellList)).Show();
+                new SellDataGridWindow(sellList).Show();
 
             }
         }

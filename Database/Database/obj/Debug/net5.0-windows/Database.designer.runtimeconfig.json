@@ -6,9 +6,8 @@
       "version": "5.0.0"
     },
     "additionalProbingPaths": [
-      "C:\\Users\\goattye\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\goattye\\.nuget\\packages",
-      "C:\\Program Files (x86)\\DevExpress 21.1\\Components\\Offline Packages"
+      "C:\\Users\\Goattyie\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Goattyie\\.nuget\\packages"
     ],
     "configProperties": {
       "Microsoft.NETCore.DotNetHostPolicy.SetAppPaths": true

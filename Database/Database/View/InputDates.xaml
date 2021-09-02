@@ -30,6 +30,7 @@
                 HorizontalAlignment="Center"
                 Width="250"
                 VerticalAlignment="Center"
+                Name="FirstDate"
                 SelectedDate="{Binding FirstDate}"/>
         </Grid>
         <Grid Grid.Row="1">
@@ -49,6 +50,7 @@
                 HorizontalAlignment="Center"
                 Width="250"
                 VerticalAlignment="Center"
+                Name="SecondDate"
                 SelectedDate="{Binding SecondDate}"/>
         </Grid>
         <Button
@@ -57,6 +59,6 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             Content="Сохранить"
-            Command="{Binding ExecuteCommand}"/>
+            Command="{Binding ExecuteCommand}" Click="Button_Click"/>
     </Grid>
 </Window>

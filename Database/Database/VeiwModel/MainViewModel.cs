@@ -78,6 +78,10 @@ namespace Database.VeiwModel
         {
             QueryList = new ObservableCollection<Query>();
             QueryList.Add(new SearchByPhone());
+            QueryList.Add(new PeriodMonthProductInfo());
+            QueryList.Add(new PeriodProductsInfo());
+            QueryList.Add(new AllTimeProfit());
+            QueryList.Add(new AllProductCountProfitQuery());
         }
 
         private void NewTablePage(object tableName)
