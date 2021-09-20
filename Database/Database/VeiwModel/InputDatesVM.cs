@@ -32,7 +32,7 @@ namespace Database.VeiwModel
 
         public InputDatesVM()
         {
-            FirstDate = DateTime.MinValue;
+            FirstDate = DateTime.Now;
             SecondDate = DateTime.Now;
         }
     }

@@ -119,9 +119,10 @@ namespace Database.Services
             //Посчитаем сколько месяцев между двумя датами
             int CalcMonth(DateTime firstDate, DateTime secondDate)
             {
-                if (firstDate.Month >= secondDate.Month)
-                    return 0;
                 int monthCount = 1;
+                if (firstDate.Month == secondDate.Month && firstDate.Year == secondDate.Year)
+                    return monthCount;
+
                 while (firstDate.AddMonths(monthCount) < secondDate) ++monthCount;
                 return monthCount;
             }

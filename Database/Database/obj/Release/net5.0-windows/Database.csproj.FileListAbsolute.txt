@@ -127,3 +127,4 @@ D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\Query\Al
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\Query\MonthProductInfoWindow.baml
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\Query\PeriodProductInfoWindow.baml
 D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\View\Query\SellDataGridWindow.baml
+D:\PlaygroundDataBase\Database\Database\obj\Release\net5.0-windows\Database.csproj.AssemblyReference.cache

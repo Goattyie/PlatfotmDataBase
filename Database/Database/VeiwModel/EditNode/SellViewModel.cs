@@ -175,7 +175,7 @@ namespace Database.VeiwModel.EditNode
             var clients = new ClientMapper().GetAll();
 
             AvailabilityList = new BindingList<Availability>(available.Where(x=>x.Count > 0).ToList());
-            CardList = new BindingList<Card>(cards.ToList());
+            CardList = new BindingList<Card>(cards.OrderBy(x=>x.Name).ToList());
             ClientList = new BindingList<Client>(clients.ToList());
 
             _executeDelegate = new Action(Create);

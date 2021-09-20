@@ -16,5 +16,5 @@ D:\PlaygroundDataBase\Database\Database\App.xaml
 226230092544
 Colors.xaml;Fonts.xaml;Styles.xaml;View\AcceptOrder.xaml;View\ChangeProducts.xaml;View\EditNode\EditAvailability.xaml;View\EditNode\EditClient.xaml;View\EditNode\EditDeliverProduct.xaml;View\EditNode\EditOrderNode.xaml;View\EditNode\EditProduct.xaml;View\EditNode\EditSell.xaml;View\EditNode\EditSup.xaml;View\ImportExportDatabase.xaml;View\InputDates.xaml;View\InputValue.xaml;View\MainWindow.xaml;View\OrderWindow.xaml;View\Pages\Availability.xaml;View\Pages\Card.xaml;View\Pages\Client.xaml;View\Pages\Deliver.xaml;View\Pages\DeliverProduct.xaml;View\Pages\Product.xaml;View\Pages\Profile.xaml;View\Pages\Sell.xaml;View\Query\AllProductInfoWindow.xaml;View\Query\AllProfitWindow.xaml;View\Query\MonthProductInfoWindow.xaml;View\Query\PeriodProductInfoWindow.xaml;View\Query\SellDataGridWindow.xaml;
 
-False
+True
 

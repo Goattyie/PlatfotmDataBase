@@ -6,6 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
 
 namespace Database.VeiwModel
@@ -34,9 +35,15 @@ namespace Database.VeiwModel
         private string _sellStatus;
         private OpenFileDialog _fileDialog;
         private bool _startEnabled = true;
+        private string _windowName;
 
         #region Properties
 
+        public string WindowName
+        {
+            get { return _windowName; }
+            set { _windowName = value; OnPropertyChanged(nameof(WindowName)); }
+        }
         public bool StartEnabled
         {
             get { return _startEnabled; }
@@ -116,9 +123,15 @@ namespace Database.VeiwModel
         public ImportExportDatabaseVM(Dispatcher dispatcher, bool import)
         {
             if (import)
+            {
                 _executeAction = new Action(ImportFiles);
+                WindowName = "Импорт";
+            }
             else
+            {
                 _executeAction = new Action(ExportFiles);
+                WindowName = "Экспорт";
+            }
             _dispatcher = dispatcher;
             AvailabilityStatus = "Файл не выбран";
             SellStatus = "Файл не выбран";
@@ -166,6 +179,15 @@ namespace Database.VeiwModel
         }
         private void ImportFiles()
         {
+            if (MessageBox.Show("Вы уверены в импорте. Все данные перед импортом будут удалены!", "Внимание", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.Cancel)
+                return;
+
+            if (MessageBox.Show("Вы ТОЧНО УВЕРЕНЫ в импорте? Все данные БЕЗВОЗВРАТНО будут удалены!", "Особое внимание", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.Cancel)
+                return;
+
+            if (MessageBox.Show("ЭТО ПОСЛЕДНЕЕ ПРЕДУПРЕЖДЕНИЕ. ПОСЛЕ НЕГО НАЧНЕТСЯ ИМПОРТ. УВЕРЕНЫ В ИМПОРТЕ? ДАННЫЕ БУДУТ УДАЛЕНЫ.", "Последнее внимание", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.Cancel)
+                return;
+
             if (_availabilityFilename != null || _sellFilename != null || _delProdFilename != null)
             {
                 new Thread(() =>

@@ -17,9 +17,15 @@ namespace Database.VeiwModel.QueryVM
         public MonthProductInfoVM(IEnumerable<IEnumerable<MonthProductInfo>> list)
         {
             Series = new SeriesCollection();
+            if (list == null)
+                return;
             foreach(var product in list)
             {
-                var lineSeries = new LineSeries();
+                var lineSeries = new LineSeries()
+                {
+                    StrokeThickness = 2,
+                    LineSmoothness = 0
+                };
                 lineSeries.Title = product.Where(x => x != null).FirstOrDefault().Name;
                 lineSeries.Values = new ChartValues<int>();
                 int index = 0;

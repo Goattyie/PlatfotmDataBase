@@ -108,7 +108,7 @@ namespace Database.VeiwModel.Pages
                 if (item.Count > 0)
                 {
                     DeliverSum += item.DeliverCost * item.Count;
-                    AvailabilityCount += 1;
+                    AvailabilityCount += item.Count;
                 }
                 AvailabilityList.Add(item);
             }

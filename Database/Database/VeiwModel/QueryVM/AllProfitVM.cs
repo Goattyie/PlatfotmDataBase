@@ -27,10 +27,11 @@ namespace Database.VeiwModel.QueryVM
                 new LineSeries()
                 {
                     ToolTip = false,
-           
-                    Title="",
-                    Values = new ChartValues<double>(monthList.Select(x=>x.Profit))
-                    
+                    StrokeThickness = 2,
+                    LineSmoothness = 0,
+                    Title = "",
+                    Values = new ChartValues<double>(monthList.Select(x => x.Profit))
+
                 }
             );
             MonthLabels = monthList.Select(x => x.Date.ToString("MMM yyyy")).ToArray();
